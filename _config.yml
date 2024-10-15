@@ -1,3 +1,5 @@
+baseurl: "/than_khanh"
+
 collections:
   categories:
     output: true
