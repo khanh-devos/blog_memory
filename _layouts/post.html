@@ -1,0 +1,15 @@
+---
+---
+
+<div style="display: inline-block">
+  <h1>{{ page.title }}</h1>
+  <p>{{ page.date | date_to_string }}</p>
+</div>
+
+  {% assign category = site.categories | where: 'short_name', page.category | first %}
+  
+  {% if category %}
+    <a href="{{ category.url }}">{{ category.name }}</a>
+  {% endif %}
+
+{{ content }}

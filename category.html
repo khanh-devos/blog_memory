@@ -1,0 +1,19 @@
+---
+title: Categories
+---
+<h1>Categories</h1>
+
+<ul>
+  {% for category in site.categories %}
+    <h2>{{ category.name}}</h2>
+
+    <ul>
+      {% assign filtered_posts = site.posts | where: 'category', category.short_name | where_exp: 'post', 'post.archived == null' %}
+
+      {% for post in filtered_posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+
+  {% endfor %}
+</ul>
