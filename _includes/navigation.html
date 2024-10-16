@@ -3,7 +3,7 @@
   {% for item in site.data.navigation %}
     <a href="{{ item.link | relative_url }}" 
       {% if page.url == item.link %}
-        class="current"
+        id="current"
       {% endif %}
     >
     {{ item.name }}
