@@ -1,10 +1,13 @@
 
 - name: Home
   link: /
-- name: Categories
-  link: /category.html
+- name: Gratitude hall
+  link: /gratitude-hall.html
 - name: About
   link: /about.html
 - name: Archived
   link: /archived.html
+- name: Categories
+  link: /category.html
+
 

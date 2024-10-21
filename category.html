@@ -31,7 +31,7 @@ title: Categories
       {% assign filtered_posts = site.posts | where: 'category', category.short_name | where_exp: 'post', 'post.archived == null' %}
 
       {% for post in filtered_posts %}
-        <li><a href="{{ post.url | relative_url }}/#shared">{{ post.title }}</a></li>
+        <li><a href="{{ post.url | relative_url }}#shared">{{ post.title }}</a></li>
       {% endfor %}
     </ul>
 
