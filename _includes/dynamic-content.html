@@ -1,0 +1,20 @@
+
+
+<div id="dynamic-content">
+{% assign category = site.categories | where: 'short_name', page.category | first %}
+
+{% if category and page.category %}
+    <div id="date">
+        <p>{{ page.date | date_to_string }}</p>
+    </div>
+
+    <a id="category-name" href="{{ site.url }}{{ site.baseurl }}/category.html/#{{ category.name }}"
+    >
+        &#9679; {{ category.name }}
+    </a>
+{% endif %}
+</div>
+
+<div id="content">
+    {{ content }}
+</div>

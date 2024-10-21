@@ -1,11 +1,13 @@
 ---
-title: Home
-my_number: 5
+title: Blog
 ---
+<h1>Latest Posts</h1>
 
-
-<h1>{{ page.title }}</h1>
-
-<h2>{{ page.my_number }}</h2>
-
-
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <h2><a href="{{ post.url | relative_url }}/#shared">{{ post.title }}</a></h2>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>

@@ -1,11 +1,10 @@
 
 - name: Home
   link: /
+- name: Categories
+  link: /category.html
 - name: About
   link: /about.html
 - name: Archived
   link: /archived.html
-- name: Blog
-  link: /blog.html
-- name: Categories
-  link: /category.html
+

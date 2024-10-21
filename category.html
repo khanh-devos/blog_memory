@@ -1,17 +1,37 @@
 ---
 title: Categories
 ---
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    var hash = window.location.hash.substring(1); // Removes the '#'
+    if (hash) {
+      Object.values(document.getElementsByClassName("hash-output")).forEach(element => {
+        if (element.innerHTML === hash){
+          element.classList.add("selected-category");
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+        else { element.classList.remove("selected-category"); }
+      });
+    }
+
+  });
+
+  
+</script>
+
+
 <h1>Categories</h1>
 
 <ul>
   {% for category in site.categories %}
-    <h2>{{ category.name}}</h2>
+    <h2 class="hash-output">{{ category.name }}</h2>
 
     <ul>
       {% assign filtered_posts = site.posts | where: 'category', category.short_name | where_exp: 'post', 'post.archived == null' %}
 
       {% for post in filtered_posts %}
-        <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+        <li><a href="{{ post.url | relative_url }}/#shared">{{ post.title }}</a></li>
       {% endfor %}
     </ul>
 

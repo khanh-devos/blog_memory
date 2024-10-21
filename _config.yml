@@ -1,4 +1,14 @@
+name: khanh than
+time: 2024/10/07
+description: "Blog"
+keywords: ["Programming", "Algorithm", "Mathematics", "genAI", "NLP"]
 
+author:
+  name: Khanh Than
+  email: dreamproperty.khanh@gmail.com
+  linkedin: https://www.linkedin.com/in/khanh-dom/
+  github: https://github.com/khanh-devos
+  twitter: https://x.com/khanhror
 
 collections:
   categories:

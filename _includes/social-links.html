@@ -1,0 +1,20 @@
+<div class="social-links">
+  <ul>
+    {% if site.author.email %}
+    <li>
+      <a href="mailto:{{ site.author.email }}?subject=Hello%20Therebody=This%20is%20a%20test%20email" class="social-link-item">
+        <i class="fa-solid fa-fw fa-envelope"></i>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if site.author.linkedin %}
+      <li><a href="{{ site.author.linkedin }}" class="social-link-item" target="_blank"><i class="fa-brands fa-fw fa-linkedin"></i></a></li>
+    {% endif %}
+    
+    {% if site.author.github %}
+      <li><a href="{{ site.author.github }}" class="social-link-item" target="_blank"><i class="fa-brands fa-fw fa-github"></i></a></li>
+    {% endif %}
+    
+  </ul>
+</div>

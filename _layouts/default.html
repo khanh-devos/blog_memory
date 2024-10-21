@@ -2,46 +2,76 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% feed_meta %}
-    {% seo %}
+    {% include header.html %}
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | absolute_url }}">
-
-    <script src="https://unpkg.com/@hotwired/turbo"></script>
-
-    <title>{{ page.title }}</title>
+    <title>{{ site.name }}</title>
   </head>
   <body>
     <div id="left-side">
       <div id="self-intro" data-turbo-permanent>
-        <img id="avatar" width="200px" src="https://github.com/khanh-devos/blog_memory/blob/main/assets/images/phu_quoc_2.jpg?raw=true" alt="avatar"  >
-        <h3 id="full-name">thân khanh</h3>
+        <img id="avatar" width="200px" src="{{ '/assets/images/phu_quoc_2.jpg' | relative_url }}" alt="avatar">
+        
+        <a href="https://khanh-devos.github.io/blog_memory/" id="full-name">
+          <span style="color:#1F9DFF">khanh</span>
+          <span style="color:#FF6666">than</span>
+        </a>
+
         <h3 id="profession">SOFTWARE ENGINEER</h3>
+
+        <p id="slogan">To keep tracking my skills & accomplisments</p>
       </div>
-      
 
       {% include navigation.html %}
+      {% include social-links.html %}
+      
     </div>
 
     <div id="right-side">
-      
-      {% assign category = site.categories | where: 'short_name', page.category | first %}
-      
+      {% include dynamic-content.html %}
 
-      {% if category and page.category %}
-        <div style="display: inline-block">
-          <p>{{ page.date | date_to_string }} * </p>
-        </div>
-      
-        <a href="{{ category.url }}">{{ category.name }} </a>
-      {% endif %}
-
-      {{ content }}
+      {% include shared-buttons.html %}
+      {% include footer.html %}
     </div>
 
   </body>
 
+  <script>
+  document.addEventListener("turbo:load", function() {
+    var hash = window.location.hash.substring(1); // Removes the '#'
+    const element = document.getElementById("shared-buttons");
+    if (hash === "shared") {
+      element.style.display = 'block';
+    }
+    else {
+      element.style.display = 'none';
+    }
+
+    const width = window.innerWidth;
+    const leftSide = document.getElementById("left-side");
+    const rightSide = document.getElementById("right-side");
+    
+    if (width <= 768) {
+      rightSide.style.transform = `translate(0, ${leftSide.clientHeight}px)`;
+    }
+    else {
+      rightSide.style.transform = `translate(0, 0)`;
+    }
+  });
+
+  window.addEventListener("resize", function() {
+    const width = window.innerWidth;
+    const leftSide = document.getElementById("left-side");
+    const rightSide = document.getElementById("right-side");
+    
+    if (width <= 768) {
+      rightSide.style.transform = `translate(0, ${leftSide.clientHeight}px)`;
+    }
+    else {
+      rightSide.style.transform = `translate(0, 0)`;
+    }
+  })
+  </script>
   
 </html>
