@@ -8,9 +8,10 @@
         <p>{{ page.date | date_to_string }}</p>
     </div>
 
-    <a id="category-name" href="{{ site.url }}{{ site.baseurl }}/category.html/#{{ category.name }}"
+    <a id="category-name" href="{{ site.url }}{{ site.baseurl }}/category.html#{{ category.name }}"
     >
         &#9679; {{ category.name }}
+        <h1>{{ page.title }}</h1>
     </a>
 {% endif %}
 </div>

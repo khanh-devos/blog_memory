@@ -10,6 +10,10 @@ author:
   github: https://github.com/khanh-devos
   twitter: https://x.com/khanhror
 
+
+baseurl: "/blog_memory"
+future: true
+
 collections:
   categories:
     output: true
@@ -25,4 +29,5 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-baseurl: "/blog_memory"
+
+

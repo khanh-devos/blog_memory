@@ -4,7 +4,7 @@
 - [Jekyll](https://jekyllrb.com/docs/)
 - [lightbox2](https://lokeshdhakar.com/projects/lightbox2/)
 - [Bootstrap](https://getbootstrap.com/)
-- [MathJax](https://www.mathjax.org/)
+- [Asciimath](https://asciimath.org/)
 - [GitHub](https://github.com/)
 - [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
 
