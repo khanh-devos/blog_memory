@@ -5,6 +5,7 @@
 - [lightbox2](https://lokeshdhakar.com/projects/lightbox2/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Asciimath](https://asciimath.org/)
+- [Typograms](https://github.com/samuelgoto/typograms)
 - [GitHub](https://github.com/)
 - [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
 
