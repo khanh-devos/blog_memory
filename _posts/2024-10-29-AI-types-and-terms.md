@@ -6,8 +6,8 @@ category: ai
 
     - <b>AI</b>: Artificial Intelligence technology that can produce: text, audio, image or synthetic data. 
     - <b>GenAI</b>: generative Artificial Intelligence that creates new content based on what it has learned from existing content.
-    - <b>AI agent</b>: a computer system that can reason, learn and act autonomously (like humans)
-    - <b>Machine Learning</b>: a subfield of AI trains to create a model from input data. The model then can produce a data that is new and never seen in the input data. This mean now a machine can learn and create by a model, not a program.
+    - <b>AI agent</b>: a computer system that can reason, learn and act autonomously (like humans).
+    - <b>Machine Learning</b>: a subfield of AI trains to create a model from input data. The model then can produce a data that is new and never seen in the input data. This means a machine can learn and take action based on a model, not a traditional program.
 
     1.1 <b>How many types of ML?</b> There are 4 types: Supervised, Unsupervised, Reinforcement(not mentioned here) & Deep Learning.<br>
     - <b>Supervised</b> (labeled data): The data is tagged or differentiated seperately by a name or a type. (Example: pizza clients behaviors, who tips at the store will be points "o", who tips at delivery will be points "x"). In supervised learning, the model is to predict the future values. 
@@ -134,9 +134,9 @@ category: ai
 
 2. <b>How generative AI works?</b>
     
-    - Traditionally in order to distinguish a cat or a dog, we need a hard code: type animal, how many legs, ears, how is the fur, what he likes, dislikes...
+    - Traditionally to distinguish a cat or a dog, we need a hard code: type animal, how many legs, ears, how is the fur, what he likes, dislikes...
     
-    - With a wave of neuron network, we could give the network pictures of cats and dogs, then ask "is it a cat?", and it would predict or answer. It is very great that "we" here could be anyone of normal persons who can speak to or type a common language into a prompt. Some examples: model PaLM (Pathways Language Model), modelLaMDA (Language Model for Dialogue Applications)
+    - With a wave of neuron network, we could give the network pictures of cats and dogs, then ask "is it a cat?", and it would predict or answer "yes, it is" or "No, it's not". It is very great that "we" here could be anyone of normal persons who can speak to or type a common language into a prompt. Some examples: model PaLM (Pathways Language Model), model LaMDA (Language Model for Dialogue Applications)
     
     - Mathematically a model looks like this: $y = f(x)$ with $x$: input data, $y$: output data, $f$: model.
     
