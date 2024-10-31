@@ -20,8 +20,9 @@ $\pmb {Hoare \ 's \ Solution:}$
 3. Loop: while i $\lt$ j:
     - ${i \leftarrow i+1 \ while \ A\(i\) \lt p}$.
     - ${j \leftarrow j-1 \ while \ A\(j\) \ge p}$.
-    - if ${i \lt j: \ swap \ A\(i\) \ and \ A\(j\)}$. 
-    <p><i>(this swapping is to move the smaller items to the leftside and the greater items to the rightside of the pivot).</i></p>
+    - if ${i \lt j: \ swap \ A\(i\) \ and \ A\(j\)}$.<br>
+    
+    <p><i>(the scheme will be ${|A_i|A_{i+1}|...|A_{j-1}|A_j|}$, this swapping is to move the smaller items to the leftside and the greater items to the rightside of the pivot).</i></p>
     
 
     Partition result: with the partition index is $j$, and the array is divided into two arrays: ${A_{left} \ and \ A_{right}}$: 
@@ -42,7 +43,7 @@ $\pmb {Lomuto \ 's \ Solution:}$
 3. Loop: for $j=1$ to $n$:
     - if $A(j) \le p,\$ swap $A(i)$ & $A(j)$, then increment $i \leftarrow i+1$.
     
-    <i>Result: j always run faster than i, so that this swapping is to move the smaller items to the leftside of the imagined pivot, so the array is divided as:</i>
+    <i>Result: j always run faster than i, so that this swapping is to move the smaller items to the leftside of the imagined pivot. Hence, with the partition index is $(i+1)$, the array is divided as:</i>
     - ${A_{left} \(k\) \le p, \ \ \ \forall k = 1,2,...,i}$.
     - ${A_{right} \(k\) \gt p, \ \forall k = i+2,...,n-1}$.
     - The pivot ${\\{p \\}}$ at index $i+1$.<br><br>

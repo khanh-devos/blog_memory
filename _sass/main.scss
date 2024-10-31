@@ -26,7 +26,7 @@ $blur-color: #333;
   font-family: Roboto, Raleway, fantasy;
   font-size: 16px;
   box-sizing: border-box;
-
+  line-height: 140%;
   @include respond-to(mobile) {
     font-size: 14px; // Adjust font size for mobile
   }
@@ -286,4 +286,19 @@ body {
 
 .MathJax > * {
   zoom: 1.2;
+}
+
+.typograms {
+  color: blue;
+  display: flex;
+  gap: 50px;
+  @include respond-to(mobile) {
+    flex-direction: column;
+  }
+}
+
+#genAI-definition {
+  background-color: antiquewhite;
+  padding: 5px 8px;
+  color: blue;
 }
