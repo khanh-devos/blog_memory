@@ -30,18 +30,9 @@ const moveRightSide = ()=>{
   }
 }
 
-// 
+//move the right-side as zooming
 window.addEventListener("resize", function() {
-  const width = window.innerWidth;
-  const leftSide = document.getElementById("left-side");
-  const rightSide = document.getElementById("right-side");
-  
-  if (width <= 768) {
-    rightSide.style.transform = `translate(0, ${leftSide.clientHeight}px)`;
-  }
-  else {
-    rightSide.style.transform = `translate(0, 0)`;
-  }
+  moveRightSide();
 })
 
 // for Typograms
@@ -65,15 +56,15 @@ const typogramsTransform = ()=>{
 }
 
 document.addEventListener("turbo:load", function() {
+  moveRightSide();
   typogramsTransform();
   showSharedBtns();
   activateMathjax();
-  moveRightSide();
 
 });
 document.addEventListener("DOMContentLoaded", function(){
+  moveRightSide();
   typogramsTransform();
   showSharedBtns();
   activateMathjax();
-  moveRightSide();
 });
