@@ -31,9 +31,10 @@ These are some common helpful commands of git:
 
 9. <b>git checkout BrName </b>: switch to another branch named "BrName".
     - git checkout -b BrName: create, copy, then switch to a new branch named "BrName" from current branch.
-    - git checkout -b BrName main: create, copy, then switch to a new branch named "BrName" from "main" branch.
+    - git checkout -b BrName main: create, copy, then switch to a new branch named "BrName" from "main" branch.<br><br>
 
 10. <b>git branch -d BrName </b>: delete a branch.
+    - git branch -m newBrName : rename the current branch.<br><br>
 
 11. <b>git merge </b>: merge a specific branch to current Branch.
     - git checkout targetBranch : enter the target_branch
@@ -60,15 +61,22 @@ These are some common helpful commands of git:
 17. <b>git bisect </b>: use binary search to find the closest commit that introduced a bug. The process is below:
     1. git bisect start : start the searching.
     2. git bisect bad : set current version is bad.
-    3. git bisect good v2.6.13-rc2 : v2.6.13-rc2 is known to be good (use "git log" to display list of commit IDs).
+    3. git bisect good v2.6.13-rc2 : set the commit v2.6.13-rc2 to be good (use "git log" to display list of commit IDs).
     4. git bisect bad : this command will <b>"check out"</b> back one step to the previous version, then we could inspect whether the bug issue is still existing or not. 
     5. If the bug is still there, "git bisect bad" again to "check out" back another step to the more previous version, inspect the bug issue again. Continue until we find the closest version that the bug issue does not happen. Now we know the commit after this version is a place where the bug issue happened for the first time. Use "git show commitID" to check the changes inside it.
-    6. git bisect reset: cancel the searching session, <a href="https://www.loom.com/share/441b848fe2524f50aae31712657fa3d4?sid=b06cfda5-662f-4c15-a08e-82b4d0544cc3" target="_blank">then fix the bug.</a><br><br>
+    6. git bisect reset: cancel the searching session, then fix the bug<a href="https://www.loom.com/share/441b848fe2524f50aae31712657fa3d4?sid=b06cfda5-662f-4c15-a08e-82b4d0544cc3" target="_blank">.</a><br><br>
 
 18. <b>git rebase </b>: keep commit history clean and clear by allowing to combine several commits into one by "squashing" technique, then force pushing again. <i>(Note: should not use for a group branch)</i>.
     - git rebase -i HEAD~5 : tell git that we want to rebase the last five commits. A window editor will appear, replace the word "pick" with "squash" on the commit we want to squash into one commit.
     - Edit a new commit message for the commit that will replaces all the combined commits.
-    - git push origin featureBranch --force : push to change the commit history at Github.
+    - git push origin featureBranch -f : to force push the change the commit history at Github.<br><br>
+
+19. <b>git reset </b>: undo "git add" and "git commit" if they have not been pushed yet:
+    - git reset --soft HEAD~1 : undo the last commit (git commit) but keep change staged (no touch to "git add").
+    - git reset HEAD~1 : undo the last commit and also unstage changes. (both git commit and git add).<br><br>
+
+20. <b>git revert </b>: undo a commit by creating a new commit, even when the commit was pushed already:
+    - git revert a8a1f7b: will undo all changes made in the commit with ID a8a1f7b and create a new commit at the same time. You will need to push this new commit to the remote repository.
     
 
 
