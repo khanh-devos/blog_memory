@@ -65,6 +65,9 @@ These are some common helpful commands of git:
     5. If the bug is still there, "git bisect bad" again to "check out" back another step to the more previous commit, inspect the bug issue again. Continue until we find the closest commit that the bug issue does not happen. Now we know the commit after this commit is a place where the bug issue happened for the first time. Use "git show commitID" to check the changes inside the commit.
     6. git bisect reset: cancel the searching session, then fix the bug.
 
+18. <b>git rebase </b>: keep commit history clean and clear by allowing to combine several commits into one, then force pushing again.
+    
+
 
 
 
