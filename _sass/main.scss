@@ -41,11 +41,6 @@ body {
   background-color: $semi-color;
   z-index: 0;
   overflow: auto;
-
-  @include respond-to(mobile) {
-    display: block;
-    position: relative;
-  }
 }
 
 #left-side {
@@ -79,7 +74,7 @@ body {
   }
 
   * {
-    font-size: 13px;
+    font-size: 14px;
     color: $highlight-color;
   }
   
