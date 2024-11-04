@@ -8,7 +8,7 @@ Author: Git was created by Linus Torvalds in 2005, who also developed Linux in 1
 These are some common helpful commands of git: 
 <br><i>(Warning: we should use a new branch named "dev" to develop or code, which allows us to do the code review before merging.)</i>
 
-1. <b>git pull </b> (git pull origin Branchname): update changes to your current local branch compared to the remote branch.
+1. <b>git pull </b> (git pull origin Branchname): updates your current local branch by fetching the latest changes from the corresponding remote branch and merging those changes into your local branch.
 
 2. <b>git clone GithubURL </b>: clone a github repository down to local machine.
 
@@ -53,7 +53,7 @@ These are some common helpful commands of git:
     - git checkout -b newBranch origin/remoteBr : create, then copy a remote branch into a new branch. This is useful to do the review code at local.<br><br>
 
 15. <b>git diff </b>: display the difference between local unstaged changes and the lasted cloned or fetched version.
-    - git diff main origin/main : difference between local main and remote main after fetching.<br><br>
+    - git diff main origin/main : difference between local main and remote main after fetching.<br>
 
 16. <b>git blame Filename </b>: report which users changed which parts of a file.
 
@@ -61,11 +61,14 @@ These are some common helpful commands of git:
     1. git bisect start : start the searching.
     2. git bisect bad : set current version is bad.
     3. git bisect good v2.6.13-rc2 : v2.6.13-rc2 is known to be good (use "git log" to display list of commit IDs).
-    4. git bisect bad : this command will <b>"check out"</b> back one step to the previous commit in the past, then we could inspect whether the bug issue is still existing or not. 
-    5. If the bug is still there, "git bisect bad" again to "check out" back another step to the more previous commit, inspect the bug issue again. Continue until we find the closest commit that the bug issue does not happen. Now we know the commit after this commit is a place where the bug issue happened for the first time. Use "git show commitID" to check the changes inside the commit.
-    6. git bisect reset: cancel the searching session, then fix the bug.
+    4. git bisect bad : this command will <b>"check out"</b> back one step to the previous version, then we could inspect whether the bug issue is still existing or not. 
+    5. If the bug is still there, "git bisect bad" again to "check out" back another step to the more previous version, inspect the bug issue again. Continue until we find the closest version that the bug issue does not happen. Now we know the commit after this version is a place where the bug issue happened for the first time. Use "git show commitID" to check the changes inside it.
+    6. git bisect reset: cancel the searching session, <a href="https://www.loom.com/share/441b848fe2524f50aae31712657fa3d4?sid=b06cfda5-662f-4c15-a08e-82b4d0544cc3" target="_blank">then fix the bug.</a><br><br>
 
-18. <b>git rebase </b>: keep commit history clean and clear by allowing to combine several commits into one, then force pushing again.
+18. <b>git rebase </b>: keep commit history clean and clear by allowing to combine several commits into one by "squashing" technique, then force pushing again. <i>(Note: should not use for a group branch)</i>.
+    - git rebase -i HEAD~5 : tell git that we want to rebase the last five commits. A window editor will appear, replace the word "pick" with "squash" on the commit we want to squash into one commit.
+    - Edit a new commit message for the commit that will replaces all the combined commits.
+    - git push origin featureBranch --force : push to change the commit history at Github.
     
 
 
