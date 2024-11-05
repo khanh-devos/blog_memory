@@ -164,6 +164,8 @@ body {
   padding: 50px;
   padding-left: 320px;
   min-height: 100vh;
+  transition: opacity 0.3s ease;
+  opacity: 0;
   
   @include respond-to(mobile) {
     z-index: 10;

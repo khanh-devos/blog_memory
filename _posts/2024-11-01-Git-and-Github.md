@@ -15,7 +15,8 @@ These are some common helpful commands of git:
 3. <b>git remote &#8211;v </b>: show the github link.
     - git remote add origin Github_Url: set a remote origin for local directory.<br><br>
 
-4. <b>git add . </b> (git add Filename): stage or track all changes at current time before committing and pushing.
+4. <b>git add $.$ </b>: stage or track all changes at current time before committing and pushing.
+    - git add Filename : stage only one file.
     - git add &#8211;&#8211;all : will include deleted files also.<br><br>
 
 5. <b>git commit &#8211;m "messages"</b> : add a short title to all the changes (added by the latest command "git add") before pushing.
@@ -24,10 +25,10 @@ These are some common helpful commands of git:
 6. <b>git push </b>(git push origin Branchname): push all the changes (committed by all commands "git commit") to the remote repository at Github.
     <br><i>Note: We should use a new branch named "dev" to develop new features, which allows us to do the code review later.</i>
 
-7. <b>git init </b>: Add "git" for current directory. (a .git file & log files is added to it).
+7. <b>git init </b>: Initialize "git" for current directory. (a .git file & log files is added to it).
 
-8. <b>git status </b>: show the staged files or other info of working directory.
-    - git show commitID : show the information or changes of a commit.<br><br>
+8. <b>git status </b>: show the staged files or other status of working directory.
+    - <b>git show commitID </b>: show the information or changes of a commit.<br><br>
 
 9. <b>git checkout BrName </b>: switch to another branch named "BrName".
     - git checkout -b BrName: create, copy, then switch to a new branch named "BrName" from current branch.

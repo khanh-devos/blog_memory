@@ -11,10 +11,35 @@ const showSharedBtns = () => {
 }
 
 // Trigger MathJax typesetting for the newly added content
-const activateMathjax = ()=> {
-  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+async function renderMathJax() {
+  await new Promise((resolve) => {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, () => resolve()]);
+  })
+  .then(()=>{
+    document.getElementById("right-side").style.opacity = '1';
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
 }
 
+// Smoothen the fade-out or disappearing of the right side.
+const delayFadeOut = (delayTime = 100)=>{
+
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function(event) {
+      if (link.href && link.href.startsWith(window.location.origin)) {
+        event.preventDefault(); // Prevent default link behavior
+        document.getElementById("right-side").style.opacity = '0';
+
+        // Delay navigation to allow fade-out effect
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, delayTime);
+      }
+    });
+  });
+}
 
 //move the right-side at mobile view
 const moveRightSide = ()=>{
@@ -55,16 +80,18 @@ const typogramsTransform = ()=>{
   }
 }
 
-document.addEventListener("turbo:load", function() {
-  moveRightSide();
+document.addEventListener("turbo:load", async function() {
+  await renderMathJax();
+  delayFadeOut();
   typogramsTransform();
+  moveRightSide();
   showSharedBtns();
-  activateMathjax();
 
 });
-document.addEventListener("DOMContentLoaded", function(){
-  moveRightSide();
+document.addEventListener("DOMContentLoaded", async function(){
+  await renderMathJax();
+  delayFadeOut();
   typogramsTransform();
+  moveRightSide();
   showSharedBtns();
-  activateMathjax();
 });
