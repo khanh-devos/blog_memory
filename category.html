@@ -3,7 +3,7 @@ title: Categories
 ---
 
 <script>
-  document.addEventListener("turbo:load", function() {
+  function highlightSelectedCategory(){
     var hash = window.location.hash.substring(1); // Removes the '#'
     if (hash) {
       Object.values(document.getElementsByClassName("hash-output")).forEach(element => {
@@ -14,10 +14,9 @@ title: Categories
         else { element.classList.remove("selected-category"); }
       });
     }
+  }
 
-  });
-
-  
+  document.addEventListener("turbo:load", highlightSelectedCategory);
 </script>
 
 

@@ -3,11 +3,18 @@ title: Blog
 ---
 <h1>Latest Posts</h1>
 
+{% assign count = 0 %} 
+
 <ul>
   {% for post in site.posts %}
-    <li>
-      <h2><a href="{{ post.url | relative_url }}#shared">{{ post.title }}</a></h2>
-      {{ post.excerpt }}
-    </li>
+    
+    {% if post.archived == null %}
+      <li>
+        <h2><a href="{{ post.url | relative_url }}#shared">{{ post.title }}</a></h2>
+        {{ post.excerpt }}
+      </li>
+    {% endif %}
+
   {% endfor %}
+
 </ul>

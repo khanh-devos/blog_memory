@@ -80,16 +80,26 @@ const typogramsTransform = ()=>{
   }
 }
 
+// make sure Mathjax loaded fully before rendering, not dependent on DOM
+window.addEventListener("load", async () => {
+  if (typeof MathJax !== "undefined") {
+    await renderMathJax();
+  } else {
+    console.error("MathJax failed to load.");
+  }
+});
+
+// for turbo
 document.addEventListener("turbo:load", async function() {
-  await renderMathJax();
   delayFadeOut();
   typogramsTransform();
   moveRightSide();
   showSharedBtns();
 
 });
+
+// For Dom loading
 document.addEventListener("DOMContentLoaded", async function(){
-  await renderMathJax();
   delayFadeOut();
   typogramsTransform();
   moveRightSide();

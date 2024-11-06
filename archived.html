@@ -5,14 +5,17 @@ title: Archived
 
 <ul>
   {% for category in site.categories %}
-    <h2>{{ category.name}}</h2>
-
-    <ul>
-      {% assign filtered_posts = site.posts | where: 'category', category.short_name | where_exp: 'post', 'post.archived == true' %}
+  
+    {% assign filtered_posts = site.posts | where: 'category', category.short_name | where_exp: 'post', 'post.archived == true' %}
+  
+    {% if filtered_posts.size >= 1 %}
+    <h2>{{ category.name }}</h2>
+    {% endif %}
     
-      {% for post in filtered_posts %}
-        <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-      {% endfor %}
+    <ul>
+    {% for post in filtered_posts %}
+      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+    {% endfor %}
     </ul>
 
   {% endfor %}

@@ -2,6 +2,8 @@
 category: ai
 ---
 
+AI is a rapidly developing technology that introduces new and often unfamiliar terminology. This post aims to clarify some of the key concepts in AI.
+
 1. <b>What is generative AI?</b>
 
     - <b>AI</b>: Artificial Intelligence technology that can produce: text, audio, image or synthetic data. 
