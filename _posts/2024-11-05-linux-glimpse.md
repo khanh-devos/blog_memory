@@ -4,15 +4,15 @@ category: os
 
 Ubuntu (based on Linux) is an operating system that is popular for strong programmability and cost-free availability. It has many variants such as manjaro, ubuntu,... for users to select.
 
-Author: the Linux kernel v0.01 was created by Linus Torvalds in $1991$, about 6 years after the first version of window was launched by Microsoft in $1985$. Since then, various Linux distributions have emerged, leading to some confusion about the concepts of the Linux operating system:
+Author: the Linux kernel v0.01 was created by Linus Torvalds in 1991, about 6 years after the first version of window was launched by Microsoft in 1985. Since then, various Linux distributions have emerged, leading to some confusion about the concepts of the Linux operating system:
 
-- Debian was created by Ian Murdock in $1993$ ( Debian is combined by his girlfriend's name, Debra, and his own name, Ian).
+- Debian was created by Ian Murdock in 1993 ( Debian is combined by his girlfriend's name, Debra, and his own name, Ian).
 
-- Arch Linux was created by Judd Vinet in $2002$. Vinet, a Canadian software engineer, developed Arch with the goal of providing a simple, lightweight, and flexible Linux distribution.
+- Arch Linux was created by Judd Vinet in 2002. Vinet, a Canadian software engineer, developed Arch with the goal of providing a simple, lightweight, and flexible Linux distribution.
 
-- Ubuntu was created by Mark Shuttleworth and his company Canonical Ltd. in $2004$. The name "Ubuntu" comes from a Southern African philosophy meaning "humanity to others" or "I am because we are".
+- Ubuntu was created by Mark Shuttleworth and his company Canonical Ltd. in 2004. The name "Ubuntu" comes from a Southern African philosophy meaning "humanity to others" or "I am because we are".
 
-- Manjaro is a Linux distribution based on Arch Linux. It was created by a team of developers led by Philip Müller in $2011$.
+- Manjaro is a Linux distribution based on Arch Linux. It was created by a team of developers led by Philip Müller in 2011.
 
 Thank goodness! Bash (Bourne Again Shell) is the default shell for many Linux distributions, providing users with a regular way to interact with the operating system using text-based commands.
 
@@ -101,8 +101,8 @@ This post is to show some regular Bash commands:
     - <b>printenv | grep -in user </b>: print out all global variables including the text "user" in their names.<br><br>
 
 20. <b>echo </b>: print out, over-write or append lines into a file.
-    - <b>echo $HOME </b>: print out a global variable "HOME".
-    - <b>echo "$(pwd)" </b>: print out a result of a command "pwd".
+    - <b>echo HOME </b>: print out a global variable "HOME".
+    - <b>echo "(pwd)" </b>: print out a result of a command "pwd".
     - <b>echo "line for overwriting" > filename.txt </b>: creating or overwriting the file.
     - <b>echo "line for appending" >\> filename.txt </b>: appending a line into the file.<br>
 
@@ -113,9 +113,10 @@ This post is to show some regular Bash commands:
 23. <b>sudo pacman -Syu </b>: update the system and upgrade all installed packages using the default package manager pacman, excluding personal applications (chrome, code,...).
 
 <br>
-$\pmb {Afterword: (Lời \ bạt)}$
 
-- <i>Bash was written by Brian Fox in $1987$ as a part of GNU Project. GNU was started by Richard Stallman in $1983$ with the goal of creating a free and open-source OS. The term "GNU" stands for "GNU's Not Unix", reflecting its Unix-like nature but free from "proprietary restrictions" (Hạn chế quyền sở hữu)<a href="https://www.gnu.org/gnu/gnu.html">.</a></i>
+<b>Afterword: (Lời bạt)</b>
+
+- <i>Bash was written by Brian Fox in 1987 as a part of GNU Project. GNU was started by Richard Stallman in 1983 with the goal of creating a free and open-source OS. The term "GNU" stands for "GNU's Not Unix", reflecting its Unix-like nature but free from "proprietary restrictions" (Hạn chế quyền sở hữu)<a href="https://www.gnu.org/gnu/gnu.html">.</a></i>
 
 - <i>The GNU Project includes essential components for an OS, such as compilers (GCC), text editors (Emacs). However, GNU was not until Linux (1991) came along that a complete free OS was created, often referred to as GNU/Linux.</i><br>
 

@@ -11,27 +11,27 @@ const showSharedBtns = () => {
 }
 
 // Trigger MathJax typesetting for the newly added content
-async function renderMathJax() {
-  await new Promise((resolve) => {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, () => resolve()]);
-  })
-  .then(()=>{
+function renderMathJax() {
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+
+// Set DelayFadeIn
+const DelayFadeIn = (delayTime = 300)=>{
+  setTimeout(() => {
     document.getElementById("right-side").style.opacity = '1';
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
+  }, delayTime);
 }
 
 // Smoothen the fade-out or disappearing of the right side.
-const delayFadeOut = (delayTime = 100)=>{
+const DelayFadeOut = (delayTime = 300)=>{
+  const rightSide = document.getElementById("right-side");
 
   document.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", function(event) {
       if (link.href && link.href.startsWith(window.location.origin)) {
         event.preventDefault(); // Prevent default link behavior
-        document.getElementById("right-side").style.opacity = '0';
-
+        rightSide.style.opacity = '0';
+        
         // Delay navigation to allow fade-out effect
         setTimeout(() => {
           window.location.href = link.href;
@@ -39,6 +39,7 @@ const delayFadeOut = (delayTime = 100)=>{
       }
     });
   });
+
 }
 
 //move the right-side at mobile view
@@ -80,18 +81,11 @@ const typogramsTransform = ()=>{
   }
 }
 
-// make sure Mathjax loaded fully before rendering, not dependent on DOM
-window.addEventListener("load", async () => {
-  if (typeof MathJax !== "undefined") {
-    await renderMathJax();
-  } else {
-    console.error("MathJax failed to load.");
-  }
-});
-
 // for turbo
-document.addEventListener("turbo:load", async function() {
-  delayFadeOut();
+document.addEventListener("turbo:load", function() {
+  DelayFadeIn();
+  DelayFadeOut();
+  
   typogramsTransform();
   moveRightSide();
   showSharedBtns();
@@ -99,8 +93,10 @@ document.addEventListener("turbo:load", async function() {
 });
 
 // For Dom loading
-document.addEventListener("DOMContentLoaded", async function(){
-  delayFadeOut();
+document.addEventListener("DOMContentLoaded", function(){
+  DelayFadeIn();
+  DelayFadeOut();
+  
   typogramsTransform();
   moveRightSide();
   showSharedBtns();
