@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ '/assets/images/phu_quoc_2.jpg' | relative_url }}">
 
     {% include header.html %}
 
@@ -35,5 +36,12 @@
     </div>
     
   </body>
- 
+
+
+  <script defer type="text/javascript" src="{{ '/assets/js/default.js' | relative_url }}"></script>
+
+  {% if page.loadingTypogram %}
+  <script defer type="text/javascript" src="{{ '/assets/js/typograms.js' | relative_url }}"></script>
+  {% endif %}
+
 </html>

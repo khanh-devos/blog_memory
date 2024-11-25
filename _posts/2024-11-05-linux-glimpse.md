@@ -1,5 +1,6 @@
 ---
 category: os
+loadingTypogram: true
 ---
 
 Ubuntu (based on Linux) is an operating system that is popular for strong programmability and cost-free availability. It has many variants such as manjaro, ubuntu,... for users to select.
@@ -34,7 +35,7 @@ This post is to show some regular Bash commands:
 6. <b>mkdir newDirName </b>: create an empty folder.
 
 7. <b>rm fileName </b>: remove a file.
-    - <b>rm -r dirName </b>: delete a empty folder. This cannot be undone.<br><br>
+    - <b>rm -rf dirName </b>: delete a folder recursively (warning: cannot be undone).<br><br>
 
 8. <b>find </b>: search for a file or directory.
     - <b>find . -name "*.txt" </b>: search all files .txt" in current dir.
@@ -75,6 +76,7 @@ This post is to show some regular Bash commands:
         - r-- -- = "read-0-0" = 100 = 2^2 + 0^1 + 0^0 = 4.
         <p>"755" refers to 3 types of user: owner, group and others.</p>
         <script type="text/typogram">
+            
                   755
                  / | \
         Owner <-+  v  +-> Other
@@ -110,7 +112,7 @@ This post is to show some regular Bash commands:
 
 22. <b>who </b>: show current logged-in user.
 
-23. <b>sudo pacman -Syu </b>: update the system and upgrade all installed packages using the default package manager pacman, excluding personal applications (chrome, code,...).
+23. <b>sudo pacman -Syu </b> (for manjaro OS): update the system and upgrade all installed packages using the default package manager pacman, excluding personal applications (chrome, code,...).
 
 <br>
 

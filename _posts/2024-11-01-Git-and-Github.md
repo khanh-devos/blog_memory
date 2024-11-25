@@ -15,7 +15,7 @@ These are some common helpful commands of git:
 3. <b>git remote &#8211;v </b>: show the github link.
     - git remote add origin Github_Url: set a remote origin for local directory.<br><br>
 
-4. <b>git add $.$ </b>: stage or track all changes at current time before committing and pushing.
+4. <b>git add . </b>: stage or track all changes at current time before committing and pushing.
     - git add Filename : stage only one file.
     - git add &#8211;&#8211;all : will include deleted files also.<br><br>
 

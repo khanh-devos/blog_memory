@@ -1,5 +1,6 @@
 ---
 category: ai
+loadingTypogram: true
 ---
 
 AI is a rapidly developing technology that introduces new and often unfamiliar terminology. This post aims to clarify some of the key concepts in AI.

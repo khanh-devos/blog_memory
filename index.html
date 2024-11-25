@@ -13,6 +13,11 @@ title: Blog
         <h2><a href="{{ post.url | relative_url }}#shared">{{ post.title }}</a></h2>
         {{ post.excerpt }}
       </li>
+      {% assign count = count | plus: 1 %}
+    {% endif %}
+
+    {% if count == 3 %} 
+      {% break %}
     {% endif %}
 
   {% endfor %}

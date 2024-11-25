@@ -1,5 +1,6 @@
 ---
 category: algo
+loadingMathjax: true
 ---
 
 Quicksort is a widely used divide-and-conquer algorithm for sorting an array ${A\[1,2,...,n\]}$. The key concept is the partitioning of the array into 2 subarrays based on a selected pivot.

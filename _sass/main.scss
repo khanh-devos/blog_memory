@@ -8,6 +8,7 @@ $twitter-color: #77bcf1;
 $facebook-color: #627aac;
 $reddit-color: #FF5700;
 $blur-color: #333;
+$light-font: rgb(61, 61, 61);
 
 // Mixin for media queries
 @mixin respond-to($breakpoint) {
@@ -289,6 +290,7 @@ body {
 .typograms {
   color: blue;
   display: flex;
+  align-items: center;
   gap: 50px;
   @include respond-to(mobile) {
     flex-direction: column;
@@ -299,4 +301,38 @@ body {
   background-color: antiquewhite;
   padding: 5px 8px;
   color: blue;
+}
+
+.grey-font {
+  color: grey;
+}
+
+.ai-images {
+  width: 80%;
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+}
+
+table {
+  background-color: $base-color;
+  border: 0.1px solid rgb(204, 204, 204);
+  border-collapse: collapse;
+
+  th, td {
+    border: 0.1px solid rgb(204, 204, 204);
+  }
+
+  @include respond-to(mobile) {
+    margin-left: 0;
+  }
+
+  * {
+    padding: 0px 3px;
+    color: $light-font;
+    td {
+      padding-left: 7px;
+      font-style: italic;
+    }
+  }
 }
