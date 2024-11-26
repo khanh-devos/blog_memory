@@ -19,7 +19,7 @@ There are 4 types of Activation Functions: Sigmoid, Tanh, ReLU, Softmax.
         <h5>Figure 1: Sigmoid</h5>
     </div>
 
-2. **Tanh**: output between -1 to 1, centered around 0 
+2. **Tanh**: output between -1 to 1, centered around 0. It is better for input datas that are complicated with both negative and positive information like "words data".
 
     $$\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}$$
 

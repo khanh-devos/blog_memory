@@ -8,13 +8,13 @@ Common Types of AI architectures:
 AI technology has been "exploding" in recent years, introducing numerous new concepts and terms each year. Among these, AI architectures, in my view, play a key role in this evolution(sự tiến bộ). This post is my attempt to collect and describe some common AI architectures with their core typical features.
 
 
-1. **FNN (Feedforward Neuron Network)** :
+1. **FNNs (Feedforward(truyền thẳng) Neuron Network)** :
     - Foundational: FNNs are the simplest neural networks and provide a foundation for understanding how inputs, weights, biases, and activations work.
     - Broad Applicability: Useful for basic tasks like regression(phân tích hồi quy) and classification.
     - Techniques: Basics of how neural networks process data, activation functions, loss functions, and backpropagation(truyền ngược).
 
     <div style="width: 100%; text-align: center;">
-      <img class="ai-images" src="{{ './assets/images/Feedforward-neural-network-FNN.png' | relative_url }}" alt="First transformer version" />
+      <img class="ai-images" src="{{ './assets/images/Feedforward-neural-network-FNN.png' | relative_url }}" alt="FNNs" />
       <h5>Figure 1: regular FNN</h5>
     </div>
 
@@ -34,7 +34,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     - Dropout: is a regularization technique to prevent overfitting. It works by randomly "dropping out" (setting to zero) a subset of neurons in a hidden layer during each training iteration. This makes the network learning more generally by not relying too heavily on specific neurons. Because "dropout" sets zero forcefully to some neurons at the "forward propagation" (truyền tới), it cannot be applied at the final layer.
     <br><br>
 
-2. **Convolutional Neural Networks (CNNs)** :
+2. **Convolutional(tích chập) Neural Networks (CNNs)** :
     - Complexity: CNNs are a natural progression, especially for image-related data.
     - Practical Applications: Many real-world use cases (face recognition, medical imaging(2D, 3D), sentiment analysis).
     - Techniques: Filters, feature maps, pooling, and convolution(tích chập) operations. These terms should be clarified to master this CNN architecture.
@@ -45,7 +45,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     </div>
 
     <div style="width: 100%; text-align: center;">
-      <img class="ai-images" src="{{ './assets/images/convolution-illustration.png' | relative_url }}" alt="First transformer version" />
+      <img class="ai-images" src="{{ './assets/images/convolution-illustration.png' | relative_url }}" alt="CNNs" />
       <h5>Figure 2.1: Convolution process</h5>
     </div>
 
@@ -74,7 +74,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     *Extension: There are various types of convolution operations, including dilated convolution, transposed convolution, depthwise separable convolution, deformable convolution. Generally, CNNs are used widely for tasks involving image-related data such as image recognition, video analysis.*
 
 
-3. **Recurrent Neural Networks (RNNs)** :
+3. **Recurrent(hồi quy) Neural Networks (RNNs)** :
     - Sequential Data: fit for time-series data, text, or speech.
     - Data Flow with BTTT (Backpropagarion Through Time): it is very similar to FNNs architectures but it includes loop over time, output from previous time steps are fed back into the network as input, making the learning process will have to 2 inputs. (*The feedback loop applies across the network as a whole*).
 
@@ -87,15 +87,58 @@ AI technology has been "exploding" in recent years, introducing numerous new con
         - $\alpha$ : activation function (sigmoid, tanh, ReLU)<br><br>
     
     - Difference: This feedback loop enables the network to maintain a form of memory, capturing "sequential dependencies" (sự phụ thuộc liên tục) in data.
-    - Techniques included: Hidden states, vanishing gradients, and how LSTMs/GRUs improve on vanilla RNNs.
+    - Techniques included: Hidden states, vanishing gradients.
+
     <br><br>
     <div style="width: 100%; text-align: center;">
-        <img class="ai-images" src="{{ './assets/images/RNNs.png' | relative_url }}" alt="First transformer version" />
+        <img class="ai-images" src="{{ './assets/images/RNNs.png' | relative_url }}" alt="RNNs" />
         <h5>Figure 3: Recurrent Neural Networks RNNs</h5>
     </div>
 
-    - Note: *Becaues the inputs are processed sequentially, which is slower compared to parallel architectures like Transformers. For very long sequence, the model could "forget" older information from the beginning time.*<br><br>
+    - Variants: The problem with RNNs is a short-term memory that means RNNs will forget older information easily for longer sequences. Hence, LSTMs (long short-term memory) was introduced with a cell state $C_{t}$ like a memory of the network during training. $C_{t}$ is to determine what the network should forget or memorize thanks for the activation "tanh".
+    <br><br>
+    <div style="width: 100%; text-align: center">
+        <img class="ai-images" src="https://databasecamp.de/wp-content/uploads/lstm-architecture-768x532.png" alt="LSTMs" style="border-radius: 3%" />
+        <h5>
+            Figure 3.1: Long Short-Term Memory - LSTMs 
+            <a href="https://databasecamp.de/en/ml/lstms?paged832=2" alt="database camp LSTMs">.</a>
+        </h5>
+        
+    </div>
 
+    - Cell state $C_{t}$:
+
+    $$ C_{t} = f_{t} \cdot C_{t-1} + i_{t} \cdot C^{tanh}_{t} $$
+
+    - With: 
+
+        - $f_{t} \cdot C_{t-1}$: determines how much of the previous memory to keep.
+        - $i_{t} \cdot C^{tanh}_{t}$: decides how much of new information to add into the network:
+
+        - Forget Gate (sigmoid): $ f_{t} = \alpha (W_{f} \cdot [h_{t-1}, x_{t}] + b_{f}) $
+
+        - Input Gate (sigmoid): $ i_{t} = \alpha (W_{i} \cdot [h_{t-1}, x_{t}] + b_{i}) $
+    
+        - ***Tanh Cell state*** : 
+
+            $$ C^{tanh}_{t} = tanh(W_{c} \cdot [h_{t-1}, x_{t}] + b_{c}) $$
+    
+    - Ouput Gate (sigmoid): $ O_{t} = \alpha (W_{o} \cdot [h_{t-1}, x_{t}] + b_{o}) $
+    
+    - New hidden state: with added $tanh(C_{t})$, $h_{t}$ is more memorable
+    
+    $$ h_{t} = O_{t} \cdot tanh(C_{t}) $$
+
+    **Remark**: *LSTMs retain information better than traditional RNNs due to their use of a "cell state" $C_{t}$ which is updated by the "forget" and "input gates". This allows the network to maintain and regulate long-term memory more effectively. The tanh activation function helps control the range of values in the "cell state", while the output gate $O_{t}$ decides how much of the "cell state" should be passed as the "hidden state" $h_{t}$.*
+
+    - Applications: while transformers dominate most NLP tasks in 2024, LSTMs remain an essential tool, especially for real-time systems:
+        - Financial forecasting
+        - Weather prediction
+        - Predicting disease progression, monitoring patient vitals in real-time
+        - Network traffic.
+        - Human action recognition in videos, gesture recognition, and video captioning.
+        - LSTMs are still heavily used for music generation and composition.
+    <br><br>
 
 4. **Transformer Architectures** :
     - State-of-the-Art: Transformers dominate modern AI applications, especially in NLP (e.g., GPT, BERT).
