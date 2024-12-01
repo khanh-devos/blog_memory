@@ -268,7 +268,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     - **Decoder Components** : process both the target sequence and encoder outputs:
         - ***1. Target Sequence Embedding and Positional Encoding*** : Like Encoder, the target sequence is embedded and combined with PE, having $Y' = Y + PE \in \mathbb R^{m \times d_{model}} \$ with $m \$ as a number of target tokens and $Y = [y_{1}, y_{2},.., y_{m}]$.
 
-        - ***2. Masked Multi-Head Self-Attention*** : Self-attention in the decoder is a little different. It includes a "MASK" to ensure that predictions depend only on previous tokens. For ex: "The cat sat on the yard.", if the model predict "on", it will depend only on 3 previous tokens "The", "cat" and "sat", **not** "the", "yard" and ".".
+        - ***2. Masked Multi-Head Self-Attention*** : Self-attention in the decoder is a little different. It includes a matrix "MASK" to ensure that predictions depend only on previous tokens. For ex: "The cat sat on the yard.", if the model predict "on", it will depend only on 3 previous tokens "The", "cat" and "sat", **not** "the", "yard" and ".".
 
         $$MaskedAttention^{i}(Q,K,V) = softmax(\frac{Q \cdot K^{T}}{\sqrt{d_{K}}} + M) \cdot V$$
 
@@ -283,13 +283,16 @@ AI technology has been "exploding" in recent years, introducing numerous new con
 
         - Row $i$ : corresponds to the attention of token $i$. 
         - Column $j$ : If $j>i$ , $M[i,j] = -\infty$, meaning the future tokens (next tokens) are masked (Softmax will set probability to $0$). 
+        
         - *So, with a sequence "I love coding.", we have input tokens ["I", "love", "coding"] and target tokens ["love", "coding", "."] by shifting right one token.*
+        
+        - *Remark: the mask matrix is vital to mask the future tokens, helping the training could run in parallel rather than in a sequence. This means predicting $y_{t+1}$ does not have to wait for $y_{t} \ \$*.
 
         - There's no FFN layers here but still layer of Normalization and Residual Connections 
         
         $$Y' = LayerNorm(MaskedAttention(Y') + Y')$$
 
-
+        <br>
         - ***3. Encoder-Decoder Attention*** : it is very noticeable here that the inputs will be outputs from Encoder and Decoder though the Attention Equation is similar:
 
         $$EDAttention(Q,K,V) = softmax(\frac{Q \cdot K^{T}}{\sqrt{d_{K}}}) \cdot V \in \mathbb R^{m \times d_{V}}$$ 
@@ -308,8 +311,9 @@ AI technology has been "exploding" in recent years, introducing numerous new con
         $$Z_{eDecoder} = LayerNorm(Z_{eDecoder-1} + FFN(Z_{eDecoder-1}))$$
 
         With: $Z_{eDecoder-1}$ derives from the previous layer of Encoder-Decoder Attentions.
-        
-        - ***5. Final Linear Layer*** : The eDecoder output passes through a linear layer and a softmax to generate probabilities over the vocabulary.
+    
+    <br>    
+    - **Final Linear Layer** : The eDecoder output passes through a linear layer and a softmax to generate probabilities over the vocabulary.
 
         - For the current timestep $t$, the decoder output $Z_{t} \in \mathbb R^{d_{model}}$ corresponds to the hidden state encoding all information from $y_{<t}$ and $X$:
 
@@ -325,7 +329,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
         
         - And "Predicted-Word" = $V[y_{t}]$
 
-    
+    <br>
     - **Loss Computation :** 
         - During training, the loss is computed using the true token indices $y^{true}_{t}$:
 
