@@ -336,3 +336,18 @@ table {
     }
   }
 }
+
+.note-part {
+  background-color: rgb(149, 255, 221);
+  border: 1px solid rgb(0, 255, 0);
+  
+  border-radius: 5px;
+  width: fit-content;
+  padding: 3px 5px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.hide {
+  display: none;
+}

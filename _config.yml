@@ -2,6 +2,7 @@ name: khanh than
 time: 2024/10/07
 description: "Blog"
 keywords: ["Programming", "Algorithm", "Mathematics", "genAI", "NLP"]
+shownPostNum: 5
 
 author:
   name: Khanh Than

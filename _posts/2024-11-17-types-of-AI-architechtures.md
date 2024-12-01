@@ -1,11 +1,14 @@
 ---
 category: ai
 loadingMathjax: true
+rollable: 'rollable'
 ---
 
 Common Types of AI architectures: 
 
 AI technology has been "exploding" in recent years, introducing numerous new concepts and terms each year. Among these, AI architectures, in my view, play a key role in this evolution(sự tiến bộ). This post is my attempt to collect and describe some common AI architectures with their core typical features.
+
+
 
 
 1. **FNNs (Feedforward(truyền thẳng) Neuron Network)** :
@@ -49,30 +52,42 @@ AI technology has been "exploding" in recent years, introducing numerous new con
       <h5>Figure 2.1: Convolution process</h5>
     </div>
 
-    2.1 Convolution: is a mathematical operation a kernel (a matrix or a filter) traverses over the image and performs a DOT product with each overlapping(phủ lên) areas, that is a matrix with same size. This DOT products are to extract important regional features on the image, but this is hardly understandable.
+    - Convolution: is a mathematical operation a kernel (a matrix or a filter) traverses over the image and performs a DOT product with each overlapping(phủ lên) areas, that is a matrix with same size. This DOT products are to extract important regional features on the image, but this is hardly understandable.
 
-    2.2 Filter (kernel or a matrix): There might be various filters (kernels) applied to capture various aspects of the image. The more number filters, the more features extracted or the longer the flatten layer becomes. The initial layers extract edges and texture, and the final layers extract parts of an image like head, eyes, or a tail. CNN adjusts (learns) the filters during training to minimize the loss.
+    - Filter (kernel or a matrix): There might be various filters (kernels) applied to capture various aspects of the image. The more number filters, the more features extracted or the longer the flatten layer becomes. The initial layers extract edges and texture, and the final layers extract parts of an image like head, eyes, or a tail. CNN adjusts (learns) the filters during training to minimize the loss.
 
-    2.3 Stride: the number of cells the kernel of filter traverse one time over the image.
+    - Stride: the number of cells the kernel of filter traverse one time over the image.
 
-    Explaination of Figure 2.1:<br>
-    (5x-1)+(2x0)+(6x1)+(4x2)+(3x1)+(4x2)+(3x1)+(9x-2)+(2x0) = 5 (origin 3)<br>
-    (2x-1)+(6x0)+(8x1)+(3x2)+(4x1)+(5x2)+(9x1)+(2x-2)+(4x0) = 31 (origin 4)<br>
-    (6x-1)+(8x0)+(2x1)+(4x2)+(5x1)+(1x2)+(2x1)+(4x-2)+(7x0) = 5 (origin 5)<br>
-    (8x-1)+(2x0)+(0x1)+(5x2)+(1x1)+(9x2)+(4x1)+(7x-2)+(7x0) = 11 (origin 1)<br>
+    - Explaination of Figure 2.1:
+        - (5x-1)+(2x0)+(6x1)+(4x2)+(3x1)+(4x2)+(3x1)+(9x-2)+(2x0) = 5 (origin 3)
+        - (2x-1)+(6x0)+(8x1)+(3x2)+(4x1)+(5x2)+(9x1)+(2x-2)+(4x0) = 31 (origin 4)
+        - (6x-1)+(8x0)+(2x1)+(4x2)+(5x1)+(1x2)+(2x1)+(4x-2)+(7x0) = 5 (origin 5)
+        - (8x-1)+(2x0)+(0x1)+(5x2)+(1x1)+(9x2)+(4x1)+(7x-2)+(7x0) = 11 (origin 1)
 
-    After convolution calculation with stride 1, the DOT product values are scaled up as following: 
+    - After convolution calculation with stride 1, the DOT product values are scaled up as following: 
     
     - 3-4-5-1 is replaced by 5-31-5-11.
 
-    This convolution values definitely highlight the relative relationship across all the cells (pixels) in the image, improving the learning process. But as mentioned, kernel values are adjusted like "weights" during the training in most cases.
+    - This convolution values definitely highlight the relative relationship across all the cells (pixels) in the image, improving the learning process. But as mentioned, kernel values are adjusted like "weights" during the training in most cases.
 
-    2.4 Pooling Layers: After convolution operations, pooling takes place, which some times reduces the size of the "representation".
+    - Pooling Layers: After convolution operations, pooling takes place, which some times reduces the size of the "representation".
 
-    2.5 Flatten layers: is to combine and reduce the size of all the pooling layers to 1-dimentional vector feeding the next "fully connected layer" that is similar to the FNN architecture.
+    - Flatten layers: is to combine and reduce the size of all the pooling layers to 1-dimentional vector feeding the next "fully connected layer" that is similar to the FNN architecture.
 
-    *Extension: There are various types of convolution operations, including dilated convolution, transposed convolution, depthwise separable convolution, deformable convolution. Generally, CNNs are used widely for tasks involving image-related data such as image recognition, video analysis.*
-
+    - **Variants**: *There are various types of "convolution operations", including dilated convolution, transposed convolution, depthwise separable convolution, deformable convolution.* 
+    
+    - Applications: tasks involving image-related data:
+        - Computer Vision Applications: Image classification, Object Detection, Facial Recognition, Image Generation and Enhancement...
+        - Video Processing: Action Recognition, Video Analytics, Video Segmentation.
+        - Medical Imaging: MRI/CT Scan Analysis, X-ray Classification.
+        - Autonomous Vehicles: Road Scene Understanding, Driver Monitoring Systems.
+        - Natural Language Processing: Text Classification, Character-Level Models.
+        - Robotics: Analyzing the environment.
+        - Satellite and Aerial Image Analysis: Land Cover Classification.
+        - Fashion and Retail: Product Recommendation, Virtual Try-On
+        - Gaming and Augmented Reality: Scene Understanding, Character Animation ( Generating realistic movements based on visual data.)
+        - Industrial Applications: Defect Detection, Quality Assurance
+    <br><br>
 
 3. **Recurrent(hồi quy) Neural Networks (RNNs)** :
     - Sequential Data: fit for time-series data, text, or speech.
@@ -96,6 +111,12 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     </div>
 
     - Variants: The problem with RNNs is a short-term memory that means RNNs will forget older information easily for longer sequences. Hence, LSTMs (long short-term memory) was introduced with a cell state $C_{t}$ like a memory of the network during training. $C_{t}$ is to determine what the network should forget or memorize thanks for the activation "tanh".
+
+    - <div class="note-part">LSTMs (Long Short-Term Memory):<div>
+        
+    - Long Short-Term Memory (LSTM) is a type of recurrent neural network (RNN) designed to handle sequential data and long-term dependencies. Its architecture includes cell states (long-term memory) and hidden states (short-term memory), regulated by three key gates: "forget, "input", and "output". The forget gate removes irrelevant information, the input gate adds new information, and the output gate determines the output and updates the hidden state. These gates, powered by sigmoid and tanh activations, enable LSTMs to mitigate issues like vanishing gradients, making them effective for tasks such as language modeling, time-series prediction, and speech recognition.
+
+
     <br><br>
     <div style="width: 100%; text-align: center">
         <img class="ai-images" src="https://databasecamp.de/wp-content/uploads/lstm-architecture-768x532.png" alt="LSTMs" style="border-radius: 3%" />
@@ -112,24 +133,26 @@ AI technology has been "exploding" in recent years, introducing numerous new con
 
     - With: 
 
-        - $f_{t} \cdot C_{t-1}$: determines how much of the previous memory to keep.
+        - $f_{t} \cdot C_{t-1}$: determines how much of the previous memory to keep (or forget).
         - $i_{t} \cdot C^{tanh}_{t}$: decides how much of new information to add into the network:
 
         - Forget Gate (sigmoid): $ f_{t} = \alpha (W_{f} \cdot [h_{t-1}, x_{t}] + b_{f}) $
 
         - Input Gate (sigmoid): $ i_{t} = \alpha (W_{i} \cdot [h_{t-1}, x_{t}] + b_{i}) $
     
-        - ***Tanh Cell state*** : 
+        - ***Cell state (tanh)*** : 
 
             $$ C^{tanh}_{t} = tanh(W_{c} \cdot [h_{t-1}, x_{t}] + b_{c}) $$
     
     - Ouput Gate (sigmoid): $ O_{t} = \alpha (W_{o} \cdot [h_{t-1}, x_{t}] + b_{o}) $
     
-    - New hidden state: with added $tanh(C_{t})$, $h_{t}$ is more memorable
+    - New hidden state: with added $tanh(C_{t})$, $h_{t}$ is more memorable to retain "long-term dependencies" in sequential data, such as natural language.
     
     $$ h_{t} = O_{t} \cdot tanh(C_{t}) $$
 
-    **Remark**: *LSTMs retain information better than traditional RNNs due to their use of a "cell state" $C_{t}$ which is updated by the "forget" and "input gates". This allows the network to maintain and regulate long-term memory more effectively. The tanh activation function helps control the range of values in the "cell state", while the output gate $O_{t}$ decides how much of the "cell state" should be passed as the "hidden state" $h_{t}$.*
+    - The output gate $O_{t}$ decides how much of the "cell state" should be passed as the "hidden state" $h_{t}$.
+
+    - **Remark**: *LSTMs retain information better than traditional RNNs due to their use of a "cell state" $C_{t}$ which is updated by the "forget" and "input gates". This allows the network to maintain and regulate long-term memory more effectively.*
 
     - Applications: while transformers dominate most NLP tasks in 2024, LSTMs remain an essential tool, especially for real-time systems:
         - Financial forecasting
@@ -141,15 +164,186 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     <br><br>
 
 4. **Transformer Architectures** :
-    - State-of-the-Art: Transformers dominate modern AI applications, especially in NLP (e.g., GPT, BERT).
-    - High Demand: Skills in transformers are highly sought after in industry.
-    - Techniques: Attention mechanisms, self-attention, and encoder-decoder architectures.
+    - State-of-the-Art: Transformers dominate modern AI applications, especially in NLP (e.g., GPT, BERT). It processes sequences in parallel rather than sequentially, using positional encodings to retain the order of inputs.
+
+    - Core terms:
+        - *Token*: a discrete symbolic representation that are *not numerical*. There are more than one way of Tokenization, a token can be a word or a subword or a character. For example: ["The", "cat", "sat", "on", "the", "mat", "."] is a set of tokens (words) from an input sentence "The cat sat on the mat.".
+        - *Embedding*: a numerical representation of a token in a continuous space. They are very dense (complex) to capture the semantic(ngữ nghĩa) relationships between tokens. For example: [0.25, 0.78, ...]
+        - *Self-attention*: a mechanism used within both the encoder and the decoder of the Transformer architecture.
+        - $d_{model}$: the size of the vector representation of each token in the sequence (input data). For ex: 512 (e.g., in the original Transformer paper), 768, 1024, or larger in modern variants like BERT and GPT.
+
+    - Techniques: self-attention mechanism, and encoder-decoder architectures.
+
+    There are many types of Transformer models, with an input sequence "I love coding." we could list some types based on the outputs:
+    
+    1. Translation: the transformer is trained for translation, the output should be "J'aime coder."
+    2. Text Summarization: "Passionate about coding."
+    3. Text Generation: "It's my favourite hobby."
+    4. Sentiment Analysis (classification): output is a label "Positive"
+    5. Part-of-Speech Tagging: "PRON VERB NOUN PUNCT"
+    6. Masked Language Modeling: "I love coding [MASK]", now predict "MASK" at inference but learn "coding" during training.
+    7. Paraphrasing: "I enjoy programming."
+
     <br><br>
     <div style="width: 100%; text-align: center;">
         <img class="ai-images" src="{{ './assets/images/Transformer.png' | relative_url }}" alt="First transformer version" />
-        <h5>Figure 4: Transformer Architectures</h5>
+        <h5>Figure 4: Transformer Architecture</h5>
     </div>
 
+    - **Input Embedding ($X$)** : each token in the input sequence is converted to a "vector representation", forming a matrix $X \in \mathbb R^{n \times d_{model}}$.
+        - $n$: number of tokens in the input data.
+        - $d_{model}$: dimensionality of the embeddings.
+      
+        - <div class="note-part">Process of generating embeddings :</div>
+        - Each token is mapped to a vector via "an embedding layer" in the model. This layer typically involves "a learned matrix" Weights: $W_{E} \in \mathbb R^{\|V\| \times d_{model}}$.
+        - $\|V\|$ : Vocabulary Size. $V$ is the "SET" of all "unique terms" (words, subwords, or tokens) that the model recognizes from the input data. If the input data only has 100 unique words, $V$ will be a dictionary or a set of 100 words, each will have a fixed index. Hence, $\|V\| = 100$ and each word (token) is represented by a vector (row) in matrix $W_{E}$.
+        - For ex: given an input sentence "I love coding.", via tokenization we have [I, love, coding, "."]. Each token will have an unique index in $V$, for example, we get [1, 4, 8, 10], using these indices we could fetch vectors from $W_{E}$ to have $X = [x_{1}, x_{2}, x_{3}, x_{4}]$ with vector $x_{i} \in \mathbb R^{d_{model}}$.
+    <br><br>
+    - **PE - Positional Encoding** : Transformers lack inherent sequence information since they process input tokens in parallel. Positional Encoding (PE) provides this missing information by encoding each token's position in the sequence.
+        - Positional information is added to the embeddings using "sin" and "cos" functions, corresponding to even and odd "positions".
+
+        $$
+        PE(pos,2i) = sin(\frac{pos}{10,000^{2i/d_{model}}}), \ 
+        PE(pos,2i+1) = cos(\frac{pos}{10,000^{2i/d_{model}}})
+        $$
+        
+        - $pos$: position index of the token in "the sequence" with length n.
+        - $i$: the dimension index of the embedding size $d_{model}$.
+        - The final input to the Transformer is $X' = X + PE$
+        - The denominator $10,000^{2i/d_{model}}$ ensures that the positional encodings cover varying frequencies.
+        - *Notice: PE is **fixed** but the final input $X'$ is learned(changed) during training.*
+        - Example: for a sentence sequence of 3 tokens ($n=3$), $d_{model} = 4$, we have $X \in \mathbb R^{3 \times 4}$ and $PE \in \mathbb R^{3 \times 4}$:
+
+        $$ X+PE = \begin{vmatrix} 
+        X_{0,0}+PE(0,0) & ... & X_{0,3}+PE(0,3) \\ 
+        X_{1,0}+PE(1,0) & ... & X_{1,3}+PE(1,3) \\ 
+        X_{2,0}+PE(2,0) & ... & X_{2,3}+PE(2,3) \\
+        \end{vmatrix}$$
+
+        Remark: 
+        - *One $PE$ will represent the exact position of each token in the sequence and map it into the feature vector space $\ \mathbb R^{d_{model}}$.*
+        
+    - **Encoder Components**: consists of multi-head self-attention and a feed-forward network. Self-attention is used to understand "token dependencies" (relationships between different words or phrases). Encoder stack contains $N$ identical layers. Each layer consists of:
+
+        - ***1. Multi-Head Self-Attention***: It was introduced by a group of researchers at "Google Brain" in their seminal paper titled "Attention Is All You Need" in 2017.  The idea is that each token in a sequence should "attend" to all other tokens (including itself), weighted by their relevance. Importantly, it allows "parallelizable computations" that improves the  efficiency greatly.
+        - If we have $h$ heads (8 for the first Transformer), each head will have an $attention score$ calculated in parallel:
+
+        $$Attention_{i}(Q_{i},K_{i},V_{i}) = softmax(\frac{Q_{i} \cdot K_{i}^{T}}{\sqrt{d_{K}}}) \cdot V_{i}$$
+
+        - Query matrix $Q_{i} = X \cdot W_{Q_{i}} \$ helping the model ask “Which other words are relevant to me?”
+        - Keys matrix $K_{i} = X \cdot W_{K_{i}} \$ setting a label for a word.
+        - Values matrix $V_{i} = X \cdot W_{V_{i}} \$ holding the meaning information of a word. 
+        - $Q_{i}$, $K_{i}$, $V_{i}$ are 3 projections of X into 3 vector spaces in nature. $Q_{i}$, $K_{i}$ $\in \mathbb R^{n \times d_{K}}$ and $V_{i}$ $\in \mathbb R^{n \times d_{V}}$
+        - $W_{Q_{i}}, W_{K_{i}} \in \mathbb R^{d_{model} \times d_{K}}$ and $W_{V_{i}} \in \mathbb R^{d_{model} \times d_{V}} $ are learnable weight matrices.
+        - The "Scaled Dot-Product" $\frac{Q_{i} \cdot K_{i}^{T}}{\sqrt{d_{K}}}$ is a matrix $\in \mathbb R^{n \times n}$ represents the compatibility scores between $Q$ and $K$.
+        - "Softmax" is applied along each rows to normalize the "attention scores".
+        - $X \in \mathbb R^{n \times d_{model}}$ is input sequence (input data), $d_{model}$ divided by $h$ heads for each $attention$, $X^{i} \in \mathbb R^{n \times d_{V}} $.
+
+        After computing attention for all $h$ heads, now we concatenate, each head produces an output of shape ($n, d_{V}$), so after concatenation:
+
+        $$MultiHeadOutput = Concat(head_{1},... ,head_{h}) \in \mathbb R^{n \times h \cdot d_{V}}$$
+
+        where: $h \cdot d_{V}$ = $d_{model}$ is the concatenated dimension.
+
+        - *Remark 1: I have an intuition that the numerator (tử số) $\ Q.K^{T}$ is just a way to get back the dimentionality $\ \mathbb R^{n \times d_{model}}$, helping parallelize the computations.*
+
+        - ***2. Feed-Forward Network (FFN)***: Applies "a fully connected layer with 2 layers" to "each position" independently. Here the computation is applied on each token in parallel, not via heads anymore:
+        
+        $$FFN(x) = ReLU(x \cdot W_{1} + b_{1}) \cdot W_{2} + b_{2}$$
+
+        - $W_{1} \in \mathbb R^{d_{model} \times d_{ff}}$, $W_{2} \in \mathbb R^{d_{ff} \times d_{model}}$.
+        - $d_{ff}$: the dimensionality of the hidden layer in the FFN
+        - $x$: is a single token $\in \mathbb R^{d_{model}}$
+
+        - ***3. Layer Normalization and Residual Connections***: Stabilize training by normalizing intermediate results and adding residuals:
+
+        $$Output = LayerNorm(x + SubLayer(x))$$
+
+        - *Why $SubLayer(x)$?* : "Residual Connections" are also called "Skip connections", are used to allow the model to bypass certain layers and directly pass the output from one layer to another. In the above equation, we have an input $x$ to a sublayer, the normal output will be $SubLayer(x)$. But "residual connections" will add input $x$ directly to the output which then = $x + SubLayer(x)$. This ensures that "original signals" will keep through the sublayer and avoid varnishing gradient problems that happens frequently in deep networks.
+
+        - **Final Encoder Output**:
+
+        $$Z_{encoder} = LayerNorm(FFN(z') + z'), \ z' = LayerNorm(SelfAtt(X) + X) $$
+
+    - **Decoder Components** : process both the target sequence and encoder outputs:
+        - ***1. Target Sequence Embedding and Positional Encoding*** : Like Encoder, the target sequence is embedded and combined with PE, having $Y' = Y + PE \in \mathbb R^{m \times d_{model}} \$ with $m \$ as a number of target tokens and $Y = [y_{1}, y_{2},.., y_{m}]$.
+
+        - ***2. Masked Multi-Head Self-Attention*** : Self-attention in the decoder is a little different. It includes a "MASK" to ensure that predictions depend only on previous tokens. For ex: "The cat sat on the yard.", if the model predict "on", it will depend only on 3 previous tokens "The", "cat" and "sat", **not** "the", "yard" and ".".
+
+        $$MaskedAttention^{i}(Q,K,V) = softmax(\frac{Q \cdot K^{T}}{\sqrt{d_{K}}} + M) \cdot V$$
+
+        Where M is a "MASK matrix" and Dot-Product $Q \cdot K^{T}$ are $\in \mathbb R^{m \times m}$, we have:
+
+        $$M[i,j] = \begin{vmatrix}
+            0 & -\infty & -\infty  \\    
+            0 & 0       & -\infty  \\
+            0 & 0       & 0        \\ 
+            \end{vmatrix}
+        $$
+
+        - Row $i$ : corresponds to the attention of token $i$. 
+        - Column $j$ : If $j>i$ , $M[i,j] = -\infty$, meaning the future tokens (next tokens) are masked (Softmax will set probability to $0$). 
+        - *So, with a sequence "I love coding.", we have input tokens ["I", "love", "coding"] and target tokens ["love", "coding", "."] by shifting right one token.*
+
+        - There's no FFN layers here but still layer of Normalization and Residual Connections 
+        
+        $$Y' = LayerNorm(MaskedAttention(Y') + Y')$$
+
+
+        - ***3. Encoder-Decoder Attention*** : it is very noticeable here that the inputs will be outputs from Encoder and Decoder though the Attention Equation is similar:
+
+        $$EDAttention(Q,K,V) = softmax(\frac{Q \cdot K^{T}}{\sqrt{d_{K}}}) \cdot V \in \mathbb R^{m \times d_{V}}$$ 
+
+        With:
+        - Like Encoder, $d_{V} = \frac{d_{model}}{h}$
+        - from Decoder, matrix Queries $Q = Y' \cdot W_{Q}$
+        - from Encoder, matrix Keys $K = Z_{encoder} \cdot W_{K}$
+        - from Encoder, matrix Values $V = Z_{encoder} \cdot W_{V}$
+        - $Q \in \mathbb R^{m \times d_{K}}$, $K \in \mathbb R^{n \times d_{K}}$, $V \in \mathbb R^{n \times d_{V}}$.
+        
+        - Remark: *"Attention Scores" $Q \cdot K^{T}$ measure the relevance of each "encoder keys" to the current "decoder queries". The scores are scaled by $\sqrt{d_{K}}$ to stabilize gradients.*
+
+        - ***4. FFN and Residue Connections*** : The output of the encoder-decoder attention layer passes through a feed-forward network similar to the encoder:
+
+        $$Z_{eDecoder} = LayerNorm(Z_{eDecoder-1} + FFN(Z_{eDecoder-1}))$$
+
+        With: $Z_{eDecoder-1}$ derives from the previous layer of Encoder-Decoder Attentions.
+        
+        - ***5. Final Linear Layer*** : The eDecoder output passes through a linear layer and a softmax to generate probabilities over the vocabulary.
+
+        - For the current timestep $t$, the decoder output $Z_{t} \in \mathbb R^{d_{model}}$ corresponds to the hidden state encoding all information from $y_{<t}$ and $X$:
+
+        $$P(y_{t}|y_{<t}, X) = softmax(Z^{eDecoder}_{t} \cdot W_{o} + b_{o})$$
+
+        With:
+        - Weight matrix $W_{o} \in \mathbb R^{d_{model} \times \| V \|}$.
+        - Bias $b_{o} \in \mathbb R^{\| V \|}$.
+        - $\| V \|$ : size of the vocabulary.
+        - Then, the model predicts the next token index $y_{t}$ is the index having the highest probability in this probability distribution:
+        
+        $$P(y_{t}|y_{<t}, X) \in \mathbb R^{\| V \|}$$ 
+        
+        - And "Predicted-Word" = $V[y_{t}]$
+
+    
+    - **Loss Computation :** 
+        - During training, the loss is computed using the true token indices $y^{true}_{t}$:
+
+        $$Loss = - \sum_{t=1}^{m} {logP(y_{t} = y^{true}_{t})}$$
+
+        With $m$ is a number of target tokens.
+        - We could see that if $y_{t} = 1$ then $loss = logP = 0$, so it's perfect. But if $y_{t}$ reaches closer to zero, $loss$ will become large:
+
+    <br>
+    <div style="width: 100%; text-align: center;">
+      <img class="ai-images" src="{{ './assets/images/logX.png' | relative_url }}" alt="FNNs" style="width: 300px"/>
+      <h5>Figure 5: LogX becomes large when X reaches to zero</h5>
+    </div>
+    <br>
+
+    - **Inference Process**: the model will predict the first word, which then is fed back into the model to predict the next word. This process continues until the prediction is complete.
+    <br><br>
+    
 5. **Reinforcement Learning (RL)** :
     - Complexity: RL is conceptually and mathematically challenging.
     - Niche Applications: While powerful, its applications (e.g., robotics, game AI) are narrower compared to others.
@@ -170,6 +364,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
         <img class="ai-images" src="{{ './assets/images/GNNs.png' | relative_url }}" alt="First transformer version" />
         <h5>Figure 6: Graph Neural Networks (GNNs)</h5>
     </div>
+
 
 **Additional Recommendations :**
 - For interests in generative AI, such as creating images or videos, consider Generative Adversarial Networks (GANs) after mastering CNNs.

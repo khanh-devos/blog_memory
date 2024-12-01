@@ -46,34 +46,10 @@ loadingMathjax: true
 
 
 2. **Vector space ($\mathbb{R^{n}}$) vs Matrix**:
-    - A vector space (also a linear space, **ko gian tuyến tính**) is a collection of objects called vectors.
-    - $\mathbb{R^{n}}$ is a symbol of a vector space of n-dimentional vectors that must be linear independent. And $n$ is called *space dimension*
-    - FIVE typical features of **Vector Addition**:
-
-        1. Closed (kín): $\vec{s}$ = $\vec{u}$ + $\vec{v}$ <br>
-        if 2 vectors $\vec{u}$ & $\vec{v}$ belongs to the vector space $\mathbb{R}$, their sum vector $\vec{s}$ must lie in the vector space  $\mathbb{R}$.
-        2. Commutative (giao hoán): $\vec{u}$ + $\vec{v}$ = $\vec{v}$ + $\vec{u}$
-        3. Associative (kết hợp): ($\vec{u}$ + $\vec{v}$) + $\vec{w}$  = $\vec{u}$ + ($\vec{v}$ + $\vec{w}$)
-        4. Existence of Additive Identity vector $\vec{0}$ to have $\vec{u}$ + $\vec{0}$ = $\vec{u}$
-        5. Existence of Additive Inverses vector $\vec{x}$ to have $\vec{u}$ + $\vec{x}$ = $\vec{0}$, so $\vec{x}$ = $\vec{-u}$
-        <br><br>
-
-    - FIVE typical features of **Scalar Multiplication**:
-
-        1. Closed (kín): $\vec{s}$ = $c \cdot \vec{u}$<br>
-        if vector $\vec{u}$ belongs to the vector space  $\mathbb{R}$, the scaled vector $\vec{s}$ must also lie in the vector space  $\mathbb{R}$.
-        2. Commutative with scalar (giao hoán với hệ số) : $\vec{u} \cdot c$ = $c \cdot \vec{u}$
-        3. Associative with scalar (kết hợp với hệ số) : $a \cdot (b \cdot \vec{u})$ = $(b \cdot a) \cdot \vec{u}$
-        4. Distributive over Vector Addition (phân phối với hệ số) : $c\cdot$($\vec{u}$ + $\vec{v}$) = $c \cdot \vec{u}$ + $c \cdot \vec{v}$
-        5. Distributive over Scalar Addition (phân phối với vectơ) : $(a + b) \cdot \vec{u}$ = $a \cdot \vec{u}$ + $b \cdot \vec{u}$
-    <br><br>
-
     - **Matrix in vector space**: a matrix represents a transformation between vector spaces, a kind of a bridge or mapping between vector spaces. This means a matrix can help "move" a vector in one vector   space to another vector space. For example, vector $\vec{X}$ in vector space $R_{x}$ is transformed to another vector space $R_{y}$ by matrix $A_{2 \times 2}$. This is a key concept in neuron network to build a bridge (model).
 
         $$ A \cdot \vec{X} = \vec{Y} $$
-
-<br><br>
-
+    
 2. **Tensor ($T$) vs Matrix :**
     - Tensor is a data structure used mainly in tensorflow or Pytorch:
 

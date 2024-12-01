@@ -16,7 +16,7 @@ title: Blog
       {% assign count = count | plus: 1 %}
     {% endif %}
 
-    {% if count == 3 %} 
+    {% if count == site.shownPostNum %} 
       {% break %}
     {% endif %}
 

@@ -3,7 +3,8 @@ category: ai
 loadingMathjax: true
 ---
 
-A vector is a mathematical object that represents a quantity with both magnitude and direction
+A. **VECTORS**: 
+- A vector is a mathematical object that represents a quantity with both magnitude and direction
 
 1. **Magnitude $\Vert v \Vert$** : a length or size of vector, given a vector $\vec{v}$ = [$v_{1}$, $v_{2}$,... , $v_{n}$], we have:
 
@@ -43,7 +44,32 @@ A vector is a mathematical object that represents a quantity with both magnitude
     softmax($z_{2}$) = 7.39/11.22 = 0.24<br>
     softmax($z_{3}$) = 7.39/11.22 = 0.10<br>
     
-    After softmax(z) = [0.66, 0.24, 0.10], with the sum = 1
+    After softmax(z) = [0.66, 0.24, 0.10], with the sum = 1.
+    <br><br>
+
+B. **VECTOR SPACE $\mathbb R^{n}$** : 
+- A vector space (also a linear space, **ko gian tuyến tính**) is a collection of objects called vectors.
+- $\mathbb{R^{n}}$ is a symbol of a vector space of n-dimentional vectors that must be linear independent. And $n$ is called *space dimension*.
+
+- FIVE typical features of **Vector Addition**:
+
+    1. Closed (kín): $\vec{s}$ = $\vec{u}$ + $\vec{v}$ <br>
+    if 2 vectors $\vec{u}$ & $\vec{v}$ belongs to the vector space $\mathbb{R}$, their sum vector $\vec{s}$ must lie in the vector space  $\mathbb{R}$.
+    2. Commutative (giao hoán): $\vec{u}$ + $\vec{v}$ = $\vec{v}$ + $\vec{u}$
+    3. Associative (kết hợp): ($\vec{u}$ + $\vec{v}$) + $\vec{w}$  = $\vec{u}$ + ($\vec{v}$ + $\vec{w}$)
+    4. Existence of Additive Identity vector $\vec{0}$ to have $\vec{u}$ + $\vec{0}$ = $\vec{u}$
+    5. Existence of Additive Inverses vector $\vec{x}$ to have $\vec{u}$ + $\vec{x}$ = $\vec{0}$, so $\vec{x}$ = $\vec{-u}$
+    <br><br>
+
+- FIVE typical features of **Scalar Multiplication**:
+
+    1. Closed (kín): $\vec{s}$ = $c \cdot \vec{u}$<br>
+    if vector $\vec{u}$ belongs to the vector space  $\mathbb{R}$, the scaled vector $\vec{s}$ must also lie in the vector space  $\mathbb{R}$.
+    2. Commutative with scalar (giao hoán với hệ số) : $\vec{u} \cdot c$ = $c \cdot \vec{u}$
+    3. Associative with scalar (kết hợp với hệ số) : $a \cdot (b \cdot \vec{u})$ = $(b \cdot a) \cdot \vec{u}$
+    4. Distributive over Vector Addition (phân phối với hệ số) : $c\cdot$($\vec{u}$ + $\vec{v}$) = $c \cdot \vec{u}$ + $c \cdot \vec{v}$
+    5. Distributive over Scalar Addition (phân phối với vectơ) : $(a + b) \cdot \vec{u}$ = $a \cdot \vec{u}$ + $b \cdot \vec{u}$
+<br><br>
 
 
     

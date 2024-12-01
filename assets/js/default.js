@@ -1,3 +1,23 @@
+const enableRollable = ()=>{
+  const rollers = document.getElementsByClassName('rollable');
+
+
+  Object.values(rollers).forEach((roller) => {
+    roller.childNodes.forEach((node) => {
+      if (node.tagName === "OL") {
+        let firstChild = null;
+        Array.from(node.children).forEach((topic) => {
+          Object.values(topic.children).forEach((part, i) => {
+            // part.classList.toggle('hide');
+            // if (i<1) part.classList.toggle('hide');
+          })
+        })
+      }
+    })
+  })
+
+}
+
 //show shared buttons
 const showSharedBtns = () => {
   var hash = window.location.hash.substring(1); // Removes the '#'
@@ -90,6 +110,7 @@ document.addEventListener("turbo:load", function() {
   moveRightSide();
   showSharedBtns();
 
+  enableRollable();
 });
 
 // For Dom loading
@@ -100,4 +121,6 @@ document.addEventListener("DOMContentLoaded", function(){
   typogramsTransform();
   moveRightSide();
   showSharedBtns();
+  enableRollable();
+
 });
