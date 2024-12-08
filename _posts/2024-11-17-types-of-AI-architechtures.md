@@ -8,8 +8,117 @@ Common Types of AI architectures:
 
 AI technology has been "exploding" in recent years, introducing numerous new concepts and terms each year. Among these, AI architectures, in my view, play a key role in this evolution(sự tiến bộ). This post is my attempt to collect and describe some common AI architectures with their core typical features.
 
+5. **Reinforcement Learning (RL)** :
+    - Definition: Reinforcement Learning (RL) is a separate approach in Machine Learning that focuses on training models through interactions with an environment, rather than just learning from existing data (like supervised or unsupervised learning).
+    - Complexity: RL is conceptually and mathematically challenging.
+    - Niche Applications: While powerful, its applications (e.g., robotics, game AI) are narrower compared to others.
+    - Techniques: Markov Decision Processes, policies, rewards, and exploration/exploitation trade-offs.
+    
+    <br><br>
+    <div style="width: 100%; text-align: center;">
+        <img class="ai-images" src="{{ './assets/images/Reinforcement.png' | relative_url }}" alt="First transformer version" />
+        <h5>Figure 5: Reinforcement Learning</h5>
+    </div>
+
+    Let's attach this diagram to a real case to get to understand an RL. Imagine we train a agent (model) for steering a car automatically. We want to go from point A to point B. Now there are 2 tasks to do:
+    - **Task 1 :** Set the map from A to B with the possible shortest distance and a clear fee.
+    - **Task 2 :** Drive the car when there are many other obstacles on the street like pedestrians, other cars, crossroads lights, or even cats. In fact, it also needs to drive under traffic law like a real human, following instructions of traffic signals in the street.
+
+    And here Reinforcement Learning is trained to handle only the task 2:
+
+    - **Agent** : a neural network recieves a state $s_{t}$ *(obstacles, traffic signals)* from the environment at time $t$.
+    - **Action $a_{t}$ :** *(turn right or left, slow down, speed up, or brake)* Based on $s_{t}$, the agent produces an antion $a_{t}$ via the network models, this means there are more than one type of Reinforcement Learning.
+
+    - **Reward $r_{t}$ :** a immediate reward (how many points) recieved after action $a_{t}$ is applied to the environment, then the system comes to a new state $s_{t+1}$. Reward for each action is set manually based on context. For driving a car, how many points to avoid pedestrians by either turning left or turning right or slowing down or just keep the current state, how many points to achieve a speed that is either energy-saving or legal or comfortable.
+
+    - **Policy ($\pi$) :** a strategy the agent follows to find and take the best action, denoted $\pi(a_{t} \| s_{t})$, implying the probability of taking action $a_{t}$ in state $s_{t}$. Each policy will have different settings of rewarding, meaning reward of one action will change under different policies. Particularly, for driving a car, we have several policies: "normal driving", "night driving", "snow driving" and etc. Action "passing another car" will get sure "smaller reward points" under "snow driving" policy and "higher reward points" under "normal driving" policy.
 
 
+    - **Discount factor ($\gamma$) :** between [0,1] that implies the important degree of future rewards, controlling the trade-off (sự đánh đổi) between immediate and future rewards.
+
+    - **1. What is the Goal here in Reinforcement Learning :** Find the optimal policy $\pi^{*}$ that could maximize the expected cumulative reward or the total rewards starting from time step t:
+    
+    $$G_{t} = \sum_{k=0}^{\infty} \gamma_{k} \cdot r_{t+k+1}$$
+
+    - **2. The Bellman equation :** It is central in Reinforcement Learning and a mathematical way to define the relationship between a state and its expected reward over time, helping the agent make decisions based on the maximum value $V(s)$:
+    
+    $$V(s) = \underset{a}{max} \Bigr[r(s,a) + \gamma \cdot \sum_{s'}P(s'|s,a) \cdot V(s')  \Bigr]$$
+    
+    With:
+    - $P(s' \| s, a)$ is the probability of transitioning to a new state $s'$ from $s$ after taking an "perfect" action $a$. 
+    - $V(s')$ is value from new state $s'$.
+
+    *Explaination: in most cases, from state $s$, there will be more than one new state $s'$ to select and because different $s'$ will give different rewards, the agent has to learn to choose the one with highest $V(s)$.*
+    
+    From here, Apply Bellman into the $V and \ Q$ equations in the Reinforcement Learning under a specific policy $\pi$, we can decompose the value functions recursively:
+
+    $$V^{\pi}(s) = \sum_{a \in A} \pi(a|s) \sum_{s' \in S} P(s'|s, a) \Bigr[r(s,a) + \gamma \cdot V^{\pi}(s') \Bigr]$$
+
+    $$Q^{\pi}(s,a) = \sum_{s' \in S}P(s'|s, a) \cdot \Bigr[r(s,a) + \gamma \cdot \sum_{a' \in A} \pi(a',s')Q^{\pi}(s',a')  \Bigr]$$
+
+    
+    - ***The relationship between $V and \ Q$ :** It is easy to see that $Q$ is calculated based on a specific action, while $V$ is based only on stateful transitions. Hence, for a specific state, $\ V$ is the maximum value over all possible actions $a$ in $Q(s,a)$ at this state.*
+
+    $$V(s) = \underset{a}{max}Q(s,a)$$ 
+    
+    **For an optimal policy $\pi^{*}$ :**
+    
+    $$V^{*}(s) = \underset{a \in A}{max} \sum_{s' \in S} P(s'|s, a) \Bigr[r(s,a) + \gamma \cdot V^{*}(s') \Bigr]$$
+
+    $$Q^{*}(s,a) = \sum_{s' \in S}P(s'|s, a) \cdot \Bigr[r(s,a) + \gamma \cdot \underset{a \in A}{max} Q^{*}(s',a')  \Bigr]$$
+    
+    Although, Bellman equation is the key of RL, there are still many "learning approaches" to build a RL model: "model-based methods" or "model-free methods".
+
+    Within this post, I will mention 2 common model-free approaches: TD Learning and Q-Learning.
+
+    <div class="note-part">A. Temporal-Difference (TD) Learning :</div>
+    - **A.1 Core Idea :** In TD-Learning, the value function $V$ is updated based on the difference between the current value estimate and a "better" estimate formed using observed rewards and the value of the next state.
+
+    - For a given policy $\pi$ with an input data of states coupled with specific rewards, at current state $s_{t}$, TD-Learning will approximates $V$ iteratively for each possible next states. (of course, there's only one target state among these states):
+
+    $$V^{\pi}(s) = \mathbb E_{\pi} \Bigr[  \sum_{k=0}^{\infty} \gamma_{k} \cdot r_{t+k+1} | s_{t}=s \Bigr]$$
+    
+
+    <br>
+    - **A.2 Error or Loss :** The TD error ($\delta$, "delta") quantifies the difference between the current value estimate and a one-step lookahead estimate:
+    
+    $$\delta_{t} = r_{t+1} + \gamma V(s_{t+1}) - V(s_{t})$$
+
+    With:
+    - $r_{t+1}$ is the immediate reward as transitioning from $s_{t}$ to $s_{t+1}$,
+    - $V(s_{t})$ is the current value estimate of state $s_{t}$,
+    - $V(s_{t+1})$ is the current value estimate of state $s_{t+1}$,
+    
+    <br>
+    - **A.3 Update Rule :** The value V is updated incrementally with learning rate $\alpha$:
+
+    $$V(s_{t}) \leftarrow V(s_{t}) + \alpha \delta_{t}$$
+
+    Replace $\delta$ into the update rule:
+
+    $$V(s_{t}) \leftarrow V(s_{t}) + \alpha \Bigg( r_{t+1} + \gamma V(s_{t+1}) - V(s_{t}) \Bigg)$$
+
+    - **A.4 With Weight matrix (W):**
+
+    $$V(s) = W \cdot \phi(s)$$
+
+    With:
+    - $W$ is the weight matrix that need to be learned,
+    - $\phi(s)$ is the input data of states. (For ex: the distance to obstacles,...)
+
+    And the learning gradient equation:
+
+    $$W \leftarrow W + \alpha \cdot \frac{dLoss}{dW}$$
+
+    $$W \leftarrow W + \alpha \cdot \frac{dLoss}{dV} \cdot \frac{dV}{dW} = W + \alpha \cdot \gamma \cdot \frac{dV}{dW}$$
+
+    $$W \leftarrow W + \alpha \cdot \Big( r_{t+1} + \gamma V(s_{t+1}) - V(s_{t}) \Big) \cdot \phi(s_{t})$$
+
+
+    <div class="note-part">B. Q-Learning :</div>
+
+
+    <br><br>
 
 1. **FNNs (Feedforward(truyền thẳng) Neuron Network)** :
     - Foundational: FNNs are the simplest neural networks and provide a foundation for understanding how inputs, weights, biases, and activations work.
@@ -34,7 +143,9 @@ AI technology has been "exploding" in recent years, introducing numerous new con
         - $\alpha$: activation function
         - $Y$: layer ouputs<br><br>
 
-    - Dropout: is a regularization technique to prevent overfitting. It works by randomly "dropping out" (setting to zero) a subset of neurons in a hidden layer during each training iteration. This makes the network learning more generally by not relying too heavily on specific neurons. Because "dropout" sets zero forcefully to some neurons at the "forward propagation" (truyền tới), it cannot be applied at the final layer.
+    - Dropout: is a regularization technique to prevent overfitting. It works by randomly "dropping out" (setting to zero) a subset of neurons in a hidden layer during each training iteration, hence these neurons have no gradient updations. This makes the network learning more generally by not relying too heavily on specific neurons.
+
+    - *Notice: "dropout" sets zero forcefully to some neurons at the "forward propagation" (truyền tới), it cannot be applied at the final layer.*
     <br><br>
 
 2. **Convolutional(tích chập) Neural Networks (CNNs)** :
@@ -346,17 +457,9 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     <br>
 
     - **Inference Process**: the model will predict the first word, which then is fed back into the model to predict the next word. This process continues until the prediction is complete.
+
     <br><br>
     
-5. **Reinforcement Learning (RL)** :
-    - Complexity: RL is conceptually and mathematically challenging.
-    - Niche Applications: While powerful, its applications (e.g., robotics, game AI) are narrower compared to others.
-    - Techniques: Markov Decision Processes, policies, rewards, and exploration/exploitation trade-offs.
-    <br><br>
-    <div style="width: 100%; text-align: center;">
-        <img class="ai-images" src="{{ './assets/images/Reinforcement.png' | relative_url }}" alt="First transformer version" />
-        <h5>Figure 5: Reinforcement Learning</h5>
-    </div>
 
 
 6. **Graph Neural Networks (GNNs)** :

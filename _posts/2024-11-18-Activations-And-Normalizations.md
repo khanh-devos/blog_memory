@@ -39,13 +39,17 @@ There are 4 types of Activation Functions: Sigmoid, Tanh, ReLU, Softmax.
         <h5>Figure 3: ReLU</h5>
     </div>
 
-    - Explaination of ***"vanishing gradient"*** : Based on the learning equation $X_{1} = X_{0} - lr \cdot (dY/dX)$. Because the gradients of $Sigmoid$ and $Tanh$:
+    - Explaination of ***"vanishing gradient"*** : Based on the learning equation:
+    
+    $$W_{1} = W_{0} - lr \cdot \frac{dLoss}{dW} = W_{0} - lr \cdot \frac{dLoss}{dY} \frac{dY}{dW}$$
+    
+    Because the gradients of $Sigmoid$ and $Tanh$:
     
     $$d_{sigmoid} = \sigma(x) \cdot (1 - \sigma(x))$$
 
     $$d_{tanh} = 1 - tanh^{2}(x)$$
     
-    - Both $d_{sigmoid}$ and $d_{tanh}$ are very small (~0) when x is far greater than 0, so that the back propagarion(sự lan truyền) through the layers of neurons will become slower. In contrast, ReLU gradient is always 1 with x > 0, this will accelerate the backward propagation or the learning. However, $ReLU$ still has a probelm that gradient is always zero when x $\le$ 0. This is called ***"dying ReLU problem"***. 
+    - Both $d_{sigmoid}$ and $d_{tanh}$ are very small (~0) when x (or W) is far greater than 0, so that the back propagarion(sự lan truyền) through the layers of neurons will become slower. In contrast, ReLU gradient is always 1 with x > 0, this will accelerate the backward propagation or the learning. However, $ReLU$ still has a probelm that gradient is always zero when x $\le$ 0. This is called ***"dying ReLU problem"***. 
 
 4. **Softmax**: Converts logits to probabilities for multi-class classification,
     given a vector $\vec{z}$ = [$z_{1}$, $z_{2}$,... , $z_{n}$]:
