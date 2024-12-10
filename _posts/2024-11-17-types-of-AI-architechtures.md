@@ -69,7 +69,13 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     
     Although, Bellman equation is the key of RL, there are still many "learning approaches" to build a RL model: "model-based methods" or "model-free methods".
 
-    Within this post, I will mention 2 common model-free approaches: TD Learning and Q-Learning.
+    - *Remark: what is model-based and model-free models?*
+    - *Firstly, the word "model" used here is ir-relevant to the neuron network in AI. Here, the model is the model of environment.*
+    - *Model-based models: It needs a model of environment, where everything is predictable or next states can be predicted. It's like playing a chess, the agent tries to predict as many as possible states or opponents possible moves to make a next move. Here, the computation of prediction is expensive.*
+    - *Model-free models: There's no a model of environment, the agent uses experience to interact directly with the environment. It estimates the "rewards" of actions or states to decide what to do instead of prediction. It's like a robot dog which you can put in a park, a house or in the streets. The "dog" will take action directly based on the environment by what it has been trained.*
+
+    Back to this post, I will mention 2 common model-free approaches: TD Learning and Q-Learning:
+    <br>
 
     <div class="note-part">A. Temporal-Difference (TD) Learning :</div>
     - **A.1 Core Idea :** In TD-Learning, the value function $V$ is updated based on the difference between the current value estimate and a "better" estimate formed using observed rewards and the value of the next state.
@@ -88,7 +94,15 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     - $r_{t+1}$ is the immediate reward as transitioning from $s_{t}$ to $s_{t+1}$,
     - $V(s_{t})$ is the current value estimate of state $s_{t}$,
     - $V(s_{t+1})$ is the current value estimate of state $s_{t+1}$,
-    
+
+    The loss function for TD learning is usually the Mean Squared Error (MSE) of the TD error: 
+
+    $$Loss = \frac{1}{2} \delta^{2} = \frac{1}{2} (r_{t+1} + \gamma V(s_{t+1}) - V(s_{t}))^{2}$$
+
+    So
+
+    $$\frac{\partial Loss}{\partial V(s)} = \frac{\partial}{\partial V(s)} (\frac{1}{2} \delta^{2}) = \delta \cdot \frac{\partial \delta}{\partial V(s)} = -\delta $$
+
     <br>
     - **A.3 Update Rule :** The value V is updated incrementally with learning rate $\alpha$:
 
@@ -108,11 +122,13 @@ AI technology has been "exploding" in recent years, introducing numerous new con
 
     And the learning gradient equation:
 
-    $$W \leftarrow W + \alpha \cdot \frac{dLoss}{dW}$$
+    $$W \leftarrow W - \alpha \cdot \frac{\partial Loss}{dW}$$
 
-    $$W \leftarrow W + \alpha \cdot \frac{dLoss}{dV} \cdot \frac{dV}{dW} = W + \alpha \cdot \gamma \cdot \frac{dV}{dW}$$
+    $$W \leftarrow W - \alpha \cdot \frac{\partial Loss}{dV} \cdot \frac{\partial V}{\partial W} = W + \alpha \cdot \delta \cdot \frac{\partial V}{\partial W}$$
 
     $$W \leftarrow W + \alpha \cdot \Big( r_{t+1} + \gamma V(s_{t+1}) - V(s_{t}) \Big) \cdot \phi(s_{t})$$
+
+    
 
 
     <div class="note-part">B. Q-Learning :</div>
