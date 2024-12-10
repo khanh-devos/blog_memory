@@ -131,7 +131,9 @@ AI technology has been "exploding" in recent years, introducing numerous new con
     
 
 
-    <div class="note-part">B. Q-Learning :</div>
+    <div class="note-part">B. Q-Learning :</div> Q-Learning is a model-free reinforcement learning algorithm that learns the optimal action-value $Q(s,a)$, which provides the "maximum expected cumulative reward" for taking action a in states and following the optimal policy thereafter.
+
+    - 
 
 
     <br><br>
