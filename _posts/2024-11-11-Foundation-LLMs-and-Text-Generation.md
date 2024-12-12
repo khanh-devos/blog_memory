@@ -1,6 +1,7 @@
 ---
 category: ai
 loadingMathjax: true
+archived: true
 ---
 
 An LLM (Large Language Model) is a programming function that specializes in processing, understanding, and generating human-like text, performing tasks like *language translation*, *code generation and completion*, *text generation*, *text classification*, and *question-answering*,... .

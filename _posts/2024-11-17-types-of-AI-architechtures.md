@@ -267,7 +267,7 @@ AI technology has been "exploding" in recent years, introducing numerous new con
 
     where: $h \cdot d_{V}$ = $d_{model}$ is the concatenated dimension.
 
-    - *Remark 1: I have an intuition that the numerator (tử số) $\ Q.K^{T}$ is just a way to get back the dimentionality $\ \mathbb R^{n \times d_{model}}$, helping parallelize the computations.*
+    - *Remark 1: The numerator (tử số) $\ Q.K^{T}$ is always a squared matrix shaped $n \times n$, it may help the attention always happens as a whole for each head.*
 
     - ***2. Feed-Forward Network (FFN)***: Applies "a fully connected layer with 2 layers" to "each position" independently. Here the computation is applied on each token in parallel, not via heads anymore:
     
