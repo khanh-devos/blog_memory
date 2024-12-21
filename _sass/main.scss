@@ -38,7 +38,7 @@ body {
   margin: 0;
   min-height: 100vh;
   max-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-color: $semi-color;
   z-index: 0;
   overflow: auto;
@@ -163,7 +163,7 @@ body {
   z-index: 2;
   background-color: $semi-color;
   padding: 50px;
-  padding-left: 320px;
+  padding-left: calc(270px + 50px);
   min-height: 100vh;
   transition: opacity 0.3s ease;
   opacity: 0;
@@ -353,4 +353,15 @@ table {
 
 .hide {
   display: none;
+}
+
+.toggled-image {
+  transform: scale(0.8);
+  width: 70%;
+  transition-duration: 0.5s;
+}
+.toggled-image:hover {
+  transform: scale(1);
+  width: 90%;
+  transition-duration: 0.5s;
 }
