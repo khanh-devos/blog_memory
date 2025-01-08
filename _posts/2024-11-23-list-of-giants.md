@@ -19,3 +19,5 @@ This is a list of regular technology giants in Information Technology:
 7. [Github Engineering](https://github.blog/engineering/){:target="_blank"}
 
 8. [Shopify Engineering](https://shopify.engineering/){:target="_blank"}
+
+9. [Google Career](https://www.google.com/about/careers/applications/jobs/results/82590262164890310-technical-curriculum-developer-iii-aiml-cloud-learning)
