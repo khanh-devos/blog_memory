@@ -150,3 +150,7 @@ Traininng and training more in different contexts:
 30. *ORDER BY season # default is Ascending (low to high)* : default is "ASC"
 
 31. IF(COUNTIF(totals.transactions > 0 AND totals.newVisits IS NULL) > 0, 1, 0) || if user is "not a new user" and buy something, give out "1".
+
+32. **COALESCE(first, second, ..., n_exp, 0)** : from left to right, which not NULL will be shown. 
+
+33. here
