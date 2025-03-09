@@ -67,6 +67,9 @@ This post is to show some regular Bash commands:
 
 
 16. <b>chmod </b>: change modes or permissions of a file.
+
+    - **chmod +x file.sh** : make a script file executable: 
+
     - <b>chmod 755 filename </b>: read & execute for everyone and plus write access for the owner. This mode is seen very commonly.
     - <b>chmod 744 filename </b>: read for everyone and plus write & execute permission for the owner.
     - <i>Binary Rule : it's better to read the permission pattern from right to left (ex: drwxr-xr-x = 755).</i>

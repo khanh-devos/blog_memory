@@ -6,9 +6,11 @@ Building, deploying, and operating effective flexible data pipelines for all the
 
 Some key terms in BigQuery:    
 
+- anomalous (Adj) : deviating from standard. => anomaly (N) : điều bất thường.
+
 - VM: a virtual machine = a node = like a physcial machine but located online.    
 
-- Cluster: a collection of virtually nodes working together as a single unit. Therefore, clusters are used to distribute workloads efficiently and handle large-scale tasks that a single machine cannot handle alone, additionally ensuring tasks continue running even if one node fails. It is used for computing, processing, and storage (in some cases). Regard storage, a cluster is a collection of databases managed by DBMS (*one DBMS instance controls the cluster*). But in BigQuery, it is different, a cluster is not existing *physically or virtually*  instead *clustering*, which is a technique to optimize how data is stored and queried within a **single** table.
+- Cluster: a collection of virtually nodes working together as a single unit. Therefore, clusters are used to distribute workloads efficiently and handle large-scale tasks that a single machine cannot handle alone, additionally ensuring tasks continue running even if one node fails. It is used for computing, processing, and storage (in some cases). Regard storage, a cluster is a collection of databases managed by DBMS (*one DBMS instance controls the cluster*). But in BigQuery, its definition is different, a cluster is not existing *physically or virtually*  instead *clustering*, which is a technique to optimize how data is stored and queried within a **single** table.
 
 - Blob format: refers to "Binary Large OBject" like a binary representation of an object on Cloud. It is purely for storage so it is not human-readable.
 
@@ -23,6 +25,11 @@ Some key terms in BigQuery:
 - Throughput (Xuất lượng): is like a rate of analytic processing.
 
 - On-premises: hardware, software, and data storage are physically located within a local servers, rather than being hosted on the cloud.
+
+- Spark: Apache Spark is *a distributed computing engine (framework)* for *large-scale data* processing, offering in-memory computation, fault tolerance, and real-time analytics. It uses Resilient Distributed Datasets (RDDs) and an optimized DAG execution model to process data *100x faster than Hadoop MapReduce*. It supports batch, streaming (Spark Streaming), SQL (Spark SQL), ML (MLlib), and graph processing (GraphX). With multi-language support (Scala, Python, Java, R), Spark integrates seamlessly with Hadoop, Kubernetes, and cloud services like Google Cloud Dataproc. Ideal for big data, AI, and real-time analytics.
+
+- Beam: Apache Beam is *a unified data processing model for batch and streaming PIPELINES*. Beam does not process data by itself, it provides a powerful, portable API for defining data pipelines that get executed by *big data engines* like Apache Spark, Apache Flink, Google Cloud Dataflow, and Samza for data processing. It supports Python, Java, Go, and SQL, integrating seamlessly with TFX for ML and cloud services, making it ideal for cross-platform deployments. Its flexible API allows developers to write once and execute anywhere, optimizing ETL, AI, and real-time data processing. (*Note: Cloud Shell doesn't support Beam because of its weak resources*)
+
 
 1. **"Migration Task" from existing private data to Google Cloud**:
 
@@ -106,7 +113,14 @@ Some key terms in BigQuery:
     - Machine learning is vital for businesses. However, getting satisfactory results requires fine-tuning the model in different ways. A Professional Data Engineer can improve model performance with techniques such as *feature engineering*, where you choose the relevant columns and combine them to make the data relevant.
 
 5. **Maintaining and Automating Workloads**:
+    
     - *Ephemeral clusters*: Jobs can use *ephemeral clusters* to quickly run the job and then deallocate the resources after use. Multiple jobs can be run in parallel without interfering with each other.
+
+    ![Ephemeral-cluster-lifetime]({{ 'assets/data-engineer-2/ephemeral-cluster-lifetime.jpg' | relative_url}}){: .toggled-image}
+
+    - *Persistent clusters*: costs more than *ephemeral clusters*
+
+    ![persistent-vs-ephemeral-clusters]({{ 'assets/data-engineer-2/persistent-vs-ephemeral-clusters.jpg' | relative_url}}){: .toggled-image}
 
     - To run repeatable tasks, it is recommended to use atomic tasks that have a single responsibility. Many of these tasks can be combined in sequence to achieve a desired end result.
 
@@ -124,7 +138,7 @@ Some key terms in BigQuery:
 
     - *Get minimal downtime for database*: => *Configuring high availability* on Cloud SQL will automatically switch to the secondary instance when the primary instance goes down, thus reducing downtime for the database's users.
 
-6. **Service APIs in GC**:
+6. **Service APIs in Google Cloud**:
     
     - Types of data: Asynchronous messaging, Unstructured (img, doc, audio) & structured, Relational databases.
     
@@ -294,55 +308,268 @@ Some key terms in BigQuery:
             - *Auto-Scaling and Elastic Compute Power* : Traditional Hadoop runs on a fixed cluster size, meaning you need to provision hardware manually. Dataproc automatically adds more worker nodes when needed and removes them when idle, optimizing costs and performance.
             
             - *High-Speed Storage with Google Cloud Storage* : In traditional Hadoop, data is stored in HDFS (*issue "I/O bottleneck"*), which is tied to the compute nodes. In Dataproc, instead of HDFS, you can use Google Cloud Storage, which is faster, more scalable, and more reliable than HDFS. Plus, it's separated from compute nodes, so you don't lose data if a node fails.
-        
-        - **Why Dataproc provides both Apache Spark and Hadoop**, allowing them to run side by side: *HDFS for storage, Hive for SQL queries, Spark for fast in memory processing (train AI models)*. Moreover, Spark supports more use cases (real-time streaming, ML, SQL, Graph processing). Spark supports Python, R, Scala, Java.
+
+            - **Why Cloud Storage instead of HDFS?**: In nature, HDFS in Cloud (with persistent disks) is just a subpar *(dưới trung bình)* solution because it has THREE problems:
+
+            ![Cloud-Storage-Instead-HDFS]({{ 'assets/data-engineer-2/cloud-storage-instead-HDFS.jpg' | relative_url}}){: .toggled-image}
+
+            - For details:
+                
+                - *1. Data Persistence* : HDFS exists only while the Dataproc cluster is running. If the cluster is deleted, HDFS data is lost.
+                - *2. Scalability* : Cloud Storage automatically scales with no storage limits, unlike HDFS, which is limited by the cluster’s worker nodes. 
+                - *3. Cost Savings* : Keeping a Dataproc cluster running costs money. Cloud Storage is cheaper and does not require an active cluster.
+                - *4. Integration with BigQuery & AI* : Cloud Storage integrates with BigQuery, Vertex AI, Dataflow, and other GCP services. HDFS does not.
+                - *5. Disaster Recovery* : Cloud Storage replicates data across regions for high availability and fault tolerance. HDFS does not automatically replicate across zones.
+
+
+        - **WARNING**: in some cases, local HDFS is still a good options if we are in following cases:
+            
+            - There are a lot of metadatas (*thousands of partitions and directories and each file sizes are small*).
+
+            - Frequently modify HDFS data or rename directories. (*Cloud Objects are immutable, so renaming is very exepensive.*).
+
+            - Heavily use the APPEND operation on HDFS files.
+
+            - Workloads involve heavy I/O (*a lot of WRITE methods*).
+
+            - Many Workloads influences latency heavily.
+
+            - **Advice**: Cloud storage is only good for 2 cases: **initial and final sources** in the big data pipeline. Medium modified results during computation should be stored in other services. *"Dataproc + Cloud Storage" should be used instead of HDFS*.
+
+            - In case we need to use "persistent clusters", we should set "scheduled deletion":
+
+            ![Cluster-scheduled-deletion]({{ 'assets/data-engineer-2/scheduled-deletion-for-persistent-clusters.jpg' | relative_url}}){: .toggled-image}
+
+        - **Why Dataproc provides both Apache Spark and Hadoop**, allowing them to run side by side: *HDFS for storage, Hive for SQL queries, Spark for fast in memory processing (train AI models)*. Moreover, Spark supports more use cases (real-time streaming, ML, SQL, Graph processing). Spark supports Python, R, Scala, Java. This happens because of Jupiter and Colossus.
+
+            - **Jupiter** is *Google’s high-speed, software-defined data center network* that relies on a super fast *Bisectional Bandwidth* (petabit) between *2 groups with a same number of servers*.
+
+            - **Colossus** is *Google’s distributed file system* that replaces Google File System (GFS) because it stored metadata in a *distributed metadata system (metadata stored across multiple nodes)*, not in a single NameNode like HDFS, so when the metadata grows big (*as data grows big*), bottleneck issue does not happen with Colossus. It is the backbone of all kinds of Google storage like Cloud storage, Gmail, Drive, Youtube,...
+
+            ![Jupyter-colossus]({{ 'assets/data-engineer-2/jupyter-colossus.jpg' | relative_url}}){: .toggled-image}
 
         - **Why move to Dataproc ?**: cheap, no re-configuration or re-development, super-fast (around 90s to turn on/off Dataproc VM), auto-update versions of Spark, Hadoop, Pig, and Hive so we dont need to learn any new things.  
 
-        - **Why Cloud Storage instead of HDFS?**: In nature, HDFS in Cloud is just a subpar solution:
-
-        
-        
-        - Tools to interact with Dataproc: Cloud Console, Cloud SDK, Dataproc Rest APIs, multi-options of OSS (open source softwares) to code like Jupyter, Kafka, Spark, Hive, HDFS, Pig...
+        - *Tools to interact with Dataproc*: Cloud Console, Cloud SDK, Dataproc Rest APIs, multi-options of OSS (open source softwares) to code like Jupyter, Kafka, Spark, Hive, HDFS, Pig...
 
         - A Dataproc Cluster has "Manager nodes (1-3)", "Primary Workers", "HDFS", "Secondary Workers". When the NATIVE cluster is turned off, we lose everything from it, *so we should consider using DIRECTLY cluster on Cloud Storage via HDFS connector*, BigTable for NoSQL DB, BigQuery for Analytics. *Code changes very simple from "hdfs//" to "gs//"*.
 
         ![Dataproc-cluster-configuration]({{ 'assets/data-engineer-2/dataproc-cluster-configuration.jpg' | relative_url}}){: .toggled-image}
 
     - Steps or Sequence to use Dataproc:
-        - **Setup**: create a cluster with Console, gcloud, YAML, Terraform config, Cloud SDK.
-        - **Config**: regional sometimes has lower latency. Primary Node is where HDFS runs (*HDFS replication is 2 by default*). Pre-emptible nodes including YARN NodeManager don't run HDFS. Worker nodes is minimum 2 be defautl.
+
+        - **Setup**: create a cluster with Console, gcloud, YAML, Terraform config, Cloud SDK. We prepare all configuration in the *Dataproc Workflow Template* (it is a YAML file). We can submit it to the DAG with changeable parameters. Generally, the template contains tasks (create a cluster, selecting existing clusters, submit jobs, deleting a cluster,...) like below:
+
+            ![Dataproc-workflow-template]({{ 'assets/data-engineer-2/dataproc-workflow-template.jpg' | relative_url}}){: .toggled-image}
+            
+            - The autoscaling will be based on *"Hadoop YARN metrics"*, adding more worker nodes if the used YARN memory is over 70% (*removing idle worker nodes if the used YARN memory is less then 5%.*). We can also set min and max number of worker nodes.
+        
+        - **Config**: regional sometimes has lower latency. Primary Node is where HDFS runs (*HDFS replication is 2 by default*). Pre-emptible nodes including YARN NodeManager don't run HDFS. Worker nodes is minimum 2 be default.
+
+            - *Pre-emptible VMs or pre-emptible nodes - PVMs* : a low-cost, short-lived VM that can be stopped anytime by Google Cloud. It reduces the cost 80% compared to regular nodes but we SHOULD NOT use pre-emptible nodes for jobs that are either long (streaming or databases) or unable to accept worker loss (anytime) during running. 
         
         ![Config-Dataproc-cluster]({{ 'assets/data-engineer-2/config-dataproc.jpg' | relative_url}}){: .toggled-image}
 
         - **Optimize**: Pre-emptible nodes are used and lower cost but notice that they can be pulled from service at any time and within 24h.
+            
+            1. Where is the data and where is the cluster? *Data region* and *cluster (VMs) zone* should be identical. Set auto-select for *cluster zone* if possible.
+
+            2. Is your local network traffic being funneled?
+            
+            3. How many input files and Hadoop partitions are your trying to deal with? The max number of input files are 10,000 files, try to combine them in 
+            larger files if possible. If we have to work with aroud 50,000 partitions, consider to update the parameter **"fs.gs.block.size"** (*the defualt size of a parition is 128MB or 256MB*).
+            
+            4. Is the size of your persistent disk limiting your throughput?
+            
+            5. Did you allocate enough virtual machines (VMs) to your cluster? How many VMs our cluster needs? It's not easy to answer but we can resize it anytime, so we can run a test.
 
         - **Utilize**: jobs can be submitted through the cloud console, the gcloud command, or REST API, workflow templates, Cloud Composer. *Don't use Hadoop Interface to submit jobs because of LACK of metadata*. By default, jobs are not restartable but we can create a restartable jobs through the command line or REST API.
 
+            - *Split clusters and jobs*: isolate dev, staging, and production environments on separate clusters.
+
+            - *Points to do if we have to use persistent clusters*:
+
+            ![notes-as-using-persistent-clusters]({{ 'assets/data-engineer-2/notes-as-using-persistent-clusters.jpg' | relative_url}}){: .toggled-image}
+
         - **Monitor**: use 'Cloud Monitor' or we can set up a dashboard to monitor some alert policy to send notification email.
 
-    - *Dataproc Serverless for Spark* is a useful API of *Google Cloud Engine*. It offer batch or session, can connect with other APIs like BigQuery, Cloud Storage. It's like a virtual machine on GC.
+    - *Dataproc Serverless for Spark* is a useful API of *Google Cloud Engine*. It offers batch or session, can connect with other APIs like BigQuery, Cloud Storage. It's like a virtual machine on GC. *"Serverless" means a server that is auto-scaling, fast setup and no cluster management, pay-per-use*.
 
+    - **DATAFLOW**:
 
-    - *Batch processing* VS *streaming data processing*: Streaming ETL is almost real-time analytics. "Pub/Sub" is for streaming ETL ingestion. *Dataflow* can process both "batching and streaming data" using *Apache Beam*.
+        - *Batch processing* VS *streaming data processing*: Streaming ETL is almost real-time analytics. "Pub/Sub" is for streaming ETL ingestion. *Dataflow* can process both "batching and streaming data" using *Apache Beam*.
 
-    ![Apache-Beam]({{ 'assets/data-engineer/Apache-Beam.jpg' | relative_url}}){: .toggled-image}
+        ![Apache-Beam]({{ 'assets/data-engineer/Apache-Beam.jpg' | relative_url}}){: .toggled-image}
 
-    - Example of Streaming & transforming data from Pub/Sub to BigQuery, using Apache Beam.
+        - Example of Streaming & transforming data from Pub/Sub to BigQuery, using Apache Beam.
 
-    ![Pub-sub-example-streaming-transforming-data]({{ 'assets/data-engineer/Pub-Sub-example-streaming-transforming-data.jpg' | relative_url}}){: .toggled-image}
+        ![Pub-sub-example-streaming-transforming-data]({{ 'assets/data-engineer/Pub-Sub-example-streaming-transforming-data.jpg' | relative_url}}){: .toggled-image}
+        
+        - *How to choose between Dataflow and Dataproc* : 
 
-    - **Dataflow template** is useful with custom parameters. Pre-built templates are available in GC.
+        ![Dataflow-vs-dataproc]({{ 'assets/dataflow/dataflow-vs-dataproc.jpg' | relative_url}}){: .toggled-image}
 
+        - At first, dataflow allows using the same code for both batching and streaming.
+
+        ![Dataflow-vs-dataproc-2]({{ 'assets/dataflow/dataflow-vs-dataproc-2.jpg' | relative_url}}){: .toggled-image}
+
+        - Apache Beam in Dataflow: *take note that Apache Beam is the core key behind Dataflow. It includes PTransforms, PCollections, Pipeline, Runners*:
+
+            - PTransforms : handle inputs, transformation and outputs of the (batch/streaming) data.
+            
+            - PCollections : represents both batch data and streaming data. All data is stored in serialized state as byte strings, enhancing the network speed.
+
+            - Pipeline Runners : contains hosts such as Kubernetes engines. The services that runners runs on are called "Backend system" 
+
+        ![apache-beam]({{ 'assets/dataflow/apache-beam.jpg' | relative_url}}){: .toggled-image}
+
+        - Bounded PCollection -> batch data
+        - Unbounded PCollection -> streaming data.
+
+        ![p-collections]({{ 'assets/dataflow/p-collections.jpg' | relative_url}}){: .toggled-image}
+
+        - How Dataflow works: 
+            
+            - It is fully-managed and auto-configured,
+            - Optimizing the graph continuously, 
+            - Processed data in parallel, 
+            - Auto-scaling (more jobs, auto provide more working nodes as necessary)
+            - Re-balancing mid-job: one machine after finishing job 1 will be managed to handle other jobs.
+            - Able to handle late arriving records with watermarking.
+            - Easy to connect with other Cloud services.
+
+        ![dataflow-mechanism]({{ 'assets/dataflow/dataflow-mechanism.jpg' | relative_url}}){: .toggled-image}
+
+        - **Dataflow Pipeline in Code**:
+
+        ![dataflow-pipeline-in-code]({{ 'assets/dataflow/dataflow-pipeline-in-code.jpg' | relative_url}}){: .toggled-image}
+
+        - Run a dataflow pipeline: *(not a prefered way of programming at scale)*
+
+        ![run-a-dataflow-pipeline]({{ 'assets/dataflow/run-a-dataflow-pipeline.jpg' | relative_url}}){: .toggled-image}
+
+        - Run a dataflow pipeline either locally or on cloud: (specify cloud parameters)
+
+        ![run-locally-on-cloud]({{ 'assets/dataflow/run-pipeline-local-on-cloud.jpg' | relative_url}}){: .toggled-image}
+
+        - **Design a dataflow pipeline** : read data from multi-sources.
+
+        ![read-data-in-dataflow-pipeline]({{ 'assets/dataflow/read-data-in-dataflow-pipepline.jpg' | relative_url}}){: .toggled-image}
+
+        - **Design a dataflow pipeline** : Write data to a BQ table:
+
+        ![write-data-in-dataflow-pipeline]({{ 'assets/dataflow/write-data-in-dataflow-pipepline.jpg' | relative_url}}){: .toggled-image}
+
+        - **Design a dataflow pipeline** : hardcode to create PCollection:
+
+        ![hardcode-to-create-a-PCollection-in-dataflow]({{ 'assets/dataflow/hardcode-to-create-a-PCollection-in-dataflow.jpg' | relative_url}}){: .toggled-image}
+
+        - **Map() vs FlatMap()** in PTransform of a Dataflow Pipeline. With Map(), each input element produces exactly one output element. With FlatMap(), each input element can produce zero, one, or many output elements.
+
+        ![Map-vs-FlatMap]({{ 'assets/dataflow/map-vs-flatmap-in-PTransform.jpg' | relative_url}}){: .toggled-image}
+
+        - **ParDo() in PTransform**: we can use ParDo() to perform a simple or complex computation with every batch (input). With ParDo(), we need a DoFn object, which is a BEAM class. Specifically, Map() or FlatMap() are just a simple type of ParDo() for transformation. Use ParDo() when you need more complex logic.
+
+        ![ParDo-in-PTransform]({{ 'assets/dataflow/ParDo-in-PTransform.jpg' | relative_url}}){: .toggled-image}
+
+        - Dataflow Aggregation with GroupByKey and Combine (Reduce): after mapping (Map()), we can combine or group data together: (k1,v1), (k1,v2), (k1,v3) -grouping-> (k1, [v1,v2,v3]). This happens on PCollections:
+
+            - **GroupByKey()**: operates on one PCollection for grouping. It can become in-efficient with *data skew*. It means one key has too many values compared to other keys, leading only one *worker node*, other worker nodes are idle (waiting but still costing).
+            - **CoGroupByKey()**: operates on multiple PCollections for grouping. After doing GroupByKey() on each PCollection, now we can combine several PCollections together if they have a same key.
+
+            ![CoGroupByKey-method]({{ 'assets/dataflow/CoGroupByKey-method.jpg' | relative_url}}){: .toggled-image}
+
+            - Combine phase = **Reduce**: it can be **CombineGlobally(sum)**, **CombinePerKey(sum)**. Some simple combine methods are pre-built like sum, min, max.
+
+            ![Combine-to-reduce]({{ 'assets/dataflow/Combine-to-reduce.jpg' | relative_url}}){: .toggled-image}
+
+            - More complex require customisation with a subclass of a combine:
+
+            ![custom-combine-subclass]({{ 'assets/dataflow/custom-combine-subclass.jpg' | relative_url}}){: .toggled-image}
+
+            - Combine is more efficient than GroupByKey. It is because one worker only can work with one key in GroupByKey, Combine does not have that limit.
+
+            ![Combine-more-efficient-GroupByKey]({{ 'assets/dataflow/Combine-more-efficient-GroupByKey.jpg' | relative_url}}){: .toggled-image}
+
+            - **Flatten()** : merges identical PCollections *storing same datatype* into one.
+            - **Partition()** : split one PCollection *storing same datatype* into several PCollections. 
+
+        - **Side inputs and windows of data**:
+
+            - Side inputs: during creating a PCollection, we can inject additional data during the runtime of ParDo() transform-function. A side inputs occurs each time of processing a new element in the PCollection, so the additional data needs to be determined at RUNTIME, not hard coded. 
+
+            ![side-inputs-added]({{ 'assets/dataflow/side-inputs-added.jpg' | relative_url}}){: .toggled-image}
+
+            - What is the Window of data: *For bounded PCollection*, the default window is called the global window, that is not time-based but it can ends when the last element of the bounded PCollection is processed. We can set it manually.
+
+            ![global-window-of-data]({{ 'assets/dataflow/window-of-data.jpg' | relative_url}}){: .toggled-image}
+
+            - Warning: the global window is not effective for streaming data or unbounded PCollections. Unbounded PCollection has no defined END or last element, this also influences GroupByKey and Combine. For streaming data (time-series data), we can use Time-based Windows.
+
+            ![unbounded-PCollection-influence]({{ 'assets/dataflow/unbounded-PCollection-influence.jpg' | relative_url}}){: .toggled-image}
+
+            - For Batching: we also can use time-based Windows as well. "60,30" means capture data in 60s but start a new window every 30s.
+
+            ![window-of-data-in-batchs]({{ 'assets/dataflow/window-of-data-in-batchs.jpg' | relative_url}}){: .toggled-image}
+
+        - **Dataflow Templates**: enable users who dont have any coding capability to execute a dataflow job. Developer build templates that dataflow will store in Cloud Storage, then normal user can submit them to run jobs. This does not need to re-compile as re-running a job. You can use available Google Templates or create your own templates. *Runtime parameters* are necessary as run a template such as *input* and *output* below.
+
+            - ```sql
+                args, beam_args = parser.parse_known_args()
+                with beam.Pipeline(argv=beam_args) as p:
+                    (p  | 'ReadFromGCS' >> beam.io.ReadFromText(args.input)
+                        | 'WriteToGCS' >> beam.io.WriteToText(args.output))
+            ```
+
+            - Execute a dataflow template from Cloud Shell with some *runtime parameters*:
+
+            - ```sql
+                gcloud dataflow jobs run my-job-instance \
+                --gcs-location gs://my-bucket/templates/my_template \
+                --region us-central1 \
+                --parameters input=gs://my-bucket/data.csv,output=gs://my-bucket/output/
+            ```
+
+    - **DataFusion**: designed for batch data pipelines.
+        - DataFusion helps build visually or graphically data pipelines. It is **a no-code tool** to build a data pipeline.
+        - Integrate with any type of data.
+        - Can combine all data from different sources into one like BigQuery, Spanner,...
+        - Reduce complexity.
+        - Allow create templates.
+
+        - Components of DataFusion:
+
+            - **Wrangler UI** is a framework for exploring datasets visually and also building data pipelines with no code. (*wrangle data: transform and clean raw data*)
+
+            ![datafusion-home]({{ 'assets/dataflow/datafusion-home.jpg' | relative_url}}){: .toggled-image}    
+
+            - **Data Pipeline UI** is a framework for drawing pipelines onto a canvas. 
+
+            - *Rules Engine* is a tool to build rules 
+            - *Metadata Aggregator* is a tool to analyze complex metadata.
+            - *Microservice* is a framework to build a specialized logic to process data.
+            - *Event Condition Action -ECA* is an application to 
+
+        - Running a pipeline after builsing and deploying:
+
+        ![datafusion-running-view]({{ 'assets/dataflow/datafusion-running-view.jpg' | relative_url}}){: .toggled-image}
+
+    - **Cloud Composer**:
+        - Cloud Composer helps orchestrate work between Cloud services.
+    
+
+    
+    
     - *Bigtable* is like a sink for streaming data pipeline for miliseconds latency analytics.
 
     - Compare ETL options
 
     ![compare-ETL-options]({{ 'assets/data-engineer/compare-ETL-options.jpg' | relative_url}}){: .toggled-image}
 
-11. **Automation Tech**: (How to automate *a Dataflow tempalte*)
+11. **Automation Tech**: (How to automate *a Dataflow template*)
     
     - Both ETL or ELT can be automated on a recurring (parameterization) basis.
+
     - 3 common types of Automation: One-off (schedule), Workflow orchestration, Event-based execution. 
 
     - **Cloud Scheduler** is a automation tool. Trigger can be Http calls, Pub/Sub, Workflows Http.
@@ -569,6 +796,15 @@ Some key terms in BigQuery:
 
     ![Data-quality-challenge]({{ 'assets/data-engineer-2/data-quality-challenges.jpg' | relative_url}}){: .toggled-image}
 
-19. **Spark on Dataproc:**
+19. **Cloud Logging and Cloud Monitoring:** both can help customize LOGs, monitor jobs and resources. Below is some examples:
     
-    - **Apache Spark**: 
+    - Error that caused Spark job failure: just look at the logs generated by Spark executioners. *(if the job was submitted to primary node using SSH, logs cannot be seen.)*. The logs output is stored on storage bucket of the Dataproc cluster, 
+
+    - **stdout VS stderr**: *stdout* is usually successful messages, *stderr* is for errors happening.
+
+    - **Cloud Logging**: contain Yarn, which collects all logs by default. Yarn is available in a Dataproc Cluster.
+
+    - If our clusters or Dataproc jobs have labels, logs can be easily found by these labels.
+
+    - **Cloud Monitoring**: help monitoring the cluster's CPU, disk, network usage and Yarn resources. We even can customize dashboard to show these metrics.
+    
