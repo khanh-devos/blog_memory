@@ -2,6 +2,21 @@
 category: tool
 ---
 
+- Under the hood = behind the scene == phía sau hậu trường.
+- Each user operation has its own separate environment *"in which to execute"*:  
+- *reference to - v* : tham chiếu đến || *preference for* : sở thích về.  
+- *tune a query* : optimize a query performance.
+- *window function* in SQL queries: unlike "aggregation functions" just resulting in one single value (SUM), "window function" add more columns to each row.
+- *take action ***in a sense of*** doing ST*: hành động theo hướng làm một việc gì đó.
+- *ST built ***on the concepts covered in*** ST*: ST đc dựng theo các khái niệm được bao gồm trong ST:
+- *the outline of the course*: nội dung chính của khóa.
+- to conclude > include > exclude: kết thúc > bao > trừ
+- to expands on those concepts with ST: mở rộng trên các kniệm đó với ST
+- to do a deep dive on ST || to do a quick refresh on ST.
+- to specify ST == to point out (an enigne powering your pipelines)
+- to provision (a system): to setup, provide and prepare st for future use.  
+- be made up of 4 parts: đc tạo thành từ 4 phần.
+
 Traininng and training more in different contexts:
 
 1. *WHERE state IS NOT NULL AND state <> ''* : gives a note that "null is not a blank".
@@ -46,7 +61,9 @@ Traininng and training more in different contexts:
 
 10. *LEAD(total_cases) OVER (ORDER BY date) AS last_day_cases* | is a way to call the next row.
 
-11. *DATE_DIFF(LEAD(date) OVER(ORDER BY date), date, day) AS days_diff* : is a way to find out the numeric difference between to dates.
+    ![Lead-in-SQL]({{ 'assets/streaming/Lead-in-SQL.jpg' | relative_url}}){: .toggled-image}
+
+11. *DATE_DIFF(LEAD(date) OVER(ORDER BY date), date, day) AS days_diff* : is a way to find out the numeric difference between "current date" and "next date".
 
     - Other case using 'DATE_DIFF(1, 2, 3)' 
         - DATE_DIFF(CURRENT_DATE(), date, DAY) AS partition_age,
@@ -219,7 +236,9 @@ Traininng and training more in different contexts:
 
     - We need extract 2 schema objects 'SCHEMATA' & 'SCHEMATA_OPTIONS'. Filter out the property 'option_name' with WHERE so.option_name = 'description'. *Note: we could see a project also has its own INFORMATION_SCHEMA*. 
 
-39. **How to use a STRUCT or ARRAY in a query.** (*reduce 'shuffled Bytes' and 'Slot time consumption', sometimes it help reduce the bill of memory usage for a query because we have to denormalize tables to obtain STRUCTS.*)
+39. **How to use a STRUCT or ARRAY in a query.** 
+    - A STRUCT in BigQuery is a nested data type that groups multiple fields together, similar to an object in JSON or a row in SQL.
+    - It helps reduce 'shuffled Bytes' and 'Slot time consumption', sometimes it help reduce the bill of memory usage for a query because we have to *denormalize* tables to obtain STRUCTS. (*denormalization: 2 tables with many similar columns -> 1 table with STRUCTs inside.*)
 
     *A Normal query with JOIN and without STRUCT*
 
@@ -239,13 +258,29 @@ Traininng and training more in different contexts:
     , t.inputs as i         -- "CROSS JOIN" a struct type
     ```
 
-    - This is benefits of a STRUCT. 'totals.*' (looks like 'flattening')
+    - This is benefits of a STRUCT: 'totals.*' (looks like *flattening*)
     ```sql
     SELECT
-    visitId,
-    totals.*,
-    device.*
+        visitId,
+        totals.*,
+        device.*
     ```
+
+    - *Notice*
+    - **shuffle rows** means Bigquery has to visit one row many times. In this query below, Bigquery has to check all remaining rows with each user_id. This causes slow performance. We can do *partitioning the user_id or filter data before aggregation with group_by or using special function "APPROX_COUNT_DISTINCT()"*:
+    ```sql
+    SELECT user_id, COUNT(*) FROM event_logs GROUP BY user_id;
+    ```
+    - **Slot time consumption**: slot means "node" or "computing resources" used to process a query. The unit *slot-seconds*. In particular, if we have 100 slots, each run 5sec, => the *Slot time consumption* is 500 slot-seconds. Bigger table, the more slots we need. For ex, the following query will causes "high slot time consumption" if it's not partitioned because Bigqiery has to scan all the huge table. But if the table is partitioned by event_date, BigQuery will scan only one partition => low *slot time usage*. 
+    ```sql
+    SELECT * FROM huge_table WHERE event_date = '2024-03-01';
+    ```
+    - Besices partitioning, other optimizations are to avoid *SELECT * FROM...* or use "BI engine" that runs everything in-memory instead of always scanning Bigquery storage. 
+
+    - How to create a STRUCT: (*we will have a Struct-typed "starting", we'll have starting.name, starting.point, ...*)
+    
+    ![Struct-creation]({{ 'assets/BQ-Geo-Viz/Struct-creation.jpg' | relative_url}}){: .toggled-image}
+
 
 40. **Why use 'UNNEST()'** : because cannot use *2 times nested query (with 2 dots)*: *t.objA.featureb* because there are more than ONE values at the first nested *t.objA*.
 
@@ -340,3 +375,87 @@ Traininng and training more in different contexts:
 49. What is difference between: FORMAT(), CAST()    
     - FORMAT(): indicate units, only return STRING type, *FORMAT(1234567.89, 'N2') AS string_number*
     - CAST(): convert to new data types, *CAST(123.45 AS INT) AS converted_int* 
+
+̀
+50. Analytic Window Functions: 
+    1. Standard Aggregations:
+        - SUM
+        - AVG
+        - MIN
+        - UNNEST
+        - BIT_AND: A bit is 1 only if all numbers have 1 in that position. 
+        - BIT_OR: always keeps 1 if at least one input has 1
+        - BIT_XOR: cancels out even occurrences of 1, keeping only odd ones.
+            ```sql
+                SELECT BIT_OR(number) AS result 
+                FROM UNNEST([5, 3, 7]);
+
+                results below
+                5  →  101  
+                3  →  011  
+                7  →  111  
+                ----------------  
+                BIT_OR →  111  (result is 7)  
+
+                5  →  101  
+                3  →  011  
+                7  →  111  
+                ----------------  
+                BIT_AND →  001  (result is 1)
+
+                5  →  101  
+                3  →  011  
+                7  →  111  
+                ----------------  
+                BIT_XOR →  101  (result is 5)    
+            ```
+        - COUNTIF
+        - LOGICAL_OR
+        - LOGICAL_AND
+    2. Navigation functions:
+        - NTH_VALUE
+        - LAG
+        - FIRST_VALUE
+        - LAST_VALUE
+    3. Ranking and Numbering functions: 
+        - RANK
+        ```sql
+            SELECT name, department, start_date, 
+                RANK() OVER (PARTITION BY department ORDER BY start_date) AS rank
+            FROM Employees;
+        ```
+        - CUME_DISK
+        - DENSE_RANK
+        - ROW_NUMBER
+        - PERCENT_RANK
+
+51. **With clauses**: are used to define "named subqueries" that can be referenced multiple times in a query in Bigquery. It is 
+    ```sql
+    WITH EmployeeData AS (
+        SELECT name, department, start_date
+        FROM Employees
+        WHERE start_date >= '2023-01-01'
+    )
+    
+    SELECT name, department FROM EmployeeData WHERE department = 'IT';
+    ```
+
+52. **Bigquery Geo Viz** : a lightweight cloud application that allows for quick testing of geospatial data.
+    - *ST_GeogPoint(longitude,latitude)* is a SQL code to convert 2 FLOAT-typed longitude & latitude to a GIS-typed geospatial point (or *exact coordinates - toạ độ*) on GIS map (Geographic Information System) of Google.
+
+    - *ST_GeogFromGeoJSON(longitudeJSON, latitudeJSON)*: similar to ST_GeogPoint() with JSON format.
+    
+    - *ST_Distance(p1, p2)*: distance between 2 points. (*p1,p2 is GIS-typed point from ST_GeogPoint()*).
+
+    - *ST_MakeLine(point1, point2)* will overlay a line between 2 geospatial points on a map.
+    - *ST_MakePolygon(ST_MakeLine([point1, point2, point3]))* will also overlay a triangle with 3 geospatial points on a map, helping highlight relationships in the data.
+
+    -  *WHERE ST_DWithin(point1, point2, 1.5e5) --150km* is used to filter out bike stations (point2) within 150km *linear distance* from point1(a city center or the post office). 
+    
+    ![ST_DWithin-method-in-BQ-Geo-Viz]({{ 'assets/streaming/ST_DWithin-method-in-BQ-Geo-Viz.jpg' | relative_url}}){: .toggled-image}
+
+    - *ST_Intersets(polyA, polyB)*: true if two polies overlap.
+    - *ST_Contains(polyA, point1)*: true if a point is inside a polygon.
+    - *ST_ConveredBy(polyA, polyC)*: true if polyA is completely inside polyC.
+
+53. *APPROX_QUANTILES(duration, 10)[OFFSET (5)] AS typical_duration* : first we have many trip durations of a rental bike, collect all the durations, sort them ASC, devive them in 10 quantiles (equal parts), select duration numbers at the edges (boundaries) of each quantiles then we will have a list of 10 numbers, because the first number has an index of 0, so the result of "OFFSET (5)" is the 5th number. (*better than AVG(durations) because we can avoid skewed data*)

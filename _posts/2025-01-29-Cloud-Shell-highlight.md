@@ -2,7 +2,30 @@
 category: tool
 ---
 
-Some common commands in Cloud Shell
+0. **Python** commands in Jupiter:
+    1. *%%writefile spark_analysis.py* : create or replace a file.
+    1.1 *%%writefile -a spark_analysis.py* : write appendingly to the existing file.
+
+    2. *import google.cloud.storage as gcs* : import google cloud storage
+
+    3. *!wget https://storage.googleapis.com/cloud-training/dataengineering/lab_assets/sparklab/kddcup.data_10_percent.gz* : download a file
+
+    4. !hadoop fs -put kddcup* / : copy all folder "*kddcup*" to the default local Hadoop file system. (*fs : file sys*)
+
+    5. *!hadoop fs -ls /* : list contents of the default directory of Hadoop file system.
+
+    6. *!gcloud storage cp spark_analysis.py gs://$BUCKET/sparktodp/spark_analysis.py* : save a copy of the Python file to cloud storage bucket.
+
+    7. import a spark, initialize spark session, set spark context, read data from a cloud bucket and cache it.
+    ```sql
+        from pyspark.sql import SparkSession, SQLContext, Row
+
+        spark = SparkSession.builder.appName("kdd").getOrCreate()
+        sc = spark.sparkContext
+        data_file = "gs://{}/kddcup.data_10_percent.gz".format(BUCKET)
+        raw_rdd = sc.textFile(data_file).cache()
+    ```
+
 
 1. **Linux** commands in Cloud Shell:
 
@@ -17,6 +40,24 @@ Some common commands in Cloud Shell
     4. ls -al /tmp : despite of standing any-folder, we can show all files inside folder "tmp" at root directory.
 
     4.1 ls -al /tmp/myoutput* : similar to 4 but show only files starting with "myoutput".
+
+    5. *nano submit_onejob.sh*
+    5.1 *edit in the new script file.*
+    ```sql
+        #!/bin/bash
+        gcloud dataproc jobs submit pyspark \
+            --cluster sparktodp \
+            --region REGION \
+            spark_analysis.py \
+            -- --bucket=$1
+
+    ```
+    5.2 *chmod +x submit_onejob.sh* : grant execute permission.
+    5.3 *./submit_onejob.sh $PROJECT_ID* : execute
+
+    6. *gsutil cp gs://your-bucket-name/path/to/file.csv.gz .* : download a zip.
+    6.1. *zcat file.csv.gz | head -n 10* : read 10 lines of a zip.
+    6.2. *gunzip file.csv.gz* : unzip a zip.
 
 
 2. **Cloud Storage** commands in Cloud Shell:
@@ -36,6 +77,12 @@ Some common commands in Cloud Shell
     7. *gcloud services enable dataflow.googleapis.com* : enable dataflow service ().
 
     8. *gcloud services disable datafusion.googleapis.com* : disable datafusion api
+
+    9. *gcloud pubsub topics create sandiego* : create a new pub/sub topic
+    9.1 *gcloud pubsub subscriptions create --topic sandiego mySub1* : create a new pub/sub subscription for topic "sandiego".
+    9.2 *gcloud pubsub topics publish sandiego --message "hello"* : send a message
+    9.3 *gcloud pubsub subscriptions pull --auto-ack mySub1* : pull a message.
+
 
 3. **BigQuery** commands in Cloud Shell:
 

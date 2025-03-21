@@ -4,11 +4,43 @@ category: tool
 
 Building, deploying, and operating effective flexible data pipelines for all the stages of data processing is a primary expectation from a pro data engineer.
 
-Some key terms in BigQuery:    
+Some key terms in BigQuery:
 
-- anomalous (Adj) : deviating from standard. => anomaly (N) : điều bất thường.
+- credential - N : tín nhiệm thư.
+- time-critical : đòi hỏi chính xác về time.
+- offload : hạ tải, tháo tải.
+- manner : cách thức || method : phương pháp
+- fuse - v : hợp nhất, kết hợp thành
+- language-agnostic - adj : ko theo 1 ngôn ngữ nào. || agnostic: vô thần
+- dependencies - N : associated packages or libraries. || unless there is a dependecy involved : trừ phi có 1 sự lệ thuộc trong đó.
+- arbitrary - adj: tùy ý, bất kỳ. => arbitrary dependencies: (alternative for "any")
+
+- compelling - adj: >> convincing: thuyết phục
+- deplete : xã hết ra, giãm, cạn, vơi đi, to reduce in quantity. => depletion rate:  
+- Analogy : tương tự, cũng như thế == By analogy
+- a sliver : mảnh, miếng || to churn : ̣đánh (kem), khuấy
+- threshold - noun: ngưỡng (cửa), level || constraint - noun : ràng buộc
+- disparity : sự chênh lệch, cách biệt || deviation: độ lệch.
+- align with: phù hợp, thống nhất với || corresponding with: tương ứng
+- hierarchical - adj: phân tầng, phân cấp, có tôn ti. => hierarchical reservation of resources: Dự phòng nguồn lực có tính phân tầng.
+
+- st is associated with st : có liên quan trực tiếp || timely solution : ... kịp thời.
+- available in a matter of seconds : sẵn có trong vài giây.
+- emphemeral - adj: phù du, tạm bợ
+- to author a poem: sáng tác 
+- undue: - adj: ko đáng *=> undue delays: những trì hoãn ko đáng*
+- ad-hoc - adj: tình thế, đối phó, ko tính trước. *=> a ad-hoc solution*
+- to incur a fee : gánh một khoảng phí.
+- resilience : one service failure does not break the whole system, tính kiên cường
+- increase exponentially - adj: tăng lũy thừa.
+- "Back-off" vs "kick-off": back-off is a strategy in computer networks where devices wait before reattempting a transmission, while "kickoff" that starts a game.
+- a benchmark: thông số hoạt động của một sys. 
+
+- anomalous (Adj) : bất thường => anomaly (N) : điều bất thường.
 
 - VM: a virtual machine = a node = like a physcial machine but located online.    
+- Vertical Scaling : Upgrade to a bigger machine (more RAM/CPU).
+- Horizontal Scaling : Add multiple subscribers (VMs) to process messages in parallel.
 
 - Cluster: a collection of virtually nodes working together as a single unit. Therefore, clusters are used to distribute workloads efficiently and handle large-scale tasks that a single machine cannot handle alone, additionally ensuring tasks continue running even if one node fails. It is used for computing, processing, and storage (in some cases). Regard storage, a cluster is a collection of databases managed by DBMS (*one DBMS instance controls the cluster*). But in BigQuery, its definition is different, a cluster is not existing *physically or virtually*  instead *clustering*, which is a technique to optimize how data is stored and queried within a **single** table.
 
@@ -22,7 +54,7 @@ Some key terms in BigQuery:
 
 - From gigabytes to terabytes to petabytes: thousands MB to millions MB to billions MB. 
 
-- Throughput (Xuất lượng): is like a rate of analytic processing.
+- Throughput (thông lượng): is like a rate of processing.
 
 - On-premises: hardware, software, and data storage are physically located within a local servers, rather than being hosted on the cloud.
 
@@ -30,6 +62,7 @@ Some key terms in BigQuery:
 
 - Beam: Apache Beam is *a unified data processing model for batch and streaming PIPELINES*. Beam does not process data by itself, it provides a powerful, portable API for defining data pipelines that get executed by *big data engines* like Apache Spark, Apache Flink, Google Cloud Dataflow, and Samza for data processing. It supports Python, Java, Go, and SQL, integrating seamlessly with TFX for ML and cloud services, making it ideal for cross-platform deployments. Its flexible API allows developers to write once and execute anywhere, optimizing ETL, AI, and real-time data processing. (*Note: Cloud Shell doesn't support Beam because of its weak resources*)
 
+- Hadoop: it is *an open-source Java framework for distributed storage and processing of large datasets*. It is designed to run on clusters of commodity hardware. Some libraries like *PySpark* allow you to write Hadoop jobs in Python.
 
 1. **"Migration Task" from existing private data to Google Cloud**:
 
@@ -85,7 +118,7 @@ Some key terms in BigQuery:
     - GC offers variety of databases: SQL, NoSQL, data lakes, data warehouse, data meshes.
     - *Data life cycles* must comply with local data privacy rules.
 
-    - **Denormalize data >< normalize data**: denormalizing data means add more redundant info into a table to reduce the query complexity.
+    - **Denormalize data >< normalize data**: denormalizing data means add more redundant info (un_necessary but easy_to_read columns) into a table to reduce the query complexity.
 
     - The user has access if either IAM or ACLs grant a permission.
 
@@ -299,7 +332,7 @@ Some key terms in BigQuery:
 
     ![Data-Fusion]({{ 'assets/data-engineer/Data-Fusion-Studio.jpg' | relative_url}}){: .toggled-image}
 
-    - *Dataproc* allows to run "Apache Hadoop (HDFS)" and "Spark Workloads or Spark jobs" on Google Cloud. *Dataproc Serverless for Spark* provides an optimized environment designed to easily move existing "Spark workloads" to Google Cloud.
+    - *DATAPROC* allows to run "Apache Hadoop (HDFS)" and "Spark Workloads or Spark jobs" on Google Cloud. *Dataproc Serverless for Spark* provides an optimized environment designed to easily move existing "Spark workloads" to Google Cloud.
         
         - **Why Hadoop Ecosystem ?**: because we need analyze large datasets and Hadoop is a *FRAMEWORK* that can build a cluster of computers (JVMs) and leverage distributed processing across these computers (parallelism), speeding up the analysis of large datasets. (*The computer here is a JVM (Java-Virtual-Machine) because Hadoop runs on the platform of Java.*). It includes HDFS and MapReduce, HDFS means "Hadoop Distribution File System".
 
@@ -352,7 +385,7 @@ Some key terms in BigQuery:
 
         - *Tools to interact with Dataproc*: Cloud Console, Cloud SDK, Dataproc Rest APIs, multi-options of OSS (open source softwares) to code like Jupyter, Kafka, Spark, Hive, HDFS, Pig...
 
-        - A Dataproc Cluster has "Manager nodes (1-3)", "Primary Workers", "HDFS", "Secondary Workers". When the NATIVE cluster is turned off, we lose everything from it, *so we should consider using DIRECTLY cluster on Cloud Storage via HDFS connector*, BigTable for NoSQL DB, BigQuery for Analytics. *Code changes very simple from "hdfs//" to "gs//"*.
+        - A Dataproc Cluster has "Manager nodes (1-3)", "Primary Workers", "HDFS", "Secondary Workers". When the NATIVE cluster is turned off, we lose everything from it, *so we should consider using DIRECTLY cluster on Cloud Storage via HDFS connector*, Bigtable for NoSQL DB, BigQuery for Analytics. *Code changes very simple from "hdfs//" to "gs//"*.
 
         ![Dataproc-cluster-configuration]({{ 'assets/data-engineer-2/dataproc-cluster-configuration.jpg' | relative_url}}){: .toggled-image}
 
@@ -468,7 +501,7 @@ Some key terms in BigQuery:
 
         ![Map-vs-FlatMap]({{ 'assets/dataflow/map-vs-flatmap-in-PTransform.jpg' | relative_url}}){: .toggled-image}
 
-        - **ParDo() in PTransform**: we can use ParDo() to perform a simple or complex computation with every batch (input). With ParDo(), we need a DoFn object, which is a BEAM class. Specifically, Map() or FlatMap() are just a simple type of ParDo() for transformation. Use ParDo() when you need more complex logic.
+        - **ParDo() in PTransform**: we can use ParDo() to perform a simple or complex computation with every batch (input). With ParDo(), we need a DoFn object, which is a BEAM class. Specifically, Map() or FlatMap() are just a simple type of ParDo() for transformation. Use ParDo() when you need more complex transformation.
 
         ![ParDo-in-PTransform]({{ 'assets/dataflow/ParDo-in-PTransform.jpg' | relative_url}}){: .toggled-image}
 
@@ -496,7 +529,7 @@ Some key terms in BigQuery:
 
         - **Side inputs and windows of data**:
 
-            - Side inputs: during creating a PCollection, we can inject additional data during the runtime of ParDo() transform-function. A side inputs occurs each time of processing a new element in the PCollection, so the additional data needs to be determined at RUNTIME, not hard coded. 
+            - *Side inputs*: during creating a PCollection, we can inject additional data during the runtime of ParDo() transform-function. A side inputs occurs each time of processing a new element in the PCollection, so the additional data needs to be determined at RUNTIME, not hard coded. 
 
             ![side-inputs-added]({{ 'assets/dataflow/side-inputs-added.jpg' | relative_url}}){: .toggled-image}
 
@@ -530,7 +563,7 @@ Some key terms in BigQuery:
                 --parameters input=gs://my-bucket/data.csv,output=gs://my-bucket/output/
             ```
 
-    - **DataFusion**: designed for batch data pipelines.
+    - **DATAFUSION**: designed for batch data and streaming data pipelines.
         - DataFusion helps build visually or graphically data pipelines. It is **a no-code tool** to build a data pipeline.
         - Integrate with any type of data.
         - Can combine all data from different sources into one like BigQuery, Spanner,...
@@ -554,13 +587,324 @@ Some key terms in BigQuery:
 
         ![datafusion-running-view]({{ 'assets/dataflow/datafusion-running-view.jpg' | relative_url}}){: .toggled-image}
 
-    - **Cloud Composer**:
-        - Cloud Composer helps orchestrate work between Cloud services.
-    
+    - **CLOUD COMPOSER**: if we want to run 3 data fusion pipelines and 2 ML models training in a certain order, we need Cloud Composer like an orchestration engine.
 
+        - Cloud Composer is a serverless environment where a **DAG workflow tool** runs. That DAG workflow tool is called **Apache Airflow**, an open-source orchestration engine. Like Datafusion, we will build a DAGraph again, yes, we can build almost anything with it.  
     
+        ![workflow-DAGs]({{ 'assets/cloud-composer/workflow-DAGs.jpg' | relative_url}}){: .toggled-image}
+
+        - Keeping mind that, we can have multiple Cloud Composer environments, each contains one separate instance of Apache Airflow, which could have many DAGs.
+
+        - When we create a Cloud Composer instance, a Cloud Storage bucket will be automatically created to store DAG file written in Python or Airflow workflows are written in Python.
+        
+        - **Operators** in Cloud Composer are pre-built tasks that perform specific actions. In other words, operators are fundamental building blocks that define tasks in DAGs (Directed Acyclic Graphs).
+
+        ![composers-DAGs]({{ 'assets/cloud-composer/composers-DAGs.jpg' | relative_url}}){: .toggled-image}
+
+        ![composers-BigQuery-DAGs]({{ 'assets/cloud-composer/composers-BigQuery-DAGs.jpg' | relative_url}}){: .toggled-image}
+
+        - Apache Airflow is an open source and continuously add more operators, be sure to check out new operators. [Apache_Airflow_GitHub_Repo](https://github.com/apache/airflow) and [Official_AirFlow_Website](https://airflow.apache.org/).
+
+        - **Workflow Scheduling** : *there are 2 types: periodic & event-triggered*.
+
+        ![workflow-schedulings]({{ 'assets/cloud-composer/workflow-schedulings.jpg' | relative_url}}){: .toggled-image}
+
+        - We can check whether DAGs worked like schedulings or not, by checking the log files.
+
+    Finally, we can see the key difference between dataproc, dataflow, datafusion and composer:
+
+    ![key-difference-dataproc-dataflow-datafusion-composer]({{ 'assets/cloud-composer/key-difference-dataproc-dataflow-datafusion-composer.jpg' | relative_url}}){: .toggled-image}
+
+    - **STREAMING DATA & ANALYTICS SYSTEMS**: 
+        
+        - *Why streaming* : help make decision at real-time.
+        - Streaming is data processing for unbounded data set.
+        - **Challenges** associated with streaming applications: we have 4Vs (variety, volumne, velocity and veracity (tính chân thật)).
+
+            - Variety: data can come in various formats or sources.
+            - Volumne: from gigabytes to petabytes.
+            - Velocity: streaming should be a near-real time process. 
+        
+        - 3 main services in streaming Data process: Pub/Sub, DataFlow, BigQuery.
+
+        - **Pub/Sub**: Pub/sub does streaming *differently than almost anything* you have used in the past.
+            - a fully managed data distribution and delivery system.
+            - Pub/Sub is not a software, it is a service. So, Pub/Sub client libraries are available in many programming languages (Java, C#, Pyhon, Ruby,...).
+
+            - 3 qualities of the Pub/Sub service:
+                - Availability:  
+                - Durability: by default it saves our messages for 7 days.
+                - Scalability: Google Cloud processes about 100 million messages per seconds. On average, Google is indexing the web 03 times/day. 
+                Thus, Google is sending the entire web over Pub/Sub 03 times/day.
+
+            - We can control the qualities of Pub/Sub by the number of publishers, number of subscribers, the size and number of messages.
+
+            - ***Pub/Sub is a story of 2 data structures, the Topic and  the Subscription***:
+
+                - *A decoupling system*: an architecture where services/modules are loosely connected instead of tightly integrated.
+
+                - *The Pub/Sub client* that created the Topic is called **publisher**.
+
+                - *The Pub/Sub client* that creates the Subscription is called **subscriber**. To create a message to the Topic, we need a Subscription to that Topic. One Topic can have multiple subscriptions or Subscriber apps.
+
+                ![the-topic-&-the-subscription]({{ 'assets/cloud-composer/the-topic-&-the-subscription.jpg' | relative_url}}){: .toggled-image}
+
+                - **Push** process: Pub/Sub sends messages to the subscriber’s endpoint (e.g., HTTP webhook).
+                - **Pull** process: The subscriber requests messages from Pub/Sub when ready.
+
+            - Google Pub/Sub takes the highest priority in managing and updating latest information directly in any systems.
+
+            - Generally, there are 3 main Pub/Sub patterns:
+
+            ![pub-sub-patterns]({{ 'assets/cloud-composer/pub-sub-patterns.jpg' | relative_url}}){: .toggled-image}
+
+            - **Acknowledgement** (Ack) : in Google Cloud Pub/Sub, **ack** ensures that messages are successfully received and processed by the subscriber. If a message is **not acknowledged**, Pub/Sub retries sending it until the retention period expires (*default 7 days*).
+
+            ![push--pull-ack]({{ 'assets/cloud-composer/push--pull-ack.jpg' | relative_url}}){: .toggled-image}
+
+            - **Ack deadline** : is the maximum time a subscriber has a acknowledge a received message and send this ack to Pub/Sub, then the message is removed from Pub/Sub. Otherwise, Pub/Sub re-deliver the message.
+
+            - **Message Replay** : we can ask Pub/Sub to published again all messages within 7 days, even acknowledged ones. For this, we need to enable **message retention** in Pub/Sub to make sure acknowledged messages are not removed. Replay is useful when a subscriber failed to process messages correctly.
+
+            - Subscribers can work as a team or separately. In a team, only one subscriber has to acknowledge the message receipt.
+
+            ![single-or-group-subscribers]({{ 'assets/cloud-composer/single-or-group-subscribers.jpg' | relative_url}}){: .toggled-image}
+
+            - **Message order**: By default, Pub/Sub does NOT guarantee *message order* because messages can be processed in parallel across multiple subscribers. However, ordered message delivery can be achieved using **ordering key**. (*Note: this increases the latency*).
+
+            - The important role of Pub/Sub for streaming resilience: for examples, data can explode on black Friday or subscriber could fail for 1 day.
+
+            ![Pub-sub-resilience-meaning]({{ 'assets/cloud-composer/Pub-sub-resilience-meaning.jpg' | relative_url}}){: .toggled-image}
+
+            - **Dead-letter Queue DLQ** : a Pub/Sub feature that stores messages that fails to be processed multiple times. Instead of being loss, they are redirected to a separate Pub/sub topic "Dead-Letter" for future debugging some manual action. This feaure helps prevent infinite retries. (*recommended*).
+
+            - **Exponential Backoff** : is *a retry strategy* where the wait time between retries increases exponentially (lũy kế) after each failure. This helps reduce system overload, prevent thundering herd issues, and improve resilience.
+
+    - **DataFlow in STREAMING** : what is the challenges:
+        - Challanges as streaming:
+            1. Scalability : data only grows larger.
+            2. Fault tolerance : 
+            3. Model : streaming and repeated batch.
+            4. Timing : how to deal with latency?
+
+        - **Dataflow helps divide the stream into a series of finite windows**, so we can use the original timestamp of pub/sub messages to add the messages into different time windows, even if they arrive late or out of order, so we can still group the messages correctly.
+
+        - *Modify the date-timestamp (DTS) with a PTransform if needed* because every message always have a timestamp in its metadata which is provided by the pub/sub sensor as pushing. This timestamp will be different from the time when Dataflow receive the message. PTransform can use this DTS to modify the timestamp at Dataflow.
+
+        ![code-to-modify-message-timestamp]({{ 'assets/streaming/code-to-modify-message-timestamp.jpg' | relative_url}}){: .toggled-image}
+
+        - **Duplicate messages with custome IDs**: if Pub/sub IO is configured to user custom Ids for messages, Dataflow will maintain a list of all messages during 10 minutes, if a new message's ID is in the list, the message is assumed to be duplicated and be discarded.
+
+        - **Dataflow windowing** : Dataflow provides 3 kinds of windows fit most circumstances:
+            1. Fixed window (Tumpling): contains no overlopping intervals.
+            2. Sliding window (Hopping): sliding time windows can overlap if the slide time is smaller than the window size because events will appear in multiple windows.
+            3. Sessions window: defined by user activity, dynamically sized. If session is 10 minutes, only when user stop his activity over 10 min, the session will closes. One session window can extends longer and longer until the user's activity stops more than 10 min. 
+
+        - In an ideal world without network latency, we have some examples like the following table.
+
+        ![window-boundaries-for-3-kinds]({{ 'assets/streaming/window-boundaries-for-3-kinds.jpg' | relative_url}}){: .toggled-image}
+
+        - *Code to set Dataflow windows in Python*:
+
+        ![coding-setting-dataflow-streaming-windows]({{ 'assets/streaming/coding-setting-dataflow-streaming-windows.jpg' | relative_url}}){: .toggled-image}
+
+        - **Lag time**: With latency in the real world, under delay influence, we can have some some small or large *lag time*:
+
+        ![lag-time-in-windows]({{ 'assets/streaming/lag-time-in-windows.jpg' | relative_url}}){: .toggled-image}
+
+        - **Watermark**: watermark is a tool to deal with *lag time*:
+            - A watermark represents *the point in event time* where Dataflow assumes all earlier events have been processed.
+            - Events arriving after the watermark are considered *late* but may still be processed (depending on *allowed lateness*).
+
+        ![watermarks-in-dataflow-windows]({{ 'assets/streaming/watermarks-in-dataflow-windows.jpg' | relative_url}}){: .toggled-image}
+
+        - By default, **data later then watermark (a threshold) will be discarded or handled separately**, but we can allow late data past the watermark by setting *"allowed_lateness=Duration(seconds=2 * 24 * 3600)"* that means Dataflow still wait for data of a window for 2 days since the window closes.
+
+        - *Custom Triggers* : A trigger defines when dataflow should process data to give some output results from a window. Because streaming data arrives almost forever, dataflow cannot wait forever.
+
+        ![kinds-of-custom-triggers]({{ 'assets/streaming/kinds-of-custom-triggers.jpg' | relative_url}}){: .toggled-image}
+
+        - **Trigger examples**:
+
+        ![trigger-code-examples]({{ 'assets/streaming/trigger-code-examples.jpg' | relative_url}}){: .toggled-image}
+
+        - **Accumulation Mode**: just select or not
+
+        ![accumulation-mode-or-not]({{ 'assets/streaming/accumulation-mode-or-not.jpg' | relative_url}}){: .toggled-image}
+
+    - **Streaming Inserts** : they are separate methods of Bigquery used to add streaming data into a BQ table. There is a cost for *streaming inserts*:
+        - *Streaming Buffer* : data is held briefly "streaming buffer" until it can be inserted into a BQ table.
+        - **Streaming quotas** : Because streaming is unbounded, we need to consider *"streaming quotas"*. There is both *daily limit* and a *concurrent rate limit*. *Daily limit* is the total amount of messages that can be processed per day. BigQuery Streaming has a daily insert limit of 1 TB/project (1000 GB/project). If we exceed this, we have to wait until the next day. *Concurrent rate limit* is 100,000 rows/second, if there are over 100,000 messages at the same time, some delay or rejection will occur.
+
+    - **Storage Write API** is an altenative for "Streaming Inserts" as adding streaming data into a table. It has different quotas, not *daily limit* or *concurrent rate limit* anymore. It has 2 throughput quotas, 3GB/sec for multi-region and 0.3GB/sec for single-region. It can be millions rows/sec.
     
-    - *Bigtable* is like a sink for streaming data pipeline for miliseconds latency analytics.
+    - *How to choose between "Streaming Inserts" or "Storage Write API"*:
+
+    ![StreamingInserts-vs-StorageWriteAPI]({{ 'assets/streaming/StreamingInserts-vs-StorageWriteAPI.jpg' | relative_url}}){: .toggled-image}
+
+    - *When to choose between "ingested stream of data" or "batch data loading"*: The answer depends on how much the immediate availability of data is required. Batch data loading is not charged in most cases.
+
+    - *Code for Streaming Inserts*: 
+    ```sql
+        bq_client = bigquery.Client(project="PROJECT_ID")
+        dataset = bg_client.dataset('DATASET_ID')
+        table  = bq_client.get_table(dataset.table('TABLE_ID'))
+        errors = bq_client.insert_rows(table, rows_to_insert_data)
+    ```
+
+    - *Looker Studio*:
+        - We can have any or all kinds of datasources in a single LookerStudio Report.
+        - Reports can be shared and datasources can also be seen, so be careful that anyone, who can see the report, can potentially see all the data of the datasources associated.
+        - free and drad-and-drop interface.
+        - From Looker, we can add new data by selecting "Add data" btn => BigQuery => "Custom Query" => ProjectId, issuing a SQL query to BigQuery table into a temp table as a new data source, being seen in tab "Data source" at the "Chart Setup". Then, we can make a report with this Data source.
+
+        ![custom-query-add-new-datasource-in-looker]({{ 'assets/streaming/custom-query-add-new-datasource-in-looker.jpg' | relative_url}}){: .toggled-image}
+
+    - **BI engine (BigQuery Engine)** : It is in-memory layer for BigQuery, meaning in-memory processing avoiding re-scanning data repeatedly. But it is not free and only work with BQ. We have to enable it and allocate memory for it. *BI Engine is best when dashboards or Looker need fast, repeated access to the same data, not for data that changes regularly.*
+
+    - *Compare Looker and BI engine*:
+
+    ![Looker-vs-BI-engine]({{ 'assets/streaming/Looker-vs-BI-engine.jpg' | relative_url}}){: .toggled-image}
+
+    - *Sending Email By a continuous Query*: [link](https://www.cloudskillsboost.google/paths/16/course_templates/52/labs/521645)
+
+    - **bq-continuous-query-sa** : a BigQuery service account which is related to *BigQuery Continuous Queries*, allowing running queries *on streaming data*, meaning *running a query continuously* in the background, ensuring real-time analysis or timely actions. 
+
+    - **Bigtable** 
+        - it is used in cases we need to handle *very low latency or very high throughput requirements* when BigQuery is not enough.
+
+        - Bigtable is a NoSQL database, meaning Bigtable is not good for data processing that needs SQL queries such as joins, aggregations. 
+
+        - **ROW KEY** : Bigtable has only one index called the *Row Key*. When new data arrives, it is stored in a *MemTable* in memory, when it is full, it is then written into disk in *a format of dictionary-order* by the *Row Key*.
+
+        - **CONSTRUCTED ROW KEY** : To get the best performance with the design of the Bigtable, we need to get our data in order first, if possible, we need to select and contruct a **ROW KEY** that minimizes sorting and searching and turns our most common queries into scans, in most cases ROW KEY is a constructed or composite type that is composed of 2 columns, usu one of them is TIMESTAMP. *Not all data and not all queries are good use cases for the efficiency that Bigtable offers*. But when it is a good match, Bigtable will be very fast like a magic. Like image below, with a constructed ROW KEY (origin-arrivalDate), we only need scanning without any sorting and searching because we did sorting as writing already.
+
+        ![composite-row-key]({{ 'assets/streaming/composite-row-key.jpg' | relative_url}}){: .toggled-image}
+
+        - **Column Families** : we can devide columns into different groups called "families", helping access more faster because we only fetch data from one family instead of all families (all columns). Bigtable can handle up to 100 column-families without losing performance.
+
+        ![column-families]({{ 'assets/streaming/column-families.jpg' | relative_url}}){: .toggled-image}
+
+        - BigQuery is serverless, Bigtable is cluster-based. **How to choose**, Bigtable or BigQuery.
+
+        ![BigTable-or-BigQuery]({{ 'assets/streaming/BigTable-or-BigQuery.jpg' | relative_url}}){: .toggled-image}
+        
+        - Bigtable stores data in file system called "**Colossus**" that contains tablets, a data structure to identify and manage data (*a number of contiguous rows within a table*). Tablets'metadata is stored in VM nodes of Bigtable cluster, leading 3-levels of operation: manipulate the data, manipulate the tablets, and manipulate the metadata.
+
+        - **SELF-IMPROVES with POINTERS** : Bigtable periodically rewrites our table to remove deleted entries and to reorganize data, ensuring reads and writes remain efficient. It tries to distribute reads and writes equally across all Bigtable nodes in the cluster. In nature, it just moving the POINTERS across nodes (pointers are not data but references or cache). It doesn't move all rows, just its pointers. Actual data is located in Tablets. To be more clear, if only certain rows are accessed more frequently than others, we can get balancing by distributing their tablets across the nodes.
+
+        - **Re-balance STRATEGY is to distribute reads**: notice that even distribution of reads takes priority over evenly distributing storage. 
+
+        - **How to optimize a Bigtable performance**: there are serveral factors that can result in slower performance:
+            - The table schema design is not correct. It's essential to design a schema that allows reads and writes to be evenly distributed across the Bigtable cluster nodes. Otherwise, individual nodes can get overloaded, slowing performance.
+            - The Bigtable cluster doesn't have enough nodes. Typically, performance increases linearly with the number of nodes in a cluster. Use Monitoring tools to check whether a cluster is overloaded.
+            - Bigtable can be used with HDD disks and SSD disks. HDD disks can result in slower response times and significantly lower number of reads requests/sec, 500 QPS/sec for HDD disks, 10000 QPS for SSD disks. In 2024, a 10-node SSD cluster with 1KB rows (*each row is 1KB*) and "write-only workload" can process 10,000 rows/sec at a 6-milisecond delay.
+
+            - Network issues can cause reads and writes to take longer than usual. Network issues often happens if clients is not at the same zone as Bigtable cluster.
+
+            - Different workloads could cause performance to vary. We should perform some tests to obtain the most accurate benchmarks. For example, throughput can be controlled by node count. With 100 nodes, we can handle 1 million QPS (Queries per seconds). *A higher throughput means more items are processed at a given amount of time*.
+            
+            - In general, smaller rows offer higher throughput, and therefore are better for streaming performance. Bigtable takes time to process cells within a row.
+
+            - Selecting the right *ROW KEY* is critical. Rows are sorted lexico-graphically (in dictionary-order).
+
+            - **Avoid "hot spots" during "Writes Streaming"**: 'hot spot' issue can be there are too many write requests on the same rows or same tablet. It can also be one node handle most writes. For ex, "timestamps" or "IDs" are naturally sequential, leading easily new writes will target the same node or same tablet if our ROW KEY is configured with only timestamps. We should use composite ROW KEY like "typeA#timestamps", "typeB#timestamps", so new writes can be distributed more evenly across nodes.
+
+            - Replication for Bigtable is to increase the availability and durability of our data by copying it across multiple regions or multiple zones within a same region. *Replication will allows us to isolate workloads by rounting different types of requests to different replicas*. **Failover** is used to automatically redirect requests to healthy replicas in case one replica was broken. Bigtable supports automatic failover for high availability. *But "isolating workloads", "increasing number of nodes", "decreasing row size and cell size" are not automatic*. We need experimentation to find the best solution.
+
+            - The ability of create **multiple clusters in an instance** is valuable for performance, as one can be for reads and one replica is exclusively for writes.
+
+            - **300 GB** is the min data volume to run a test on Bigtable.
+
+        - **Key Visualizer** is a heat map (*Ox:time, Oy:row keys, higher values appear in white color*) that automatically generates hourly and daily scan for every table that meets at least one of the following criteria:
+            - 1. During the previous 24 hours, the table contained at least 30 GB of data at some point of time.
+            - 2. During the previous 24 hours, the average of all reads or writes was minimum 10,000 rows/sec.
+
+            ![Key-visualizer]({{ 'assets/streaming/Key-visualizer.jpg' | relative_url}}){: .toggled-image}
+
+        
+    - **Bigquery Geo Viz** : a lightweight cloud application that allows for quick testing of geospatial data.
+        - *ST_GeogPoint(longitude,latitude)* is a SQL code to convert 2 FLOAT-typed longitude & latitude to a GIS-typed geospatial point (or *exact coordinates - toạ độ*) on GIS map (Geographic Information System) of Google.
+
+        - *ST_GeogFromGeoJSON(longitudeJSON, latitudeJSON)*: similar to ST_GeogPoint() with JSON format.
+
+        - *ST_Distance(p1, p2)*: distance between 2 points. (*p1,p2 is GIS-typed point from ST_GeogPoint()*).
+        
+        - *ST_MakeLine(point1, point2)* will overlay a line between 2 geospatial points on a map.
+
+        - *ST_UNION_AGG(lines)*: aggregate all the lines from ST_MakeLine()
+
+        - *ST_MakePolygon(ST_MakeLine([point1, point2, point3]))* will also overlay a triangle with 3 geospatial points on a map, helping highlight relationships in the data.
+
+        -  *WHERE ST_DWithin(point1, point2, 1.5e5) --150km* is used to filter out bike stations (point2) within 150km *linear distance* from point1(a city center or the post office). 
+        
+        ![ST_DWithin-method-in-BQ-Geo-Viz]({{ 'assets/streaming/ST_DWithin-method-in-BQ-Geo-Viz.jpg' | relative_url}}){: .toggled-image}
+
+        - *ST_Intersets(polyA, polyB)*: true if two polies overlap.
+        - *ST_Contains(polyA, point1)*: true if a point is inside a polygon.
+        - *ST_ConveredBy(polyA, polyC)*: true if polyA is completely inside polyC.
+
+    - **BIGQUERY SQL OR PRICING OPTIMIZATIONS**: FAST but SMART (*smart = not expensive*)
+    
+        - **Best practices** we should consider:
+            - Use Dataflow to do the processing and data transformations.
+            - Create multiple tables for easy analysis.
+            - Use Bigquery for streaming analysis and dashboards.
+            - Store data in Bigquery for low cost and long term storage.
+            - create Views for common queries.
+
+        - *Good Data analyts will explore how the datasets are structured even before writing a single line of code.*
+
+        - **Revisit the schema**, make questions: *what were the goals then? Are those the same goals at present?*. Analogy, for dirty dishes, if you clean them as you use them, the kitchen remains clean. If you save them, you end up with a sink full of dirty dishes and a full of work.
+
+        - **5 key areas of BQ performance optimization**: less work == faster query. 
+            - For Input/Output: How many bytes were read from disks?
+            - Shuffling: how many bytes were passed to the next query stage? (one query can have several stages, filtering or sorting or aggregating,...)
+            - Grouping: how many bytes were passed through each group.
+            - Materialization: how many bytes were written permanently out onto disk?
+            - Functions and UDFs (user-defined func): How much CPU (slots) are the functions using?
+            - *Slogan: don't scale up your problems, solve them earlier while they are small.*
+
+        - **Query Structure Best practices**: 
+            - Avoid "select *" or don't select more columns than you need.
+            - Considering "APPROX_COUNT_DISTINCT()" instead of COUNT(DISTINCT...) for a very large dataset. 
+            - Make liberal use of "WHERE clause" to filter in queries as soon as you can.
+            - Don't use "ORDER BY" in WITH clause or subqueries, only apply "ORDER BY" at the final or outermost stage of a query.
+            - For JOIN, put the larger table on the left
+            - *Note: if we forget those best practices, BQ will likely do it for us*
+            - can use **wildcards** in table suffixes to query multiple tables, but keep specific as much as possible.
+            - ```sql
+                SELECT * 
+                FROM `my_project.my_dataset.logs_*`  --wildcards
+                WHERE _TABLE_SUFFIX BETWEEN '20240310' AND '20240312';  --specific
+            ```
+
+            - For "GROUP BY",  be careful to avoid data skew as GROUP_BY that possibly results in 30 minutes processing a query in case of different zones. Because some "values" occur many and many times compared to others. Solution:  use approximate funtions first, or GROUP BY 2 values to create a balance, or use BI engine (with in-memory processing).
+            - Lastly, use partitioned tables if possible.
+
+            - Break a complex query into multiple-staged query with *"intermediate table, view or materialized view, even denormalization"* to avoid join. Each stage will materialize an intermidiate tables that stores result for next stages. Analogy: flying directly from the USA to Japan versus taking shorter connecting flights. A direct flight must carry all the fuel at once, while connecting flights only need fuel for each shorter journey. In a real context, we must calculate both storage and processing costs. However, storing and processing big data often costs more.
+
+            - Avoid self-joins of large tables, instead we can use aggregation or window functions or trimming data as small as possible before joining
+            
+            ![self-join-large-data]({{ 'assets/BQ-Geo-Viz/self-join-large-data.jpg' | relative_url}}){: .toggled-image}
+
+            ![window-functions-instead-self-join]({{ 'assets/BQ-Geo-Viz/window-functions-instead-self-join.jpg' | relative_url}}){: .toggled-image}
+
+            - Way to check how many bytes or records being processed by clicking on EXECUTION DETAILS tab at BQ UI. *It shows the work required to process a job at each stage.*
+
+            ![bq-sql-execution-details]({{ 'assets/BQ-Geo-Viz/bq-sql-execution-details.jpg' | relative_url}}){: .toggled-image}
+
+            - Another way to analyze a query performance is CLOUD MONITORING: we can check SLOTS UTILIZATION,...
+
+            ![query-performance-by-cloud-monitoring]({{ 'assets/BQ-Geo-Viz/query-performance-by-cloud-monitoring.jpg' | relative_url}}){: .toggled-image}
+
+            - Use BI engine if you have a dashboard that keeps the exactly same data all the times.
+
+            - **PRE-COMPUTATION** : sometimes, it can be helpful to precompute functions on **smaller tables**, and then join with the precomputed values rather than repeat an expensive calculation on a larger tables each time. We need run tests to check.
+
+            - **1.5GB is max for sorting in 2025**: First, we need to know sorting is an expensive operantion because Bigquery typically will perform sorting on a single worker, even "LIMIT 10" will not help avoid this because it occurs after sorting is completed. For ex, *ROW_NUMBER() OVER(ORDER BY end_date) AS rental_number* will do the sorting the entire dataset first required by "ORDER BY end_date". Therefore, 1.5GB of data is the threshold over which a worker will gets overloaded or overwhelmed while sorting. Solutions are partitioning, clustering by end_date, or approximate ranking with *NTILE(1000) OVER (PARTITION BY MOD(rental_id, 1000) ORDER BY end_date) AS rental_approx_rank* to dividing into 1000 groups then sorting and numbering them from 1->1000. In real case, *EXTRACT(DATE FROM end_date)* is used to reduce sorting complexity because we only check DATE not TIME anymore.   
+
+            - **APPROX FUNCTIONS'ACCURACY** : approximate functions is much more efficient than the exact algorithm **only on large datasets** and is recommended in use-cases where errors of approximately 1% are tolerable.
 
     - Compare ETL options
 
@@ -637,7 +981,14 @@ Some key terms in BigQuery:
 
 14. **SLA (Servive Level Agreement)**:
 
+    - An SLA (Service Level Agreement) in cloud service is a formal contract between a cloud service provider and a customer that defines the expected service quality, availability, and responsibilities of both parties. It ensures that the cloud provider meets specific performance standards and outlines the consequences if those standards are not met.
+
     ![SLA-skimming]({{ 'assets/data-engineer/SLA-skimming.jpg' | relative_url}}){: .toggled-image}
+
+    - Multi-Region: 99.95% Availability means max downtime: ≈ 21.6 minutes per month.
+    - Dual-Region: 99.95% Availability means max downtime: ≈ 21.6 minutes of downtime per month.
+    - Single Region: 99.9% Availability means max downtime: ≈ 43.2 minutes per month.
+
     
 15. **Security with IAM**: there are 2 main roles (customizable)
 
@@ -685,9 +1036,23 @@ Some key terms in BigQuery:
 
     - *Multi-zone VS multi-region*: a dataset can be set to stored in a region, so it will be replicated to become multi-zone. Or, A dataset can be stored in multi-regioned. 
 
-    - *View*: it is a virtual table defined by a SQL query, you can share it externally without sharing the underlying data because we cannot export data from a view.
+    - *View*: it is a virtual table defined by a SQL query, you can share it externally without sharing the underlying data because we cannot export data from a view. View will always run everytime we run the query containing it. *"Intermidiate table"* is a basic solution but no auto update so it needs a *"scheduled upate"* service.
 
-    - *Materialized View*: it is saved permenantly and auto refreshed and updated with the contents of the source table. Materialized View can improve signigicantly ther performance of workloads.
+    - *Materialized View*: Bigquery will save "materialized view" permenantly and auto refreshed and updated with the contents of the source table. Materialized View can improve signigicantly ther performance of workloads. (*note: storage cost will arise for "materialized view"*). If we use "With clause" so many times, "Materialized view" will be a effective way to improve queries performance because "with clause" is not cached like "Materialized view".
+
+    ```sql
+        CREATE OR REPLACE TABLE mydataset.typical_trip AS ...   --extra cost of storage and manual update
+        CREATE VIEW my_dataset.active_users AS ...              --cost everytime running the view.
+        CREATE MATERIALIZED VIEW my_dataset.monthly_sales AS ...    --extra cost of storage but auto update
+    ```
+
+    - ***Warning***: "materialized view" depends on cache, but query can never be cached in following cases:
+        - Queries are never cached if they exhibit non-deterministic functions (CURRENT_TIMESTAMP() or RAND())
+        - If the table or view being queried has changed (even if the columns/rows of interest to the query are unchanged)
+        - If the table is associated with a streaming buffer (even if there are no new rows)
+        - If the query uses DML statements (INSERT, UPDATE, DELETE, and MERGE), or queries external data sources.
+
+    - If you find yourself using a WITH clause, view, or a subquery often, one way to potentially improve performance is to store the result into *a intermidiate table (or materialized view)*.
 
     - *Authorize Views*: an "authorize view" allows to share query results to particular users or groups without giving them access to the underlying source data.
 
@@ -752,8 +1117,9 @@ Some key terms in BigQuery:
         
         - A TIMESTAMP TYPE COLUMN: bq mk --table --schema a:STRING, tm:TIMESTAMP --time_partitioning_field tm
 
-        - Integer Type column: bq mk --table --schema "customer_id:integer, value:integer" \
-        --range_partitioning=customer_id,0,100,10 mydataset.mytable 
+        - Integer Type column: 
+            bq mk --table --schema "customer_id:integer, value:integer" \
+                --range_partitioning=customer_id,0,100,10 mydataset.mytable 
         ```
 
     - What is CLUSTERING ?: *BigQuery will auto SORT values in the clustered column, "these sorted values" will then be used to organise the data into many "sorted BLOCKs" in its storage, also reducing scans of un_necessary data, particularly for queries that aggregate data based on CLUSTERED column because the sorted BLOCKs co-locate rows with similar values. If we cluster multi-columns (4 or more) the order of columns is important because only the first column is sorted truly. We cannot cluster a nested column. *.
@@ -808,3 +1174,165 @@ Some key terms in BigQuery:
 
     - **Cloud Monitoring**: help monitoring the cluster's CPU, disk, network usage and Yarn resources. We even can customize dashboard to show these metrics.
     
+20. **Cost consideration**:
+    - **slots** are units of processing that help clients to manage resources consumption and costs. Bigquery will *automatically* calculate how many slots are required by each query denpendent on size and complexity as running.
+    - **Bigquery Editions**: there are 3 edition tiers (3 nấc, 3 bậc). All options are auto-scalabitity. The last thing is an optional feature to reduce storage cost with **compressed storage**.
+        
+        1. **Standard Tier**: entry-level, low-cost option for standard SQL analysis that is suitable for all requirement of basic workloads.
+        2. **Enterprise Tier**: offers a broad range of analytics features for workloads that demand higher capability, flexibility, and reliability..  
+        3. **Enterprise plus Tier**: designed for advanced features, mission-critical workloads that require multi-region support, cross-cloud analytics, advanced security and regulatory compliance.
+        
+        - Besides, there is also to **"mix and match" edition** based on individual workload demands.
+        - In addition to the 3 pricing tiers, there is an on-demand pricing option that allows clients to pay for data they process. (6.25$/TB ~ 1k GB).
+    
+    ![three-edition-tiers-with-on-demand-pricing]({{ 'assets/BQ-Geo-Viz/three-edition-tiers-with-on-demand-pricing.jpg' | relative_url}}){: .toggled-image}
+
+    - Despite slot auto-scalability, we need set maximum size and an optional baseline for reservation. It is a serverless architecture. Slots are added or removed on-demand, we only pay the slots they consumed.
+
+    - **Compressed Storage with Exabeam**: sometimes we have to re-balance costs between storage and compute. Now, *exabeam* help us solve it very well. *Note that, uncompressed storage is more expensive 2 times than compressed storage*.
+
+    ![compressed-better-than-uncompressed-storage]({{ 'assets/BQ-Geo-Viz/compressed-better-than-uncompressed-storage.jpg' | relative_url}}){: .toggled-image}
+
+    - **Time travel vs Snap-shot** Time Travel in cloud storage (BigQuery) refers to the ability to access previous versions of data at a specific point in time. These versions are kept for a limited time (up to 7 days in BigQuery). We can reduce it to 2 days to reduce storage cost. For longer time backup, we have to create *snapshot* to store the old table verion permanently. (Note: "time travel" is auto-updated but snapshot is not).
+
+    ```sql
+    --change time travel from 7(default) to 3: (0 = disable time travel)
+        ALTER SCHEMA my_dataset  
+        SET OPTIONS(time_travel_retention_days = 3);
+
+    --restore data of yesterday (using Time travel).
+        SELECT * FROM my_table  
+        FOR SYSTEM TIME AS OF TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY);
+
+    --create a snapshot for long-term backup.
+        CREATE SNAPSHOT TABLE my_project.my_dataset.snapshot_table  
+        CLONE my_project.my_dataset.original_table;
+    ```
+
+    - **2000 slots = 50 complex queries**: Because Bigquery does not allow us to set slots prioritized for a specific query, its auto-scalability assures fair resource allocated among all queries. So, estimating the right number of slots from beginning is critical to ensuring query performance. Bigquery will stop any queries that run over 6 hours. For example, if we execute only one query, Bigquery will use all 2000 slots for it, but when we execute 2 queries concurrently, each query will get half of total slots available, in this case 1000 slots each. This subdividing of compute resources will continue happens as more queries are executed. This is a long way of saying, it's unlikely for one heavy resource query will overpower the system and steal resources from other running queries.
+
+    ![fair-resource-division-of-Bigquery]({{ 'assets/BQ-Geo-Viz/fair-resource-division-of-Bigquery.jpg' | relative_url}}){: .toggled-image}
+
+    - **Unfair Division at project level**: we can set up a unfair hierarchical reservation in case we know that one project require somewhat lower resource than other projects. We can set a maximum number of slots for it, then it can never use over this maximum.
+
+    
+21. **Dataflow**:
+    - **Beam Portability framework**: 
+        - **Original vision** is to allow users to write data pipelines in the programming language of their choice and run it on the engine of their choice. Optional languages are Python, Java, Go, SQL.
+        - Allows moving pipelines from premise server to Dataflow. 
+        - **Portability API** is an inter-operability layer enables us to use the language of choice with the engine of choice.
+
+    - **Dataflow Runner v2**: 
+        - Portability (*Apache Beam*) helps us build a data pipeline that will be uploaded and executed by various runners. Some users prefer to run their pipelines on-premises or in multi-cloud environments (a multi-serviced combinations of AWS, Cloud, and Azure). But in this section, the pipeline will be uploaded and executed onto Dataflow *by a runner* called **"Dataflow Runner"**. It is like interpreter between Portability and Dataflow instance.
+
+        - Dataflow itself can operate alone without using Portability, for example "SQL-based data processing". However, we will lose most of useful features supported by Portability as mentioned in *"Beam Portability"*.
+    
+        - Runner are packaged together with **"Dataflow Shuffle"** service and **"the streaming engine"**.
+
+        - Most of times, "Runner v2" is auto-enabled, but we can use it at runtime by using **flag** (*formed with "--"*) in the command line CLI:
+        ```sql
+            --experiments=use_runner_v2
+            --experiments=disable_runner_v2
+        ```
+
+    - **Container on-cloud**:
+        - The Beam SDK "runtime environement" can be containerized with Docker. (*Note: containerization is a way to isolate oneself from other runtime systems*). So, each user operation has its own separate environemnt in which to execute.
+        - A default environment supported by SDKs can be further customized.
+        - Because of *"available containers" in Cloud service*, we can benefit from **ahead-of-time installation** that includes **"arbitrary dependencies"**. Even **"further customization"** is possible.
+
+        - To run your pipelines on custom containers, **Beam SDK v2.25** or later is required.
+
+        - To create a custom container image, specify the Beam SDK as a parent image staring with "FROM" as below in Dockerfile, then add your own customization.
+
+        ![custom-container-image-in-Dataflow]({{ 'assets/BQ-Geo-Viz/custom-container-image-in-Dataflow.jpg' | relative_url}}){: .toggled-image}
+
+        - After creating the Dockerfile, we have to build the image, push it to the container registry on Cloud (*gcr.io*) that is an address where container images are stored and managed.
+
+        ![parameters-as-building-docker-image]({{ 'assets/BQ-Geo-Viz/parameters-as-building-docker-image.jpg' | relative_url}}){: .toggled-image}
+
+        - Finally, launch Dataflow pipelines by referencing regular parameters including the location of your container image.
+
+        ![launch-pipeline-on-container-image]({{ 'assets/BQ-Geo-Viz/launch-pipeline-on-container-image.jpg' | relative_url}}){: .toggled-image}
+
+    - **Cross-language Transform of Beam Portability**:
+        - With *a language-agnostic representation* of pipelines and the possibility to specify the environment for each operaion, we are no longer limited to a single language in a given pipeline.
+        - **Portability** (*not its framework*) allows us to run multi-language pipelines that leverage the respective benefits of different languages. In specific, we can write a **Python** pipeline while using I/O connectors that were only available in **Java**. Or we can even use a Tensorflow extended block of code for a Machine Learning model in a Java pipeline.
+        -  The code below is a part of a **Python** streaming pipeline. The transform method "ReafFromKafka" is imported from the "apache_beam.io.kafka" module that is **Java-based**.
+
+        ![multi-language-pipeline]({{ 'assets/BQ-Geo-Viz/multi-language-pipeline.jpg' | relative_url}}){: .toggled-image}
+
+        - Under the hood, to use a Java transform method in a Python dataflow pipeline, the Python Beam SDK has to create and inject appropriate Java pipeline fragments to the Python pipeline, then it has to download the necessary Java dependencies to execute the Java transform. That means, at runtime, VM workers must run both Java and Python code simultaneously.
+
+    
+    - **Separate compute and storage**: we have 4 sections.
+        1. **Dataflow**:
+            - *Fully-managed* and *auto-configured*.
+            - *Automatically optimize the graphical pipeline* by fusing operations effectively, and by not waiting for a previous step to finish before starting a new one. (*in parallel*)
+            - *Autoscaling* happens step by step in the middle of a pipeline job, as a job needs more resources, it will recieve them automatically without any manual intervention. We dont pay for VMs that aren't being used. Dataflow will turn down the workers as the job demand decreases. 
+            - With *intelligent watermarking* to improve latency, aggregation functions (*SUM and COUNT*) remain correct even if the input sends duplicate records. *It dynamically adjusts watermarks based on the characteristics of incoming data*. So, watermark is an estimate, not a fixed threshold in the timeline of streaming.
+        
+        2. **Dataflow Shuffle**
+            - It's important to note that *Dataflow Shuffle* is a foundational operations behind transforms such as GroupByKey, CoGroupByKey, and Combine. Shuffle refers to partition or group data by key in a scalable, efficient, and fault-tolerant manner. There are 3 types:
+
+            - *Default Dataflow Shuffle* runs entirely on worker VMs and consumes worker CPUs, memory, and persistent disk storage. 
+            
+            - *Service-based Dataflow Shuffle* is only for batch pipeline and runs entirely on Dataflow service backend using Cloud Storage instead of woker VMs. So, we'll benefit from a reduction in consumed CPU, memory and persistent disk storage resources on worker VMS, meaning worker nodes no longer hold any shuffled data, resulting in essential resilience where if one worker is broken accidentally, it will not cause the entire pipeline to fail with it. Service-based Shuffle certainly has better fault-tolerance.
+
+            - Another type is **Streaming Shuffle** implemented within the dataflow streaming engine.
+
+        3. **Dataflow Streaming engine**
+            - offloads the window state storage from worker VMs disk to a backend service.
+            - Luckily, no code changes are required with Dataflow Streaming engine. Worker nodes remain running your user code, implementing data transform, and transparently communicate with the streaming engine to manage state (*windowing, aggregations*).
+
+            - **n1-standard-2** is a smaller but faster worker machine type that runs behind the Dataflow Streaming Engine, making it more responsive to variations in incoming data volumne.
+
+        4. **Flexible resource scheduling (FlexRS)**
+            - Let's talk about "*Flexible resource scheduling*" or in short "*FlexRS*".
+            - FlexRS helps us reduce the cost on ***batch pipelines*** because of:
+                - Advance scheduling
+                - Service-based Dataflow Shuffle.
+                - Mix of pre-emptible and standard VMs (*that are cheap but can be stopped anytime*). 
+
+            - When we submit a FlexRS job, Dataflow will place it into a queue, and submits it for execution ***within 6 hours*** from creation. This makes FlexRS suitable for workloads that are not *time-critical* such as daily or weekly jobs that can be completed *within a certain time window*.
+
+            - Although FlexRs jobs are placed in a queue but Dataflow will immediately perform **an early validation run** to verify execution parameters, configurations, quotas and permissions. In case of failure, errors will be reported immediately. 
+
+22. **IAM roles, Quotas, and Permission**: (Omar Ismail):
+    - Let's start with some questions like:
+        - How IAM provide access to different Dataflow resources. Or What happens as our Beam code is submitted? 
+        - When the pipeline is submitted, it is sent to 2 places: 
+        - The SDK uploads the Beam code to Cloud Storage and sends it to the Dataflow service.
+        - The Dataflow service does a few things:
+            - validates and optimize the pipeline.
+            - creates the compute VMs required to run the code.
+            - deploys the code to the VMs.
+            - Gather monitoring information for display. 
+        - When all those above jobs are done, the VMs will start running the code.
+
+    - At each of stages mentioned above, IAM plays a role in determining whether to continue the process.
+    
+    - **3 Credentials** to determine whether a dataflow job can be launched.
+
+
+        1. **"User role" credential**: whether a person is allowed to submit the code is determined by the IAM role assigned to their account. Your account is represented by your email address. **Three user roles** can be assigned to each user. Each role is made up of a set of permissions:
+            - **Dataflow viewer role**: users, who is assigned with this role, can only view the Dataflow jobs, but cannot submit, update, or cancel jobs.
+            - **Dataflow developer role**: suitable for person whoes job is to manage the pipeline. Users, having this role, might view and cancel jobs that are currently running, but they cannot create/edit a new job beacause the role doesn't have permission to stage files into a bucket and view the Compute Engine Quota.
+            - **Dataflow admin role**: it is a minimum set of permissions that allow both creating and managing Dataflow jobs. Permissions include interacting with Dataflow jobs, staging files in an existing cloud storage bucket, and view the Compute Engine quota.
+        
+        2. **Dataflow service account**: 
+            - It is used to interact between projects such as checking project quota, creating worker instances, managing Dataflow jobs at run time:
+            - When we run a Dataflow pipeline, Dataflow will use a service account ***"service-PROJECTNUMBER@dataflow-service-producer-prod.iam.gserviceaccount.com"***, which is automatically created when Dataflow API is enabled. This service account is assigned the *"Dataflow service agent role"*, which grants necessary permissions to run a Dataflow job.
+            - In the following diagram, the interactions of *Dataflow service account* is at the "HERE" on the medium right between the project and Dataflow
+
+            ![dataflow-service-account-interaction]({{ 'assets/BQ-Geo-Viz/dataflow-service-account-interaction.jpg' | relative_url}}){: .toggled-image}
+
+        3. *Controller service account*:
+            - It is assigned to the Compute Engine VMs to run a Dataflow pipeline.
+            - By default, worker nodes use the project's *"Compute Engine default Service Account"* as the "*Controller Service Account*" in pattern ***PROJECTNUMBER-compute@developer.gserviceaccount.com***, which is automatically created when we enable the Compute Engine API.
+
+            - **Note**: the "Compute Engine default service account" has a broad access to project's resources, which makes easy to get started with Dataflow. However, for production workflow, it is recommended to create *"a new service account"* with only the roles and permissions in need. At a minimum, this new service account should have "Dataflow worker role" and can be used with a "--service_account_email" flag when launching a Dataflow pipeline.
+
+            - Besides, we might have to add additional roles to access different Google Cloud resources. For reading Bigquery, your service account must also have a "Bigquery data viewer" role. "HERE" is the location of the Controller service account's interactions.
+
+            ![controller-service-account-interaction]({{ 'assets/BQ-Geo-Viz/controller-service-account-interaction.jpg' | relative_url}}){: .toggled-image}
+
