@@ -3,13 +3,5 @@ category: ai
 loadingMathjax: true
 ---
 
-Promp Engineering is a technique for not using model but 
-1. "Train" the model to "think and work" only within a limited content of data, like "selling" drinks for clients in a cafe shop.
-2. "Teaching" the model new or latest information that the model might not know, making the model always have enough knowledge before answering questions.
 
-*Note: this post I used to take note only of what I understood about Prompt engineering*
-
-
-
-
-
+- **Prompt engineering**: is a process of designing high-quality prompts that guide LLMs to produce accurate ouputs. This process involves *tinkering* to find the best prompt, optimizing prompt length, and eveluating a prompt's writing style and structure in relation to the task. In the context of natural language processing and LLMs, a prompt is an input provided to the model to generate a response or prediction.

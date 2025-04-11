@@ -3,6 +3,10 @@ category: ai
 loadingMathjax: true
 ---
 
+- converge : hội tụ 
+- gradient : độ dốc || descent : sự hạ xuống
+- 
+
 **Gradient Descent** is an optimization algorithm used to minimize a function by iteratively moving in the direction of *steepest descent* as defined by the negative of the gradient. It's the core key to train a model in Machine Learning.
 
 1. Objective:

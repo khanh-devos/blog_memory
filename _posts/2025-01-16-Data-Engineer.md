@@ -6,14 +6,59 @@ Building, deploying, and operating effective flexible data pipelines for all the
 
 Some key terms in BigQuery:
 
-- credential - N : tín nhiệm thư.
+- quadruped >< biped /e/ : ĐV 4/2 cẳng || carnivore >< herbivore : loài ăn thịt/cỏ
+- it's more of ST than ST: nó thuộc cgì hơn là ... || twist a throttle : vặn ga
+- companion : bạn đồng hành || like-minded companion : đồng đạo
+- shock absorbing leg mechanics : cơ cấu chân hấp thu chấn động
+- gravel : sỏi, đá cuội || trail : đường rừng trên núi, off-road  || dual sports (*motorcycles*): xe địa hình 
+- in real-time : trong thực tiển || at run-time : lúc chạy
+- AI-powered, hydrogen-powered : chạy bằng hydro/AI 
+- dynamic posture adjustment: sự đ/chỉnh tư thế động (the kawasaki corleo)
+- zero emission /i/ : mức thải zero 
+- agility : tính linh hoạt || stamina : tính bền bỉ
+- terrain : địa hình, rough terrain: đ/hình gồ ghề || traverse : di chuyển || territory : lãnh địa
+- a snippet of code : đoạn code || 
+- decelerate : giãm tốc >< accelerate : tăng tốc
+- accordingly : theo hoàn cảnh, tương ứng, theo trước đó || respectively : theo thứ tự đó
+- stale - adj : quá hạn, ôi thiu ||
+- annotate : dán nhãn, attach a metadata "@Override" on a method in code || annotation: nhãn ("@Override")
+- indefinitely : vô thời hạn || forever : mãi mãi
+- elapse : (tgian) trôi qua || the timeline : dòng tgian || an interval of time : khoảng tgian/kogian || expire : quá tgian
+- overwhelm ST : tràn ngập, gây quá tải ||
+- also known as ST == like ST == such as ST
+- prefix scan (in NoSQL): scanning all rows whose *row key* starts with a certain prefix.
+
+- look: nhìn || see: thấy || watch: xem || glance: liếc || stare: trừng || peep: ngấp ngé || wink: đá lông nheo || blink: chớp
+- aspect : khía cạnh || feature : đặc điểm || attibute : thuộc tính
+- criteria -pl (criterion) : tiêu chuẩn || condition : đk || standard : tiêu chuẩn chất lượng
+- route -v: dẩn dắt || divert : làm chệch hướng 
+- trigger : cò súng || trigger : kích hoạt
+- finite /fainait/ : hữu hạn chế || bounded : có ranh giới 
+- metric : phép đo 1 đơn vị đo lường || unit of work : đơn vị |
+- flash : vụt mất, xẹt qua || monotonical : đơn điệu
+- phone coverage : vùng phủ sóng || instantaneous : ngay tức thời, ko trì hoản
+- inherent (problems): cố hữu, căn cơ || stationary : cố định  
+- emit (result) : phát ra, tỏa ra || omit (st): bỏ sót || vomit : ói || discard: loại bỏ
+- stage : dàn dựng, tổ chức || perform : biểu diễn 
+- For redundancy : để dự phòng, để thay thế || For backup: đề sao lưu
+- overdrive : đề ba, tăng tốc || override : lấn áp, cưỡi lên, đè đầu || overwrite: viết đè lên
+- implement : triển khai || integrate : tích hợp
+- fine-grained control : kiểm soát tinh vi || in-flight data: dữ liệu đang truyền 
+- suite of possibilities : 1 bộ các khả năng. 
+- dedicate st (for doing st) : dành ra, để riêng ra. || tap into : become familiar to ST
+- thus far (formal) == so far (casual) || unified : hợp nhất
+- installment: phần GÓP phải trả mỗi tháng (để trả hết 1 khoảng nợ) trong 1 hay nhiều năm.
+- symmetric : đối xứng, cân đối.
+- outline : đề cương, nội dung chính || agenda : chương trình nghị sự || curriculum : chương trình học
+- take precedence == take control: tiếm quyền (ưu tiên).
+- credential - N : tín nhiệm thư. || conserve : bảo tồn, gìn giữ.
 - time-critical : đòi hỏi chính xác về time.
 - offload : hạ tải, tháo tải.
 - manner : cách thức || method : phương pháp
-- fuse - v : hợp nhất, kết hợp thành
+- fuse - v : hợp nhất, kết hợp thành || 
 - language-agnostic - adj : ko theo 1 ngôn ngữ nào. || agnostic: vô thần
 - dependencies - N : associated packages or libraries. || unless there is a dependecy involved : trừ phi có 1 sự lệ thuộc trong đó.
-- arbitrary - adj: tùy ý, bất kỳ. => arbitrary dependencies: (alternative for "any")
+- arbitrary - adj: tùy ý, bất kỳ. => arbitrary dependencies: (alternative for "any").
 
 - compelling - adj: >> convincing: thuyết phục
 - deplete : xã hết ra, giãm, cạn, vơi đi, to reduce in quantity. => depletion rate:  
@@ -63,6 +108,8 @@ Some key terms in BigQuery:
 - Beam: Apache Beam is *a unified data processing model for batch and streaming PIPELINES*. Beam does not process data by itself, it provides a powerful, portable API for defining data pipelines that get executed by *big data engines* like Apache Spark, Apache Flink, Google Cloud Dataflow, and Samza for data processing. It supports Python, Java, Go, and SQL, integrating seamlessly with TFX for ML and cloud services, making it ideal for cross-platform deployments. Its flexible API allows developers to write once and execute anywhere, optimizing ETL, AI, and real-time data processing. (*Note: Cloud Shell doesn't support Beam because of its weak resources*)
 
 - Hadoop: it is *an open-source Java framework for distributed storage and processing of large datasets*. It is designed to run on clusters of commodity hardware. Some libraries like *PySpark* allow you to write Hadoop jobs in Python.
+
+- runner: refers to the Cloud service backend that manages all the operations of that service, including controlling workers activity.
 
 1. **"Migration Task" from existing private data to Google Cloud**:
 
@@ -1223,7 +1270,7 @@ Some key terms in BigQuery:
         - **Portability API** is an inter-operability layer enables us to use the language of choice with the engine of choice.
 
     - **Dataflow Runner v2**: 
-        - Portability (*Apache Beam*) helps us build a data pipeline that will be uploaded and executed by various runners. Some users prefer to run their pipelines on-premises or in multi-cloud environments (a multi-serviced combinations of AWS, Cloud, and Azure). But in this section, the pipeline will be uploaded and executed onto Dataflow *by a runner* called **"Dataflow Runner"**. It is like interpreter between Portability and Dataflow instance.
+        - Portability (*Apache Beam*) helps us build a data pipeline that will be uploaded and executed by various runners. Some users prefer to run their pipelines on-premises or in multi-cloud environments (a multi-serviced combinations of AWS, Cloud, and Azure). But in this section, the pipeline will be uploaded and executed onto Dataflow *by a runner* called **"Dataflow Runner"**. It is like a translator between Portability and Dataflow instance.
 
         - Dataflow itself can operate alone without using Portability, for example "SQL-based data processing". However, we will lose most of useful features supported by Portability as mentioned in *"Beam Portability"*.
     
@@ -1236,13 +1283,13 @@ Some key terms in BigQuery:
         ```
 
     - **Container on-cloud**:
-        - The Beam SDK "runtime environement" can be containerized with Docker. (*Note: containerization is a way to isolate oneself from other runtime systems*). So, each user operation has its own separate environemnt in which to execute.
+        - The Beam SDK "runtime environment" can be containerized with Docker. (*Note: containerization is a way to isolate oneself from other runtime systems*). So, each user operation has its own separate environemnt in which to execute.
         - A default environment supported by SDKs can be further customized.
         - Because of *"available containers" in Cloud service*, we can benefit from **ahead-of-time installation** that includes **"arbitrary dependencies"**. Even **"further customization"** is possible.
 
         - To run your pipelines on custom containers, **Beam SDK v2.25** or later is required.
 
-        - To create a custom container image, specify the Beam SDK as a parent image staring with "FROM" as below in Dockerfile, then add your own customization.
+        - To create a custom container image, specify the Beam SDK as a parent image starting with "FROM" as below in Dockerfile, then add your own customization.
 
         ![custom-container-image-in-Dataflow]({{ 'assets/BQ-Geo-Viz/custom-container-image-in-Dataflow.jpg' | relative_url}}){: .toggled-image}
 
@@ -1256,8 +1303,8 @@ Some key terms in BigQuery:
 
     - **Cross-language Transform of Beam Portability**:
         - With *a language-agnostic representation* of pipelines and the possibility to specify the environment for each operaion, we are no longer limited to a single language in a given pipeline.
-        - **Portability** (*not its framework*) allows us to run multi-language pipelines that leverage the respective benefits of different languages. In specific, we can write a **Python** pipeline while using I/O connectors that were only available in **Java**. Or we can even use a Tensorflow extended block of code for a Machine Learning model in a Java pipeline.
-        -  The code below is a part of a **Python** streaming pipeline. The transform method "ReafFromKafka" is imported from the "apache_beam.io.kafka" module that is **Java-based**.
+        - **Portability** (*not its framework*) allows us to run a multi-language pipeline that leverage the respective benefits of different languages. In specific, we can write a **Python** pipeline while using I/O connectors that were only available in **Java**. Or we can even use a Tensorflow extended block of code for a Machine Learning model in a Java pipeline.
+        -  The code below is a part of a **Python** streaming pipeline. The transform method "ReadFromKafka" is imported from the "apache_beam.io.kafka" module that is **Java-based**.
 
         ![multi-language-pipeline]({{ 'assets/BQ-Geo-Viz/multi-language-pipeline.jpg' | relative_url}}){: .toggled-image}
 
@@ -1276,7 +1323,7 @@ Some key terms in BigQuery:
 
             - *Default Dataflow Shuffle* runs entirely on worker VMs and consumes worker CPUs, memory, and persistent disk storage. 
             
-            - *Service-based Dataflow Shuffle* is only for batch pipeline and runs entirely on Dataflow service backend using Cloud Storage instead of woker VMs. So, we'll benefit from a reduction in consumed CPU, memory and persistent disk storage resources on worker VMS, meaning worker nodes no longer hold any shuffled data, resulting in essential resilience where if one worker is broken accidentally, it will not cause the entire pipeline to fail with it. Service-based Shuffle certainly has better fault-tolerance.
+            - *Service-based Dataflow Shuffle* is only for batch pipeline and runs entirely on Dataflow service backend using Cloud Storage instead of woker VMs. So, we'll benefit from a reduction in consumed CPU, memory and persistent disk storage resources on worker VMs, meaning worker VMs no longer hold any shuffled data, resulting in essential resilience where if one worker is broken accidentally, it will not cause the entire pipeline to fail with it. Service-based Shuffle certainly has better fault-tolerance.
 
             - Another type is **Streaming Shuffle** implemented within the dataflow streaming engine.
 
@@ -1315,18 +1362,19 @@ Some key terms in BigQuery:
 
 
         1. **"User role" credential**: whether a person is allowed to submit the code is determined by the IAM role assigned to their account. Your account is represented by your email address. **Three user roles** can be assigned to each user. Each role is made up of a set of permissions:
+            
             - **Dataflow viewer role**: users, who is assigned with this role, can only view the Dataflow jobs, but cannot submit, update, or cancel jobs.
-            - **Dataflow developer role**: suitable for person whoes job is to manage the pipeline. Users, having this role, might view and cancel jobs that are currently running, but they cannot create/edit a new job beacause the role doesn't have permission to stage files into a bucket and view the Compute Engine Quota.
+            - **Dataflow developer role**: suitable for person whoes job is to manage the pipeline. Users, having this role, might only *view and cancel* jobs that are currently running, but they *cannot create/edit* a new job *beacause the role doesn't have permission to stage files into a storage bucket and view the Compute Engine Quota*.
             - **Dataflow admin role**: it is a minimum set of permissions that allow both creating and managing Dataflow jobs. Permissions include interacting with Dataflow jobs, staging files in an existing cloud storage bucket, and view the Compute Engine quota.
         
-        2. **Dataflow service account**: 
+        2. **"Dataflow service account" credential**: 
             - It is used to interact between projects such as checking project quota, creating worker instances, managing Dataflow jobs at run time:
             - When we run a Dataflow pipeline, Dataflow will use a service account ***"service-PROJECTNUMBER@dataflow-service-producer-prod.iam.gserviceaccount.com"***, which is automatically created when Dataflow API is enabled. This service account is assigned the *"Dataflow service agent role"*, which grants necessary permissions to run a Dataflow job.
             - In the following diagram, the interactions of *Dataflow service account* is at the "HERE" on the medium right between the project and Dataflow
 
             ![dataflow-service-account-interaction]({{ 'assets/BQ-Geo-Viz/dataflow-service-account-interaction.jpg' | relative_url}}){: .toggled-image}
 
-        3. *Controller service account*:
+        3. **"Controller service account" credential**:
             - It is assigned to the Compute Engine VMs to run a Dataflow pipeline.
             - By default, worker nodes use the project's *"Compute Engine default Service Account"* as the "*Controller Service Account*" in pattern ***PROJECTNUMBER-compute@developer.gserviceaccount.com***, which is automatically created when we enable the Compute Engine API.
 
@@ -1336,3 +1384,490 @@ Some key terms in BigQuery:
 
             ![controller-service-account-interaction]({{ 'assets/BQ-Geo-Viz/controller-service-account-interaction.jpg' | relative_url}}){: .toggled-image}
 
+    - **Quotas**: what does it mean?
+        - **CPU quota** is the total number of *virtual CPUs* across all of *your VM instances* in a region or zone. Any Google Cloud service that creates a Compute Engine VM as Dataproc, AI notebooks, or Dataflow consumes this CPU quota. "CPU quota" can seen in the "IAM quota page".So, what it the CPU your dataflow job needs over the CPU quota? => error *"CPU quota has been exceeded"* will be reported.
+            - n1-standard-1 (VM type) : 1 VM has only one CPU.
+            - n1-standard-8 (VM type) : 1 VM has 8 CPUs.
+
+        - **IP quota**: refers to the total number of *in-use IP addresses* in each region. This *IP quota* limits the number of VMs that can be launched with an external(public) IP address for each region in your project. The *IP quota* is shared across all Google Cloud products that create VMs with external IP addresses (public IP):
+            - There are 2 types IP, *internal IP* and *external IPs*. The first is for internal communication within Google Cloud. The second is to access external services outside Google Cloud.
+            - *By default, when launching a Dataflow job, the VM is assigned an external IP address*. This is required if the job needs to access external APIs or services outside Google Cloud. However, if the Dataflow job doesn't require external services, we can manually *re-configure* it to use only internal IPs. This helps save costs and conserve the "IP quota".
+
+        - **Persistent Disk quota (PD quota)**: we can choose the disk type (HDD or SDD). By default, it will be HDD disk. 
+            
+            - To select SDD, use the flag *--worker_disk_type* at CLI in Python:
+        
+            ```sql
+            python3 -m apache_beam.xyz \
+            --worker_disk_type compute.googleapis.com/projects/$PROJECT/zones/$ZONE/diskTypes/pd-ssd (SSD) 
+
+            IN JAVA: gradle clean execute -DmainClass=org.apache.beam.xyz \ 
+            --workerDiskType=compute.googleapis.com/projects/$PROJECT/zones/$ZONE/diskTypes/pd-standard (HDD) 
+            ```
+            
+            - *For batch pipeline*: when we lauch a pipeline, the ratio VM to PD is 1:1 (*1 to 1*)
+            - For batch pipeline: for jobs running Shuffle on worker VMs, the default size of each persistent disk (PD) is 250GB. 
+            - For batch pipeline: for service-based Shuffle, the default PD size is only 25GB (*recall that service-base Shuffle moves the shuffling operations out of worker VMs to the Dataflow backend service, which is why the attached PD size is smaller*).
+
+            - We can use ***disk_size_gb** flag* in Python to overwrite the default persistent disk (PD) for batch pipelines. (*diskSizeGb flag in Java*)
+
+            - **For streaming Pipeline**: PD are allocated from *a fixed pool*. Each worker must have at least one attached PD, with a maximum limit is 15 PDs per worker VM. Similar to "batch jobs", *"streaming jobs"* can be run either on worker VMs or utilize the Dataflow Streaming Engine. When we run on the Dataflow Streaming Engine, which offloads some operations from worker VMs into the Dataflow's service backend. For the streaming case, the default PD size on each worker VM is 400GB and on Streaming Engine is 30GB. The flag is used to overwrite it is the same as batch pipeline.
+            
+            - *It's important to note that* the amount of PDs allocated in a streaming pipeline can auto-scale to the value set in the flag ***max_num_workers***. This flag is required when running on the worker VMs and its value cannot exceed 1000. For the Dataflow Streaming Engine, the flag is optional with default value of 100.
+
+23. **SECURITY**: "How many ways to enhance security while running Dataflow? or What is security?" There are 4 security features in this module:
+
+    1. **Data Locality**: it ensures *all data and metadata stay in one region*. Because it affects *who can access the data, where it is physically stored, and what laws govern its protection*.
+
+        - As we discussed in the IAM module, the Dataflow Service Account communicates between our project resources and the Dataflow backend. The *Dataflow backend* exists in a few regions across the globe and ***can be different*** from the region where our worker VMs run.
+        
+        - What metadata is transfered between our project and the "*regional endpoint*" (*the Dataflow backend*). Worker VMs, which take actions of some "*health checks*", request a "*work item*" and the regional endpoint (*backend region*) responds with a *"work item"*, the "*worker item status*" and "*autoscaling events*". (*item = task*)"
+        
+        - *Unexpected events*" are also transfered to the "*regional endpoint" like *unhandled exceptions in user code, jobs that failed because of lacking permissions, worker item failures, and errors from another related system such as Compute Engine*. These items are available and visible in the Dataflow UI along with other info such as *pipeline parameter values*, *job name*, *job ID* and *start time*.
+
+        - **Regional endpoint**: *"us-central1" is a regional endpoint*. Why do we have to specify a *reginal endpoint*?
+
+            - Definition: A regional endpoint is a service-specific URL that directs requests to a specific geographic region in a cloud provider's infrastructure. It ensures that workloads are executed within a designated region for lower latency, network transfer cost, compliance, and high availability.
+
+            - Firstly to support "*project security*" and "*compliance needs*". For ex, in some countries, a regional regulatory rule mandates that *data of banking systems* does not leave the country of operation. This rule can be met with a specific *"regional endpoint"*.
+            
+            - **Network egress** will not be charged if our pipeline sources, syncs, and staging locations are *all in the same region*.
+
+        - **--region VS --worker_zone VS --worker_region**: if we have no *"zone preference"*, just specify the flag *"--region"* only. In this case, the regional endpoint will automatically select the best zone based on *"available capacity"*. Otherwise, use *--worker_zone $WORKER_ZONE* to specify a zone.
+
+        ```sql
+        python3 -m apache_beam.xyz --region $REGION
+        gradle clean execute -DmainClass=org.apache.beam.xyz --region=$REGION
+        ```
+        - Note: in case, we want worker processing to occur in a region that does not have "*a Dataflow regional endpoint*", use both --region and --worker_region flags. the region flag is to specify the supported endpoint, that is *closest to the region* where the workers run in, and --worker_region for the region where the workers run in. This case can happen because sometimes data is stored in a different region that does not have a Dataflow regional endpoint (*so we wanna set the --region close to it*) OR the default region has limited resources or quota.
+
+        - Keep in mind: Even if no regional endpoint exists in the region we want our data to be stored, only metadata is transfered, the application data remains in that region. 
+
+
+
+    2. **Shared VPC** (*virtual private cloud = a network*): Another feature we can use with Dataflow is "shared VPC", which provides *routing, firewall rules, and connectivity options*.
+        
+        - **Host project**: Dataflow can run in networks that are either in the same project or in a separate project called (*"the host project"*).
+        
+        - When a network exists in a host project, say the networking setup is *"shared VPC"*.
+        
+        - *"A Shared VPC"* let organization admins delegate administrative responsibilities (*such as creating and managing instances*) to others while maintaining centralized control over network resources like *subnets, routes and firewalls*.
+
+        - **When we should set "same VPC"?**:
+            - Definition: *A VPC* can span(extend) multiple regions, allowing resources in different locations to communicate. *A Subnet* is associated to only one region within the network.
+            - A custom network refers to manually configure some regions, and some subnets.
+            - When setting the number of VMs to use, remember to have enough IP addresses available. For ex, we have a subnet "/29" without any VMs running on it, the maximum number of Dataflow workers that we can launch is only 4. We should choose subnet "/27" with 28 availabe IPs in case of heavy-load Dataflow jobs. (*in following image*).
+
+            ![subnet-IP-number]({{ 'assets/BQ-Geo-Viz/subnet-IP-number.jpg' | relative_url}}){: .toggled-image}
+
+            - Note: the Dataflow service account needs *"Compute Network User"* role in the host project (*either project-level or subnet-level*).
+
+            - Use --network or --subnetwork flag.
+
+            ```sql
+            ## project_level "Compute Network User"
+            python3 -m apache.beam.xyz ... --network default 
+
+            ## subnet_level "Compute Network User"
+            gradle clear execute -DmainClass=org.apache.beam.xyz \
+            --subnetwork=https:.../compute/v1/projects/$PROJECT_ID/regions/$REGION/subnetworks/$SUBNET
+            ```
+
+            ![subnet-flag]({{ 'assets/BQ-Geo-Viz/subnet-flag.jpg' | relative_url}}){: .toggled-image}
+
+    3. **Private IPs**: Another security we can use is to *disable external IP usage*, blocking users to access the internet.
+        - Dataflow service can assign workers with both public and private IP addresses. When we turn off public IP addresses, the Dataflow pipelines access resources only in the following places:
+            
+            - *Another instance* in the same VPC network.
+            - A shared VPC network.
+            - A network with VPC network peering enabled.
+
+        - If our pipeline is communicating with other Google Services and APIs and is in a custom network, the Private Google Access must be enabled for the subnetwork your workers will be launched. If the Private Google Access is disabled and there is no other way of reaching the internet *(like Cloud NAT)*, VM instances can no longer reach Google services or APIs.
+
+        - To user private IPs only, we have to add 2 flags: --network or --subnetwork, and --no_use_public_ips (*use internal(private) IPs only*)
+
+        ```sql
+        python3 -m apache.beam.xyz --subnetwork regions/$REGION/subnetworks/$SUBNETWORK --no_use_public_ips
+        
+        graddle clean execute --DmainClass=org.apache.beam.xyz \  --subnetwork=regions/$REGION/subnetworks/$SUBNETWORK \ 
+        --usePublicIps=false
+        ```
+
+    4. **CMEK** stands for *Customer Managed Enscrytion Key*
+        - Where data is stored:
+            - *Cloud storage bucket*: is used to store binary files containing pipeline code. It is also used a staging areas to temporarily store export or import data between different services.
+            - **Persistent Disk** (*attched at workers*): used for disk-based(*default*) shuffle and streaming state storage.
+
+            - If a batch job is using *Dataflow shuffle* (*service-based shuffle*), the backend stores the "batch pipeline state" during execution. This means ***intermediate results, shuffle data, and execution progress*** are stored outside of worker nodes.
+
+            - If a job is using *Dataflow Streaming Engine*, instead of workers, the backend will store the *streaming pipeline state* during execution. *Dataflow Streaming Engine* moves ***streaming state management and shuffle operations*** to a Dataflow backend, rather than relying on *worker VMs' memory or disk*.
+        
+        - By default, when data is stored in any of those above locations, Google Cloud automatically encrypts all data at rest using *Google-managed keys*. CMEK gives us control over this encryption by allowing us to use our own keys stored in *Google Cloud KMS* (*keys managenent sys*). Because CMEK is supported across multiple Cloud storage services, we can use CMEK in any of data storage locations mentioned.
+
+        - When a pipeline starts, data is loaded into workers memory. *Data keys* (*ID, timestamp*) used in *key-based operations*, such windowing, grouping and joining, and those keys, which were encrypted using CMEK, will be decrypted before being used in the pipeline execution for functioning correctly. For additional layer of secutiry, we can hash or transform the keys before encryption.
+         
+        - Job metadata is ecrypted with Google encryption. Job metadata includes the following:
+            - User data
+            - Job name
+            - Job parameter values
+            - Pipeline graphs
+            - System-generated data like IP addresses and job IDs
+
+        - Using CMEK requires both the "Dataflow service account" and the "Controller Agent Service account" to have the *Cloud KMS Cryptokey Encrypter/Decrypter role*.
+
+        - We need 2 flags to use CMEK: *--temp_location* & *--dataflow_kms_key*.
+        
+        ```sql
+        python3 -m apache.beam.xyz \
+        --tem_location gs://$BUCKET/tmp \
+        --dataflow_kms_key projects/$PROJECT/locations/$REGION/keyRings/$KEY_RING/cryptoKeys/$KEY
+
+        graddle clean execute -DmainClass=org.apache.beam.xyz \
+        --temLocation=gs://$BUCKET/tmp \
+        --dataflowKmsKey=projects/$PROJECT/locations/$REGION/keyRings/$KEY_RING/cryptoKeys/$KEY
+        ```
+
+        - Note: *when we use CMEK for a Dataflow job, the region for our key and the region where Dataflow job runs must be the same. Global or multi-regional keys will not work. The bucket selected to temporarily store data must also be in the same region as the key.*
+
+        
+
+24. **Develop Dataflow Pipelines**: 
+    - There are 3 ways to launch a Dataflow pipeline:
+        1. **Launching a template** using Create Job Wizard in Cloud Console. No need to write code with this option. All we have to do is to select a template from a drop-down menu, fill out a few fields, and the job will be deployed. We'll cover this workflow briefly in the **Building Batch Pipelines** course.
+        
+        2. **Authoring a pipeline using the Apache Beam SDK and launching from your development environment.**: This can mean writing a pipeline using Java SDK in an interactive development environment like IntelliJ, OR using a read-eval-print-loop workflow with the Python SDK using the Jupiter notebook. We introduced this building blocks of the Apache Beam SDK in the data engineering course.  
+
+        3. **Writing a SQL statement and launching it in the Dataflow UI.** Dataflow SQL lets us launch Dataflow job using the familiar semantics of SQL, and includes a streaming extension that allows us to express logic for handling data in real time.
+
+    - **Agenda:**
+    - ***Beam basics***: How to apply the Apache Beam to write our own pipelines
+        - The genius of Beam is that provides instructions that unify traditional batch programming concepts and stream processing concepts. Unifying batch programming and stream processing is a big innovation.
+        - The 4 main concepts : PTransforms, PCollections, Pipeline, Runners.
+            
+            - **PCollections**: Data is divided and held in a distributed data instruction (*called a PCollection*) by Dataflow runner. Firstly, reading data from the source is also an operation of PTransforms and the ouputs are PCollections. Any change that happens in a pipeline will receive a PCollection as input and create a PCollection as output. Incoming PCollection doesn't change anything.
+
+            - **PTransform**: actions are contained in a PTransform. It handles data transformation. Data in P Collections is passed along the pipeline from one PTransform to another PTransform. So, each PTransform results in a new copy (*a new PCollection*), that means the input data remains unchanged, and no need sharing the input data between workers(*in parallel*). So, it speeds up distributed processing since *synchronization* and *race conditions* are eliminated.
+
+            - **Pipeline Runners**: are analogous to execution backends like Apache Spark or Dataflow. (*note: Beam has not an execution backend itself.*)
+
+        - ***Utility Transform***: there are many available **building blocks** (transforms = methods) in Apache Beam. By combining these blocks we can build a complex processing logics that is applied at scale by Dataflow.
+            - **ParDo** (parallel-Do): let us apply a function to one of elements of a PCollection, "GroupByKey" or "Combine" are similar.  
+                
+                - "*GroupByKey()*" puts all elements with the same key together in the same worker. If one group is very large or data is very skewed, we have *a so-called hotkey*, we have to apply "commutative and assosiative operations" (*quá trình giao hoán và kết hợp*) to create (*a composite key*) to make data less skewed. Or, we can use "Combine" to deal with "skewed data".
+                
+                - "*Combine()*": same result as GroupByKey but its transformation is different. Instead of sending all elements with the same key together in the same worker, "Combine" *aggregates locally* before shuffling, hence less data needs to be shuffled, reducing memory and network load. For very large groups, "Combine" will have much better performance than "GroupByKey". 
+
+                - "*CoGroupByKey()*": let us join 2 PCollections by a common key. We can create left, right, outer join, inner join and so on using "CoGroupByKey".
+
+                - *"Flatten()"* can receive 1 or 2 PCollections of the same datatype as inputs and fuses them together. It's like a concatenation. Please do not confuse "Flatten" with "join" or "CoGroupByKey". When 2 PCollections doesn't contain the same datatype, we cannot use "Flatten". 
+
+                - *"Partition"*: opposite to "Flatten", it divides a PCollection into several PCollections using a function to decide how to split data.
+            
+            - **Friends of ParDo**:
+                - Recall that only "ParDo" we can have "side inputs" or "side outputs".
+                - We don't always need to use ParDo, when we just need filter, just map or flatmap the elements of a PCollection or add keys, extract keys or values, we can use other high-level and more convenient transforms shown in the following table.
+
+                ![ParDo-building-block]({{ 'assets/dataflow-2/ParDo-building-block.jpg' | relative_url}}){: .toggled-image}
+
+            - **DoFn() Life cycle**: Don't forget that "DoFn" also offers us very powerful possibilities. Let's see them in more details:
+                
+                - In Apache Beam, data processing operates on bundles of elements. A single bundle may contain several different keys. PCollections are ***automatically and arbitrarily*** divided into bundles, and these bundles are dynamically selected by workers. This design enables efficient parallel processing, and allows workers to retry anytime if there is a failure. For example, "streaming runners" may prefer to process and commit small bundles to reduce latency, while "batch runners" may prefer larger bundles to optimize throughput.
+
+                ![DoFn-each-bundle]({{ 'assets/dataflow-2/DoFn-each-bundle.jpg' | relative_url}}){: .toggled-image}
+
+                - Method "DoFn" has several methods that can be overdriven to control how our code interacts with each data bundles. The main method is "def process" where elements are transformed. Other methods are called at different moment during the lifecycle of the method *"DoFn"*. These methods in combination with "side-input" and "side-output" open a myriad of possibilities for writing the *"DoFn"* funcion.
+
+                ![DoFn-life-cycle-methods]({{ 'assets/dataflow-2/DoFn-life-cycle-methods.jpg' | relative_url}}){: .toggled-image}
+
+                - **State variables**: "State variables" are associated with individual keys in a streaming pipeline. These variables persist across multiple bundles and are updated after each processing step, ensuring correct stateful operations. 
+
+                ![details-of-DoFn]({{ 'assets/dataflow-2/details-of-DoFn.jpg' | relative_url}}){: .toggled-image}
+
+                - [Beam tour in Python](https://tour.beam.apache.org/tour/python/core-transforms/map/co-group-by-key), and [Beam college](https://beamcollege.dev/about/) with certificate, [Aggregation transforms](https://beam.apache.org/documentation/transforms/python/aggregation/combineperkey/), [exercise](https://github.com/GoogleCloudPlatform/training-data-analyst/tree/master/quests/dataflow_python/3_Batch_Analytics/solution), [presentation]()
+
+    - **Windows, Watermarks, Triggers**: Streaming with Dataflow. 
+        - There are 3 main concepts:
+            1. How to group data in windows.
+            2. The importance of watermarks to know when a window is ready to produce results.
+            3. How to control WHEN and how many TIMES the window will emit output.
+
+        - **Windows**
+            - Processing data in batch = batch pipelines are often run on schedule, for instance, once a day.
+            - ***The batches***: are artificial split to simplify the processing of data.
+            - If your data is *not stationary*, Beam will let us to handle it as a stream of continuous data. However, dealing with a stream is not a matter of continuity and making split to process data, there are other *inherent problems* to processing data as streaming such as "*out of order in streams*".
+
+            - **Windowing** divides data into time-based, finite chunk. A window is just a way to split data in groups to some transformation with the data.
+
+            - Note: Some aggregations like *GroupByKey* and *Combiners* require "*windowing*". But we can also do aggregation with *"state and timers"* without using *windowing*.
+
+            - **Event-time and processing-time**: are 2 *dimensions of time* in a streaming pipeline.
+                - *Processing time*: Dataflow assign a current timestamp to every new message.
+                - *Event time*: the timestamp of the message set in the original source when the message was produced. This opens possibilities of doing complex and sophisticated calculations in streaming pipelines even in cases of out-of-order delivery.
+
+            - **3 different types of window**: fixed, sliding, session. (*custom window is optional*)
+                1. *Fixed window*: data is divided into tiny slices (*5min for each or 1 hour for each*), so there is no *overlapping intervals* between windows.
+                2. *Sliding time window*: map overlap, for example, a window may capture 60s source of data but a new window will start every 30s.
+                3. *session window*: it capture bars of each activity. it is defined by *minimum gap duration* and triggered by another element. It's data-dependent not time-dependent, we need to look at it to figure it out.    
+
+            ![types-of-window]({{ 'assets/dataflow-2/types-of-window.jpg' | relative_url}}){: .toggled-image}
+
+        - **Watermarks:** 
+            - What is late data? it's very intuitive with fixed windows or sliding windows. But if windowing is based on event-time, it might not be obvious anymore.
+            - How long will we wait for late data? This is where the concept of watermark becomes useful.
+            - Even when we receive messages in perfect order, when they are processed in a distributed system, different messages will take different processing times and that order will be lost.
+
+            - How can we assure that no further or other message will be received?
+
+            - The relationship between the processing timestamp and event timestamp will define the watermark. *The processing timestamp is the moment the message arrives at the pipeline*. Ideally, both of the times are equal with no delays, however this rarely happens. There are always latencies and so on. *Watermark* is an added extra time which Dataflow will use to wait and define whether a message is later or not. Any messages that arrive later than "watermark" is set "later". 
+
+            ![watermark-with-process-time-and-event-time]({{ 'assets/dataflow-2/watermark-with-process-time-and-event-time.jpg' | relative_url}}){: .toggled-image}
+
+            - Watermark helps to decide when a window is complete. In other words, Dataflow will wait until the watermark is trespass to close the window. We need to decide how to do with these later messages, by default they are dropped.
+
+            - **Data freshness - (Latency)** is the difference between the current real-world time and the arriving timestamp of the latest message waiting to be processed. The "*watermark*" is actually the arriving timestamp of the oldest message that has not been processed yet. So, *watermark* is a point of time. 
+
+            - **System Lag - (Sys Latency)**: a period of time the system takes to fully process a message. If in some cases the system need more time process a message, the system lag (latency) will increase. 
+            
+            - If *latency* increases monotonically but the *sys latency* keeps unchanged. That means, there are more messages arriving at the pipeline, but the system still can process at the same space, so *latency* does not increase the *system latency*. At this time, Auto-scaling will add workers to process the waiting messages.
+
+            ![latency-and-system-latency]({{ 'assets/dataflow-2/latency-and-system-latency.jpg' | relative_url}}){: .toggled-image}
+
+
+
+
+
+
+        - **Triggers:** used to check some results of processing early or whether late data is under control with custom triggers like following: (*we cannot let the processing running alone, we have to check results at runtime so we need triggers*)
+            - Triggers can work on *event-time, processing time, data-driven, or a composition of them*. By default, we have a afterwatermark trigger that is an event-time trigger.
+
+            - Note: triggers also help to check late data for our additional process.
+
+            ![triggers]({{ 'assets/dataflow-2/triggers.jpg' | relative_url}}){: .toggled-image}
+
+            - **Accumulation mode**: if we trigger a window several times, (*how apache-beam repeats calculation*), we need specify the desired accumulation mode. There are 2 types of mode:
+                - *ACCUMULATE mode*: apache-beam will repeat calculation with all the data included in a window regardless of number of triggers we made to the window. 
+                - *DISCARD mode*: the calculation only include the new data (*since the latest trigger*) that has never been included in any calculation to previous triggers.
+
+                ![modes-of-triggers-in-python]({{ 'assets/dataflow-2/modes-of-triggers-in-python.jpg' | relative_url}}){: .toggled-image}
+
+            
+
+    - **Sources(E) and Sinks(L) (in th ETL pattern)**: *Mr.Wei Hsia - Customer Engineer*: Below are common sources or sinks we can meet on Cloud:
+        
+        0. *Sources and Sinks (in Beam)* they are basically an input and an output in a Dataflow pipeline. *A source* appears at the beginning and *a sink* is a PTransform that performs a write to the specified destination. Sink will emit a ***PDone value*** to signify the completion of the transform.
+
+            - **A bounded source** == a chunk == a bundle = a unit of work (*bundles can even split into smaller chunks for better performance by runners.*)
+                - Because these bounded sources are finite, Dataflow can provide an estimate of number of bytes to be processed, even a start point end an end point of a process.
+            - **An unbounded source** is associated with streaming.
+                - **Checkpoints**: to bookmark where data has been read to avoid reading the same data.
+                - **Watermark**: is *a point of time* to define when a window is complete.
+
+        1. *TextIO & FileIO:* 
+            - TextIO: *both read and write*
+                - For a single file: ReadFromText(file_name)
+                - For a list of files: 
+
+                    ```sql
+                        "create" >> Create([file1, file2])
+                        "read" >> ReadAllFromText() 
+
+                        "write" >> WriteToText(known_args.output, coder=JsonCoder())
+                    ```
+
+            - FileIO:
+                - Use a file pattern or regex to filter matched files: 
+                    
+                    ```sql
+                    with beam.Pipeline() as p: 
+                        readable_files = (
+                            p
+                            | fileio.MatchFiles('hdfs://path/to/*.txt')
+                            | fileio.ReadMatches()
+                            | beam.Reshuffle()
+                        )
+
+                        contents = (
+                            readable_files 
+                            | beam.Map(lambda x: (x.metadata.path, x.read_utf8()))
+                        )
+                    ```
+                
+                - FileIO is even able to monitor continuously a location for a pattern. For example, it can check new coming data in a location every 30s for an hour.
+
+                ![FileIO-read-and-monitor]({{ 'assets/dataflow-2/FileIO-read-and-monitor.jpg' | relative_url}}){: .toggled-image}
+
+                -  FileIO can process files as they arrive. Below methods is used to read a stream of files (*streaming data*)
+                    ```sql
+                    with beam.Pipeline() as p:
+                        context = (
+                            p
+                            | beam.io.ReadFromPubSub(...)
+                            | ReadAllFromText()
+                        )
+                    ```
+
+                - We also have *ContextualTextIO.read()* for ***advanced usage*** like dealing with windowed writes, with file-based triggers, side inputs, stateful file writes, or context-aware destinations. ()
+
+                - We can even set *a dynamic sink* with FileIO:
+                    ```sql
+                      p 
+                      | beam.io.fileio.WriteToFiles(
+                          path='x/y',
+                          desination=lambda record: 'avro' if record['type']=='A' else 'csv',
+                          sink=lambda dest: AvroSink() if dest=='avro' else CsvSink(), file_naming=beam.io.fileio.destination_prefix_naming()    
+                    )
+
+                    ```
+
+
+        2. *BigQueryIO:* is a useful connector for Bigquery. 
+            - ***BigQuery Storage API*** supports Dataflow pipelines with parallel-reading on BigQuery but only Java SDK supports it. Python SDK does not natively support but it has a package "bigquery_storage" to support it we can use it separately like fetching first, then put results into pipeline later like below.
+
+            ```sql
+                from google.cloud import bigquery_storage
+                import apache_beam as beam
+
+                def fetch_data():
+                    ## use BigQuery Storage API here
+                    return list_of_rows  ## Convert to a format Beam can process
+
+                (p | beam.Create(fetch_data()) | <further processing>)
+
+            ```
+
+            - Without Storage API, we can read tables directly with *beam.io.ReadFromBigQuery()* like below:
+
+            ```sql
+                (p 
+                | 'QueryTableStdSQL' >> beam.io.ReadFromBigQuery(
+                    query='SELECT max_temperature FROM' \
+                    '`clouddataflow-readonly.samples.weather_stations`',
+                    use_standard_sql=True)
+                | 'Reading' >> beam.Map(lambda elem: elem['max_temperature']))
+            ```
+
+            - BigQueryIO also supports writing with *dynamic destinations* (*multi-destination*) even with *various schemas* as well. We can define a separate function to dynamically return the destination we would like data routed to like following image:
+
+            ![BigQueryIO-multi-destination-write]({{ 'assets/dataflow-2/BigQueryIO-multi-destination-write.jpg' | relative_url}}){: .toggled-image}
+
+
+        3. *PubsubIO:* Dataflow and Pubsub can go hand in hand, they can connect via *PubsubIO*. 
+            - PubsubIO has ability to pass a record ID that helps *de-duplication* in pipelines by comparing IDs.
+            
+            - ***Reading***: While reading, PubsubIO auto *creates a subscription* when Dataflow job is deployed and *destroys the subscription* upon the termination of the job. But we can keep the subscription if necessary like below:
+
+            ```sql
+                beam.io.ReadFromPubSub(topic=ABC)  --auto delete as job terminated
+                
+                beam.io.ReadFromPubSub(subscription='project/')  --subscription remains
+                beam.io.ReadFromPubSub.fromSubscription('project/')  --subscription remains
+            ```
+
+            - **Capture failure == PubsubIO write** if a message was 5 times failed while sending, we could capture and put them in a bucket. The configuration is below, first we define subscription with *--max-delivery-attempts=5* and then use "PubsubIO" to write failed messages to the *dead-letter-topic* bucket
+
+            ```sql
+            gcloud pubsub subscriptions create my-subscription \
+            --topic=my-topic \
+            --dead-letter-topic=projects/YOUR_PROJECT/topics/my-dead-letter-topic \
+            --max-delivery-attempts=5
+
+
+            messages = (
+                p | "ReadFromPubSub" >> beam.io.ReadFromPubSub(subscription="projects/YOUR_PROJECT/subscriptions/my-subscription")
+            )
+
+            processed = (
+                messages | "ProcessMessages" >> beam.ParDo(process_message).with_outputs("failed", main="main")
+            )
+
+            processed.failed | "WriteFailedMessages" >> beam.io.WriteToPubSub("projects/YOUR_PROJECT/topics/my-dead-letter-topic")
+
+            ```
+
+        4. *KafkaIO:*: is *an unbounded source* used for streaming. KafkaIO is built in Java but beam still has come cross-language transform like ReadFromKafka in Python.
+
+        5. *BigTableIO:*: BigTable is a NoSQL database service by Google. Both BigTable and Dataflow are highly scalable and they communicate by BigTableIO (*read and write*).
+            - **Row Filter**: able to do *a RowFilter* using row key.
+            - **Prefix Scan**: like any NoSQL database, it is able to do *prefix scan* using *row-key* as *index*.
+            - **Wait.on()**: force the pipeline runner to wait for the writing to complete before other transforms, (only in Java). *Python SDK handles this waiting automatically*.
+         
+        6. *AvroIO:* ".avro" is a file-format that is popular for big data. AvroIO enable us to read/write this file type. In Java, all "avro files" are *self-describing* with schema files under "avsc" format (schema_file.avsc). Nod need for Python 
+            
+            ```sql
+            (
+            pipeline
+            | 'ReadFromAvro' >> ReadFromAvro(input_avro_path)  #This reads the Avro files
+            | 'ProcessAvroData' >> beam.Map(process_avro_record)  
+            | 'WriteToJson' >> beam.io.WriteToText(output_path))
+            
+            ```
+
+
+        7. *Splittable DoFn:* brings Beam closer to fruition (*golden time*). The core key is *splittability of a big job which we cannot process in parallel like reading a big file*. It allows to build *custom sources (reading)* with ease as below:
+            - *def initial_restriction*, shown in following image, will create a *restriction* defining a *complete unit of work*. 
+            - a *tracker* then is created to monitor this new restriction by def *OffsetRestrictionTracker*
+            - Details in [here](https://beam.apache.org/documentation/programming-guide/#splittable-dofns)
+
+
+    - **Schemas**: a way to express data structures in pipelines.
+        - **byte string** : only 256 *ASCII characters* in the form of digit 0-255 || **string or plain text** : all kinds of human-readable characters in format of *unicode*. *String* can be encoded to *byte string* with ***my_byte_str.encode("utf-8")***. 
+
+        - *UTF-8* is not *a character set*, it’s an *encoding*, it tells how to store Unicode characters using *1 to 4 bytes*, including over 1 millon encodings (characters) from Greek, math, chinese, vietnamese, symbols,...
+            
+            - **Pipeline records**: one record in one element in PCollections.
+            - *Why we need schemas in beam pipeline*:
+                - Naming a new fields as appearing.
+                - Type safety.
+                - As writing into a sink like BigQuery or BigTable.
+            - PCollection must have a schema attached to it. One PCollection only has one schema.
+
+    - **State and Timers (fine-grained control):** a powerfull tool we can use in a *DoFn* to implement *stateful transformations*:
+        
+        - **State API**: Pardo is normally *a stateless transform* that cannot aggregate elements like *GroupByKey or CombinePerKey*. Pardo can only do mapping, map element to a function and yield a list. But is it changeable?
+        Apache Beam adds this *stateful feature* to Pardo, which is then called *stateful Pardo*, by reusing *stateful variables*. This means Pardo can do aggregations.
+
+        - *Why aggregations refers to state?* it's because state is a memory of streaming, and *total number (or aggregation)* needs to be saved and updated continuously in memory while streaming. So, aggregation represents a state of streaming.
+
+        - In a pipeline, state is also maintained *per window* and *local to each transform*. In other words, two different keys processed in 2 different workers are not able to share a common state but elements in the same key can share a common state.
+
+        - We can see 2 state variables in the following example. ParDo only stop entirely when the whole state are clear. (the purpose of this state here is that we do *batch-by-batch calls (after num-elements reachs a MAX)* instead of *element-by-element calls* to avoid overwhelming external services, *that is omitted for simplicity*)
+
+        ![state-vars-in-DoFn-or-ParDo]({{ 'assets/dataflow-2/state-vars-in-DoFn-or-ParDo.jpg' | relative_url}}){: .toggled-image}
+
+        - **What if the state does not reach the MAX after the final message? => refer to the Timers**
+
+        - **Timers API**: *combines with State API* to have more perfect stateful transformations.
+            - Ensure a state is cleared at regular intervals of time. As with the case of windows and triggers, we can define *TIMERS* either in event-time or processing-time.
+            
+            - *Event-time timers*: depends on the watermark value, for instance, invoke a callback when the watermark reaches some threshold. Event-time timers are influenced by *the rate of the progress of input data*.
+
+            - *Processing-time timers*: depends on the clock of worker, not on any kinds of timestamp included on a message, invoke a callback after a certain amount of time *has elapsed*. Processing-time timer will expires regardless of *the progress of the input data*. The timers will clear at regular intervals.
+
+            - If a ParDo is processing the last message of the last bundle, it's likely that the buffer will not reach the threshold set in the code or the message might be coming very slowly, in both cases we also want to produce results rather than waiting very a long time for the message to show up. Timer will help with this.
+
+            - An example of **event-time timer** in the following example:
+
+            ![timer-expiry-on-PaDo]({{ 'assets/dataflow-2/timer-expiry-on-PaDo.jpg' | relative_url}}){: .toggled-image}
+
+        - **Types of state**: [state_examples](https://beam.apache.org/documentation/programming-guide/#state-and-timers)
+            1. Value: single value 
+            2. Bag: a list of values
+            3. Combining: a kind of aggregation like "sum", "count"
+            4. Map: a pair of key + value
+            5. Set: only unique items
+
+    - **Best Practices**:
+        1. Beam Schemas:
+        2. Handling erroneous data
+        3. Error handling
+        4. AutoValue code generator
+        5. Json data handling
+        6. Utilize DoFn lifecycle
+        7. Pipeline optimizations
+
+    - SQL and DataFrames(having a similar interface of Pandas).
+    - Beam Notebooks.
+    - Course Summery.
+
+
+        

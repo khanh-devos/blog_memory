@@ -59,6 +59,10 @@ category: tool
     6.1. *zcat file.csv.gz | head -n 10* : read 10 lines of a zip.
     6.2. *gunzip file.csv.gz* : unzip a zip.
 
+    7. *cat /proc/cpuinfo | grep "model name"*: check CPU power at Cloud shell
+    7.1. *top -bn1 | grep "Cpu(s)"*: check CPU usage currently.
+
+    8. free -h: check memory
 
 2. **Cloud Storage** commands in Cloud Shell:
     
@@ -82,7 +86,19 @@ category: tool
     9.1 *gcloud pubsub subscriptions create --topic sandiego mySub1* : create a new pub/sub subscription for topic "sandiego".
     9.2 *gcloud pubsub topics publish sandiego --message "hello"* : send a message
     9.3 *gcloud pubsub subscriptions pull --auto-ack mySub1* : pull a message.
+    
+    10. *gcloud dataflow jobs run job2 ... --disable-public-ips*: net no use public IPs (external IP) => need enable PGA
+    10.1 *python3 -m apache_beam.examples ... --no_use_public_ips*: also no use public IPs as running a python script.
 
+    11. Example of a full code to run a dataflow job:
+    ```sql
+    python3 -m apache_beam.examples.wordcount \
+    --input gs://dataflow-samples/shakespeare/kinglear.txt \
+    --output gs://$BUCKET/results/outputs --runner DataflowRunner \
+    --project $PROJECT --temp_location gs://$BUCKET/tmp/ --region $REGION \
+    --subnetwork regions/$REGION/subnetworks/$SUBNETWORK \
+    --num_workers 20 --machine_type n1-standard-4 --no_use_public_ips
+    ```
 
 3. **BigQuery** commands in Cloud Shell:
 
@@ -223,4 +239,25 @@ category: tool
     --noreplace  \
     nyctaxi.2018trips \
     gs://cloud-training/OCBL013/nyc_tlc_yellow_trips_2018_subset_2.csv
+    ```
+
+    26. Run a dataflow job 
+    ```sql
+    gcloud dataflow jobs run job1 \
+    --gcs-location gs://dataflow-templates-"REGION"/latest/Word_Count \
+    --region $REGION \
+    --staging-location gs://$PROJECT/tmp \
+    --parameters inputFile=gs://dataflow-samples/shakespeare/kinglear.txt,output=gs://$PROJECT/results/outputs
+    --disable-public-ips
+    ```
+
+    27. Enable PGA (private Google Access) with a required role:
+    ```sql
+    # add a new role "networkAdmin"
+    gcloud projects add-iam-policy-binding $PROJECT --member=user:$USER_EMAIL --role=roles/compute.networkAdmin
+
+    # Enable PGA
+    gcloud compute networks subnets update default \
+    --region=$REGION \
+    --enable-private-ip-google-access
     ```

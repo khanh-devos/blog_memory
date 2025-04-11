@@ -4,6 +4,10 @@ loadingMathjax: true
 rollable: 'rollable'
 ---
 
+- evolution : sự tiến bộ || innovation : sự sáng tạo
+- regression : hồi quy || classification : sự phân loại 
+
+
 Common Types of AI architectures: 
 
 AI technology has been "exploding" in recent years, introducing numerous new concepts and terms each year. Among these, AI architectures, in my view, play a key role in this evolution(sự tiến bộ). This post is my attempt to collect and describe some common AI architectures with their core typical features.
