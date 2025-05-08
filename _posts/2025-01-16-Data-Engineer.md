@@ -4,8 +4,129 @@ category: tool
 
 Building, deploying, and operating effective flexible data pipelines for all the stages of data processing is a primary expectation from a pro data engineer.
 
-Some key terms in BigQuery:
+<div class="hide">
+Some key terms in BigQuery: 
 
+- stall : đứng máy, kẹt, the pipeline is ~ indefinitely.
+- transient : thoáng qua, nhất thời, ~ error can disappears naturally.
+- hassle - N: rắc rối 
+- reconcile ST with SO/ST : điều hòa, hòa giải, *~ incomplete aggregations with production dataset*, ~ with her father.
+- co-ordinate : phối hợp, điều phối || 
+- reap : thu vô 1 món hời (thu hoạch, gặt, hái - lúa, xoài)
+- cadence : nhịp (số lần/phút)
+- assert : xác nhận (một logic) đúng hay sai || validate : chứng thực (một danh tính, tính hợp pháp) 
+- anonymous : ẩn danh 
+- alongside ST: dọc theo bên cạnh ...
+- content N-2 : 1-nội dung, 2-sự hài lòng, she always shows ~ with her life.
+- contend N : phản bác, đấu tranh, they ~ that they deserve the win.
+- pre-production evironment: is a place where end-to-end tests are run.
+- artifact : tác phẩm
+- a bad release >< a safe release (of new feature to an application).
+- a rollback : hồi một trạng thái (to a previous state).
+- idempotent (method or behavior): Calling the same operation multiple times has no additional effect after the first.
+- devise : bày ra, đặt ra (a plan), devise a strategy to do ST
+- normality : tình trạng bình thường, it could take a week to return to a full normality.
+- spectator : khán giả xem trực tiếp || audience : khán thính giả qua TV, đài.
+- go off : tắt đi, when the mic and sound went off.
+- call off : hũy đi, the rest of the day's action was called off.
+- to empty - V : (làm) trống rổng, the shelves are emptying quickly.
+- frustration : sự thất vọng, sự chán chường
+- Standstill : sự đứng yên
+- misery - N : sự khổ sở, more misery || miser /ai/: người keo kiệt
+- stranded - adj : bị bỏ lại, bị mắc kẹt, ko thể tự lo, ~ passengers || get stuck : bị kẹt lại nhưng có thể tự lo đc.
+- a cyber attack : tấn công mạng, ~ is ruled out.
+- the outage : sự thiếu thốn (như cúp điện, cúp nước) cấp khu vực, ~ hit Spain and Portugal.
+- the lights back : có điện lại 
+- It's been a bit of fearful day : thật là một ngày hơi hơi đáng sợ.
+- rule out ST : loại trừ ST (*để quyết định làm gì đó*) || exclude : ko bao gồm
+- plunge into ST : chìm vào || a blackout == a power cut
+- panic buying : buy many essential things in fear of war or disaster.
+
+- account for ST/30% : 1. thanh minh cho ST 2. chiếm 30%
+- topology : kiểu mô hình liên kết, star or bus topology 
+- release : sự phát hành || edition : phiên bản (có số) || publication : ấn bản
+- implicit (ly) : ẩn, ngầm hiểu || explicit (ly) : rõ ràng, minh bạch
+- accumulate : tích lũy, tích tụ || aggregate : tổng hợp
+- corrupted : bị hỏng || disrupted : bị gián đoạn, ngưng trệ || broken : bị vỡ 
+- well-understood - adj : đã được biết rộng rãi & đầy đủ, ~ best practices
+- comprehensive : toàn diện, ~ testing strategy || thorough : kỹ lưỡng, ~ inspection
+- up-to-date : mới nhất, keep an application ~
+- streamline -V : giúp di chuyển thêm nhanh và hiệu quả || smoothen : đánh bóng bề mặt, giải quyết v/đ êm xuôi
+- **"Backlog"** refers to the tasks or jobs that are piled up and waiting for external source to process. By analogy, **"back pressure"** happens when external source cannot keep up with the processing rate of the pipeline system. In contrary, "**overhead**" happens when external source processed data faster than our system.
+
+- abstract SO from ST : đơn giản hoá SO khỏi ST == simplify || ~ user from dealing with read stage parallelism. 
+- abstract -adj: trừu tượng, freedom is ~ || vague : mơ hồ, thiếu thông tin || ambiguous : nước đôi, nhập nhằng, ko nhất quán.
+- key fanout : phân tán || fanin : hội tụ
+- mitigate - V: giãm nhẹ, ~ a punishment
+- granular - adj : có dạng hạt || granule - N: hạt || granularity: độ hạt
+- root cause : nguồn gốc vấn đề 
+- reckless : khinh suất, cẩu thả >> haphazard : thiếu tổ chức, ~ rollout >< well-structured
+- mis-judge : đánh giá sai, ~ its opponent
+- strike : cú đáng, attempt another ~ on both dogs. 
+- a scuffle : cuộc chiến || break out : mở ra, bùng nổ, a scuffle broke out.
+- charge at SO: lao vào, nhào vô AI (== lunge to SO/ST) 
+- retreat -v : rút lui || retrieve -v : truy cập thông tin
+- wild habitat : môi trường hoang dã
+- behave erractically : hàng động thất thường
+- disoriented : ko phân biệt được phương hướng || lose co-ordination : lừ đừ, mất sự hoạt bát
+- inanimate object : vật chết, vật ko có sự sống >< animate (adj) : có sự sống. 
+- rabies : bệnh dại
+- snatch : chộp, vồ, ~ pet food
+- shepherd : người chăn cừu 
+- square up with so : chiến, oánh lộn (slang) || confront SO: cương, "bậc sếp" (politely)
+- faceoff (N) : cuộc đối đầu (cạnh tranh) || encounter (N,V) : bất ngờ gặp gở 
+- to sift : sàn lọc, ~ through the logs.
+- slope -V : dốc, ~ downward and then upaward many times
+- diagnose : chuẩn đoán, ~ pipeline regressions || 
+- interprete : diễn giãi, ~ Dataflow job graphs
+- navigate : lèo lái, ~ Dataflow job details' UI
+- cross-reference ST to ST (in a dictionary) : đối chiếu.. với.. (alternative for: look up ST == check ST against ST)
+- job throughput : thông lượng xử lý tác vụ || log entries : các ghi chép của log
+- run across : chay xuyên suốt, ~ the lifetime of a job || run along: chạy dọc (a real thing)
+- I emailed you earlier today: hồi nãy, sớm nay || never seen before || worked here previously
+- time-series data : data collected at successive points in the timeline
+- made up of STs : đc tạo thành từ ..., some step are made up of sub-steps
+- trace : dấu vết, a full-stack trace of the error.
+- histogram : biểu đồ (temperature) || to track : theo vết || monitor : giám sát
+- sequentially : theo chuỗi || in order : theo thứ tự || in a queue : theo hàng 
+- implied by default : đc hiểu ngầm là mặc định
+- recap : tóm tắt lại ## revise : ôn lại ## review : đánh giá lại (re-consider)
+- outage : sự ngừng hđộng, sự mất dịch vụ == downtime : sự gián đoạn => website/power/(data center) outages/downtimes 
+- corrupted : hư hỏng, ko đạt chuẩn ## stale : ôi thiu, cũ nát
+- roll out ST to SO: triển khai/cho ra mắt lần đầu ... đến ai đó
+- otherwise known as ... : theo cách khác đc hiểu là..., ~ CI/CD
+- get the most out of your Dataflow jobs :  "tận dụng tối đa" các tác vụ Dataflow của mình. (*fully leverage your Dataflow jobs == maximize the performance of your Dataflow jobs == use your Dataflow jobs to their full potential.*)
+- take/have a walkthrough of ST : sẽ tuần tự từng bước đi qua ST
+- a console : màn hình điều khiển, a Dataflow console 
+- in terms of == regarding == concerning == with respect to + N/Gerund : liên quan tới ST, 
+- experiment : thí nghiệm (formal) || experimentation : dùng thử, trải nghiệm
+- That's for you to hopefully do once you start exploring them directly : Điều đó là dành cho bạn, hy vọng bạn sẽ thực hiện khi bắt đầu khám phá chúng trực tiếp.
+- give the access to create new instances: cấp quyền để tạo các phiên bản mới. 
+- host for our notebooks: máy chủ hay nơi lưu trữ các notebook của chúng ta
+- be already in place : ̣đã đâu vào đó (alternative for "be ready")
+- mock out ST: (giả tạo)/(mô phỏng) ST (for testing)
+- Dataflow fusion : an optimization technique that fuses all the stages (*transforms*) in a Beam pipeline into *a single stage* that can be done locally on the same worker. (*Note: fusion breaks at shuffles in GroupByKey or CombinePerKey, but not with CombineGlobally(sum), Count.Globally(),  CombinePerKey(single key)*)
+- DSL : a domain-specific language created just for small domain like HTLML, SQL, CSS, Regex
+- interpret : diễn giải || translate : phiên dịch
+- hypothesis /o/: giả thuyết
+- verbosity : sự dông dài, reduce code verbosity || 
+- algebra : đại số || geometry /o/ : hình học || literature : văn học
+- populate : lấp đầy, populated with ants 
+- malformed : dị dạng, nhầm phôm, ~ data 
+- wrap up : gấp lại, ~ this section 
+- under-utilize = under-use ST : ko tận dụng || exploit : khai thác
+- bottleneck - N : thắt cổ chai => backlog - V,N : dồn ứ, tồn đọng, ~ of work 
+- serially : theo chuỗi, theo 1 series, transformed serially
+- vertebra : đốt xương sống || backbone : cột sống
+- date back : đã tồn tại, ~ 10m years ago. || paleontology >< archaeology : hóa thạch cổ SV học >< khảo cổ học 
+- end up with ST = result with ST = tạo ra KQ với... 
+- inconsistent application : 1 app ko ổn định
+- error-prone : dể mắc lỗi (replacing "easy") || errors introduced by hand-coding
+- intuitive : trực quan, ~ instances || intuition : trực giác
+- severe : nghiêm trọng, according to their severity
+- a performant, fault-tolerant pipeline : pipeline hiệu quả, chịu lỗi được
+- rather than just overthinking, start breaking into it. == instead of over-analyze, take small steps. thay vì nghĩ quá nhiều hãy làm từng bc nhỏ.
+- ...if not handled properly : ...nếu ko xử lý đúng cách || ...if (not) necessary : nếu (ko) cần
 - quadruped >< biped /e/ : ĐV 4/2 cẳng || carnivore >< herbivore : loài ăn thịt/cỏ
 - it's more of ST than ST: nó thuộc cgì hơn là ... || twist a throttle : vặn ga
 - companion : bạn đồng hành || like-minded companion : đồng đạo
@@ -20,16 +141,16 @@ Some key terms in BigQuery:
 - a snippet of code : đoạn code || 
 - decelerate : giãm tốc >< accelerate : tăng tốc
 - accordingly : theo hoàn cảnh, tương ứng, theo trước đó || respectively : theo thứ tự đó
-- stale - adj : quá hạn, ôi thiu ||
-- annotate : dán nhãn, attach a metadata "@Override" on a method in code || annotation: nhãn ("@Override")
-- indefinitely : vô thời hạn || forever : mãi mãi
+- stale - adj : quá hạn, ôi thiu, ~ data
+- annotate : dán nhãn, attach a metadata "@Override" on a method in code || annotation: nhãn (ex: "@Override")
+- indefinitely : ko giới hạn || forever : mãi mãi
 - elapse : (tgian) trôi qua || the timeline : dòng tgian || an interval of time : khoảng tgian/kogian || expire : quá tgian
 - overwhelm ST : tràn ngập, gây quá tải ||
 - also known as ST == like ST == such as ST
 - prefix scan (in NoSQL): scanning all rows whose *row key* starts with a certain prefix.
 
 - look: nhìn || see: thấy || watch: xem || glance: liếc || stare: trừng || peep: ngấp ngé || wink: đá lông nheo || blink: chớp
-- aspect : khía cạnh || feature : đặc điểm || attibute : thuộc tính
+- aspect : khía cạnh || feature : đặc điểm || attribute : thuộc tính
 - criteria -pl (criterion) : tiêu chuẩn || condition : đk || standard : tiêu chuẩn chất lượng
 - route -v: dẩn dắt || divert : làm chệch hướng 
 - trigger : cò súng || trigger : kích hoạt
@@ -51,7 +172,7 @@ Some key terms in BigQuery:
 - symmetric : đối xứng, cân đối.
 - outline : đề cương, nội dung chính || agenda : chương trình nghị sự || curriculum : chương trình học
 - take precedence == take control: tiếm quyền (ưu tiên).
-- credential - N : tín nhiệm thư. || conserve : bảo tồn, gìn giữ.
+- credential - N : thông tin đăng nhập (username, password, ID number) || conserve : bảo tồn, gìn giữ.
 - time-critical : đòi hỏi chính xác về time.
 - offload : hạ tải, tháo tải.
 - manner : cách thức || method : phương pháp
@@ -110,6 +231,8 @@ Some key terms in BigQuery:
 - Hadoop: it is *an open-source Java framework for distributed storage and processing of large datasets*. It is designed to run on clusters of commodity hardware. Some libraries like *PySpark* allow you to write Hadoop jobs in Python.
 
 - runner: refers to the Cloud service backend that manages all the operations of that service, including controlling workers activity.
+</div>
+
 
 1. **"Migration Task" from existing private data to Google Cloud**:
 
@@ -577,6 +700,7 @@ Some key terms in BigQuery:
         - **Side inputs and windows of data**:
 
             - *Side inputs*: during creating a PCollection, we can inject additional data during the runtime of ParDo() transform-function. A side inputs occurs each time of processing a new element in the PCollection, so the additional data needs to be determined at RUNTIME, not hard coded. 
+                - But why we need side_input? If we want the same result without using the *side_input transform*, we have to join the main data with the side_input data, this JOIN would be very expensive if *side input data* is small, but if this JOIN should be re-considered again when the side input data is over 100MB.
 
             ![side-inputs-added]({{ 'assets/dataflow/side-inputs-added.jpg' | relative_url}}){: .toggled-image}
 
@@ -1857,17 +1981,641 @@ Some key terms in BigQuery:
             5. Set: only unique items
 
     - **Best Practices**:
-        1. Beam Schemas:
-        2. Handling erroneous data
-        3. Error handling
-        4. AutoValue code generator
-        5. Json data handling
-        6. Utilize DoFn lifecycle
-        7. Pipeline optimizations
+        1. ***Beam Schemas***: 
+            - Make our pipeline code more readable and cleaner
+            - Allow Dataflow service to make optimization behind the scene as it is aware of type and structure of data being processed. For ex, Dataflow service optimizes *data serialization* and *deserialization* using encoders and decoders as the data flows through different stages in a pipeline, serialization and deserialization become faster with available schemas without additional steps of prediction.
 
-    - SQL and DataFrames(having a similar interface of Pandas).
-    - Beam Notebooks.
-    - Course Summery.
+        2. ***Handling erroneous data & Error handling***:
+            - rather than just log erroneous records, sending the log data to a persistent storage medium such as BigQuery or Cloud Storage to handle separately.
+            - In the *process* method of *ParDo* function, considering using try/catch block. In the try/catch block, avoid logging every error exception as it may overwhelm the whole pipeline especially when "presenting errors" increases, instead, sending all *erroneous records* to an *alternative sink* for further inspection. These records should be tagged "DeadLetter". For success records, it is written in different sink.
+
+        3. ***AutoValue code generator***: is a utility class that Beam SDK provides for generating *POJOs* which stands for *Plain or Java Objects*.
+            - Although Beam schemas are the best way to represent objects in a pipeline due to their intuitive structure, there are places where *a POJO* is needed, such as handling *key-value objects* or *stateful objects*.
+
+            - Use *AutoValue class builder* to generate POJOs when not using schemas. AutoValue is used popularly in Beam code-base using Java SDK. For Python, NamedTuple is used instead.
+
+
+        4. ***Json data handling***:
+            - handling Json strings in Dataflow is a common need. For Java, use a built-in method *JsonToRow*. For Python SDK, use *json.load(e)*. 
+
+            - In case we need to convert from Json to POJOs, use the AutoValue class with the "*@DefaultValue*" annotation.
+
+            - Struture of json data may change frequently, use DeadLetter Pattern to handle unsuccessful messages or exceptions.
+
+        5. ***Utilize DoFn lifecycle***:
+            - What is the *"life cycle of DoFn objects"* for micro batching?
+            
+            ![life-cycle-DoFn]({{ 'assets/dataflow-2/life-cycle-DoFn.jpg' | relative_url}}){: .toggled-image}
+            
+            - **Issue**: in a big data use case, it is easy to overwhelm an external service endpoint (API) if we make a single call for each input element without applying any reducing function. 
+            
+            - **Solution**: If remember, we recommended *"batching calls" to an external API by leveraging two life cycle methods "StartBundle" and "FinishBundle"*. For mirco batching, we can initialize or reset the batch in the "StartBundle" and commit it in the "FinishBundle", please note that *due to "Dataflow runner operation" these two methods can be called multiple times to process more than one bundle.* Because data is split into bundles by Dataflow runner. Each bundle is a batch of elements processed together in parallel. A single DoFn instance might process multiple bundles over time. Hence, for each bundle, "StartBundle" and "FinishBundle" will be called one time.
+
+            ![life-cycle-DoFn-2]({{ 'assets/dataflow-2/life-cycle-DoFn-2.jpg' | relative_url}}){: .toggled-image}
+
+        6. **Pipeline optimizations:** some general guidelines we should keep in mind while developing our pipelines:
+            - *Filter data early whenever possible*: This will reduce data volumne flowing through the pipeline, thereby enabling efficient use of the pipeline resources.
+            
+            - Data collected from external sources often need cleaning.
+
+            - Whenever possible, apply data transformations *serially* to let the dataflow service to optimise DAG for us. *"Transformations applied serially"* is suitable for "graph optimization" because multiple steps can be fused together behind the scenes in a single stage for execution on the same worker, thereby reducing ***costly IO and network operations***. (*By executing these fused steps on the same worker, Dataflow reduces the amount of data transferred over the network.*)
+
+            - Handle *back pressure* from external systems. For instance, if writing into an external system like BigTable can have high write latency, resulting in an bottleneck issue. So, it is recommended that we should *manage the APPROPRIATE capacity* of the external system to avoid back pressure. 
+            
+            - *Enable "autoscaling"* is also a good idea to reduce number of under-utilized workers.
+
+    - **SQL and DataFrames(having a similar interface of Pandas)**.
+        - **Dataflow SQL**: helps using SQL in a data streaming code: 
+            - Use cases: Select from PubSub, Join with batch data, Aggregate over Window, Publish to BigQuery of PubSub. 
+            - It's planned to integrate with other Google services like Kafka or Bigtable.
+            - *Note that*: with Dataflow SQL we use Dataflow engine to execute SQL statements instead of our common BigQuery engine. It's important to ensure the regional endpoint, sources, and destination are within the same region if possible.
+
+            - Besides SQL in-pipeline, we can use SQL in command line - CLI (shell) with Dataflow SQL CLI.
+
+            ![SQL-in-pipelines]({{ 'assets/dataflow-2/SQL-in-pipeline.jpg' | relative_url}}){: .toggled-image}
+
+
+        - **Beam SQL** : can be embedded in an existing pipeline using *SqlTransform*, which can be mixed with PTransforms. In Java, it also supports some UDFs (*user-defined functions*)
+
+        - *Suport multi-dialects*: two main types.
+            
+            - **Calcite SQL** : The SQL (*via Apache Calcite*) used by Beam SQL to parse and execute *SQL queries over data streams*. It also lets us write SQL queries against PCollections in a declarative way to process data without writing Java/Python code.
+
+            - **ZetaSQL** : developed by Google in products like: BigQuery, Cloud Spanner, Google Sheets (query parts), Looker, Dataflow SQL.
+
+        - **Windowing in SQL**:
+            - For Fixed Window:
+                - TUMBLE() defines non-overlapping fixed windows of 1 minute. 
+                - TUMBLE_START() gives you the start time of each window.
+
+            ```sql
+            SELECT
+                TUMBLE_START(event_timestamp, INTERVAL 1 MINUTE) AS window_start,
+                COUNT(*) AS event_count
+            FROM pubsub.topic.`your-project.your-topic`
+            GROUP BY TUMBLE(event_timestamp, INTERVAL 1 MINUTE)
+            ```
+
+            - For Sliding Window:
+                - HOP(event_timestamp, slide, window_size) creates sliding windows. 
+                - INTERVAL 5 MINUTE → the hop/sliding interval (how often a new window starts).
+                - INTERVAL 10 MINUTE → the window size (how long each window lasts).
+
+            ```sql
+            SELECT
+                user_id,
+                HOP_START(event_timestamp, INTERVAL 5 MINUTE, INTERVAL 10 MINUTE) AS window_start,
+                HOP_END(event_timestamp, INTERVAL 5 MINUTE, INTERVAL 10 MINUTE) AS window_end,
+                COUNT(*) AS click_count
+            FROM click_events
+            GROUP BY user_id, HOP(event_timestamp, INTERVAL 5 MINUTE, INTERVAL 10 MINUTE)
+            ```
+
+            - For Session Windows:
+                - SESSION(event_time, INTERVAL 15 MINUTE) groups events that are less than 15 minutes apart into the same session.
+                - SESSION_START and SESSION_END return the actual session window boundaries.
+
+            ```sql
+            SELECT
+                user_id,
+                SESSION_START(event_time, INTERVAL 15 MINUTE) AS session_start,
+                SESSION_END(event_time, INTERVAL 15 MINUTE) AS session_end,
+                COUNT(*) AS page_views
+            FROM clickstream
+            GROUP BY 
+                user_id, 
+                SESSION(event_time, INTERVAL 15 MINUTE);
+
+            ```
+        
+        - **Beam DataFrames**: a more Pythonic Cloud API (*compatible with Pandas DataFrames*)
+            - Parallel processing with Beam model could be slower than Pandas DataFrames.
+            - Beam DataFrames and Beam SQL is a type of DSL in Beam Python SDK. 
+            - NOTE: Beam DataFrames can be used to replace beam transform like *ParDo* or *CombinePerKey*. 
+            - Easy programming interface within Beam pipeline and somehow more efficient with vectorized pandas implementation.
+
+            - *LIMITS of Beam DataFrames*:
+                - Cannot transpose like ordinary Pandas
+                - Results of most operations are not available till the end of a pipeline. For instance, we can compute a sum() but cann't branch it with *IF sum() > 100 ELSE ...* because *result of sum()* is only available after finishing a pipeline. The only thing we can work is the columns NAMEs and TYPEs from the beam schema, not the results.
+
+                - PCollections are not in order, so any Pandas operations sensitive to the ordering will not be supported like *head, tail, or shift*.
+
+            - Example of Counting Words with Beam DataFrames:
+
+            ![Beam-dataframess]({{ 'assets/dataflow-2/Beam-dataframes.png' | relative_url}}){: .toggled-image}
+
+    - **Beam Notebooks**. 
+        - Similar to Colab that is limited to the local environment. It's not serverless or scalable, only useful for experimentation. 
+
+        - Example of dataflow fusion:
+        ![fusion-stores-and-online-purchses]({{ 'assets/dataflow-2/fusion-stores-and-online-purchses.jpg' | relative_url}}){: .toggled-image}
+
+        - What an interactive runner can allow us to do with *.head(n) or .visualize()*:
+            - Get access to intermediate results (*PCollections after each transform*)
+            - Able to work with both batch and stream sources.
+        
+        - How we tell the runner when to stop recording/reading: 2 options
+            - **ib.options.recording_duration** : set a fixed amount of time
+            - **ib.options.recording_size_limit** : a fixed amount of bytes, which is very useful for a real case of streaming when you may have a very large volumne of data.
+
+            - Some other useful methods:
+
+            - **ib.show(windowed_word_counts, include_window_info=True)** : materializes the resulting PCollection into a table.
+            - **ib.collect(windowed_word_counts, include_window_info=True)** : load the output into *a Pandas DataFrame* which we can do some manipulation against (*Pandas table*).
+            - **ib.show(windowed_word_counts, include_window_info=True, visualize_data=True)** : visualize the data in the notebook.
+
+            ![beam-notebook-intermediate-results-visualization]({{ 'assets/dataflow-2/beam-notebook-intermediate-results-visualization.jpg' | relative_url}}){: .toggled-image}
+
+        - **Re-use feature**: is an important option that we can choose to actually reuse the stream of information that we have gathered OR to get fresh data. This first is useful to prevent repeated reading the same dataset, saving cost of reading. The latter is useful to give us the most updated information because stale data could lead to wrong decisions.
+
+        - **Code to submit our code to the production**:
+        ```sql
+            from apache_beam.runners import DataflowRunner
+            options = pipeline_options.PipelineOptions()
+            runner = DataflowRunner()
+            runner.run_pipeline(p, options=options)
+        ```
+
+
+
 
 
         
+25. **Dataflow Operation**:
+    - **Monitoring**:
+        - Job list : Cloud Monitoring is integrated tightly with Dataflow. The fist page of Dataflow will show a list of jobs, we can do some filters, sorting, and bookmark the view with specific filter and sorting if necessary.
+
+        - Job Info : After clicking one job, we will see the job info. On top right is the metadata (encryption type), below is resources in use (CPUs, Memory), next is *the parameters used to run the pipeline*.
+
+        - Job Graph = DAG : a visually representation for each step, which might be *made up of* sub-steps.
+            
+            - **For Batch data**: steps are executed sequentially, the next part should not start until the one before it finishes. Dataflow optimizes all steps by split them into various optimized stages that can be shared among pipeline steps. Jobs do get completed with batch pipeline.
+            - **For Streaming data**: all the steps will run concurrently. There is no completion time for jobs unless we cancel or drain it.
+
+            - **Throughput**: total amount of elements per second.
+            - **Wall time**: total amounf of time by the assigned workers to run each step. It's useful to check which step our workers take longer time to run on.  
+
+            - Note: Some **custom metrics** we might need to track **a specific data feature**. We can also see them at the right pane of the Dataflow Job Graph Page.
+                - Counter: increment and decrement
+                - Distribution: COUNT, MIN, MAX, MEAN
+                - Gauge: latest value
+
+            ![custom-metrics-Dataflow-jobs-graph-page]({{ 'assets/dataflow-3/custom-metrics-Dataflow-jobs-graph-page.jpg' | relative_url}}){: .toggled-image}
+            
+            
+        - **Batch Job Metrics Tab or Page**:
+            - The first graph: track the number of workers
+                - Dataflow decides more or less workers are needed to maintain the perfect job throughput.
+                - The green lines shows the number of workers needed, the blue line shows the current number of workers running.
+
+            - The second graph: show the throughput of each sub-step versus time.
+
+            - The third graph: for CPU utilization
+                - A healthy pipeline should have all the workers running at around the same CPU utilization rate.
+                - **Uneven distribution workload**: means few workers work 100% while others do nothing because of heavily skewed data.
+            
+            - The final graph: "Worker error log count": 
+                - Shows the number of log entries from workers that had a level of error. 
+
+            - **Notice**: in batch pipeline, if processing an element fails four times in a row, the whole batch pipeline fails.
+
+        - **Streaming Job Metrics Page**: similar to the *batch job metrics* with some following extra metrics:
+            - "*Data freshness*" and *"System latency"*: very useful to measure the health of a streaming pipeline.
+                - Data freshness: shows the difference between "*real-time*" and the *"output watermark"*.
+
+                - The watermark is a timestamp where any element timestamp prior to it is nearly garanteed to have been processed. For example, if the current timestamp is 9:26am and the data freshness graph shows 6 minutes at that time. This means all elements with the timestamp at 9:20am or earlier have arrived and have been processed.
+
+                - *When data is seen to be "fresh"?* data is "fresh" when it is processed almost in real time without a big lag.
+
+            - *"System latency"*: shows how long it take elements to go through the pipeline. 
+                - If the pipeline is blocked at any stages, the latency will increase. For example, we have a pipeline reading from a PubSub, do some transformation, then sink into a Spanner. Suddenly, the Spanner goes down for 5 minutes. When this happens, PubSub won't receive confirmation from Dataflow that element have been sunk into Spanner. This confirmation is needed for PubSub to delete the element, so the system latency and data freshness both will rise 5 minutes. When Spanner returns to work, Dataflow sends confirmation to PubSub, returning the system latency and data freshness to normal. 
+
+            - "*Input metrics*" or *"Output metrics"*: they will show up when our pipeline reads and writes records using PubSub respectively.
+                - If I have over 2 PubSub sources or sinks, we can select one of them to see its metrics as following:
+                
+                - *"Request per sec"* : it is the rate of API request to read or write by the source or sink over time. 
+                    - If the "Request per sec" drops to 0 or decrease significantly, our pipeline should be blocked at certain steps. When this happens, we should review first the steps that have high watermark to check the blockage. Additionally, we can check the "*Worker error log count*" to see errors or indications.
+
+                - *"Response errors per sec by error type"*: it is the rate of *failed* API requests to read or write by the source and sink over time. If an error happens, take the code and cross-reference it to the specific error code in the documentation.
+            
+        - **Custom Dashboard:**
+            - Cloud Monitor is integrated tightly with Dataflow to track time-series data to provide viewing and alertings:
+
+            - Custom dashboard means we can show on our dashboard any metrics that we are interested at. Below is some common metrics we should consider.
+
+            ![common-metrics-for-custom-dashboard]({{ 'assets/dataflow-3/common-metrics-for-custom-dashboard.jpg' | relative_url}}){: .toggled-image}
+
+            - Most of metrics that we have seen had **a "Create alert policy" button**. This allows us to set alert and be noticed when a certain metric crosses a specific threshold. This becomes useful when in streaming pipeline, if an element fails to get processed, it is retried in-definitely (forever) unless we cancel or drain a job. We can catch the number of retries by setting an alert if system latency increases over a predefined value. Every time an alert is triggered, an incident and a corresponding event are created, if we set the notification mechanism in the alert such as an email or SMS, we will receive the notification. 
+
+            - **Note**: The alert policy provided is on per pipeline but we can build a custom alert policy grouping over one pipeline using Cloud Monitoring.
+
+    - **Logging panel (in job graphs) and centralized Error Reporting**:
+        - The logging panel is located at the right bottom of the Dataflow job graph page. There are 3 tabs: job logs, worker logs, and diagnostics
+            - Job logs : logs or errors from Dataflow services
+            - Worker logs : messages are from VMs that managed all the workers running the job.
+            - Diagnostics : a link to *Error Reporting page*, the first seen, the last seen. Additionaly, Diagnostics tab also shows *"jobs insights"*:
+                
+                - If submitted file into workers missed some required classes, we will receive an error message of "Worker jar file misconfiguration"
+                
+                - If our coding took a long time to perform operations, we might see *a operation link* in the diagnostics tab. If the slow processing due to **"Hot key detected"**, the diagnostics tab will show the message "Hot key detected". (*"Hot key" means some key has a large scale over others as performing GroupByKey or CombinePerKey*)
+
+                - In streaming scenario, our pipeline will fail to process if we are grouping a huge amount of data without using a combine transform or producing a large amount of data from a single input element. If this happens, the diagnostics will notice **"Commit Key request Exceeds Size limit"**. To avoid this, we should do pre-aggregations before heavy operations like windowing or grouping. But before pre-aggregation, we need to set key if data structure is not a key-value type. There are 2 ways to declare key: beam.Map(lambda x: (k, v)) or beam.GroupBy('key').aggregate_field('user_id', sum, 'page_views'). Now, CombinePerKey() will combining data locally on each workers before shuffling results out for further combining. This will reduce the amount of data significantly compared to method GroupByKey().
+
+                - Finally, if there are a high rate of logging msgs, some of them could not be sent to your Cloud Logging, **"Throttling logger worker"** warning will appear in our Diagnostics tab.
+
+                - We should see another log tab for BigQuery if our pipeline reads/writes data to BigQuery. (*required BigQuery Admin and beam 2.24+*).
+                    - For reading BigQuery: both *extract jobs* and *query jobs* are shown in the Diagnostics tab. (*the first: BigQuery will send all the table under JSON format to GCS using "extract jobs", the latter: BigQuery sends a part of a table under JSON format to GCS using "query jobs"*)
+                    - For inserting data to BigQuery: only *load jobs* are shown. "*streaming inserts*" is not shown. By default, "load jobs" are used to sync bounded PCollections and "streaming inserts" for unbounded PCollections.
+
+                    - In *BigQuery Jobs tab*, select the region of the dataset. click on *Load BigQuert jobs* to get a list of all jobs that BigQuery ran from our pipeline . We can press *"Command Line"* if we want to see more detailed information about the job. A pop-up window will show the gcloud command, then pressing "*run in Cloud shell*" button to examine the results like "destination uri", "number of bytes", "length of time the job took to run". It will take any real effect to the data.
+
+                    ![logs-panel-BigQuery-jobs-tab]({{ 'assets/dataflow-3/logs-panel-BigQuery-jobs-tab.jpg' | relative_url}}){: .toggled-image}
+                    
+                - **Error Reporting page**: aggregates and displays a list of frequently occuring errors from our Dataflow pipelines in our project. 
+                    - We can see how many times the error occured across a specific time range such as 1 hour, 1 day, 7 days...
+
+
+    - **Troubleshooting and Debugging**: includes 2 steps
+        - step1: checking for errors in the job.
+            - There's a *error notification icon* located above the job graph. Expanding the log pannel to show more details. 
+            - **Cloud Logging** offers a simple UI (logs panel) to filter and search for logs within the job.  
+
+        - step2: looking for anomalies in the Job Metrics tab.
+            - *Data freshness* and *System Latency* are good indicators of performance.
+            - Increasing *Data freshness* shows that the pipeline workers are unable to keep up with the rate of the data being ingested into the pipeline.
+            - Increasing *System Latency* indicates that certain work element within the pipeline is taking a long time to get processed.
+
+            - *CPU utilization* is also a good indicator for parallelism in a job and also indicate if a job is CPU-bound (100%). The below image is a good example of bad parallelism, only one or few of workers have high CPU utilizations while others close to zero.
+
+            ![CPU-utilization-indicates-parallelism]({{ 'assets/dataflow-3/CPU-utilization-indicates-parallelism.jpg' | relative_url}}){: .toggled-image}
+
+        - **Types of troubles**: 4 types
+            - 1. Errors as building the job graph or the pipeline.
+                - Validating Beam Model aspects, including input, output specifications...
+                - There is no job created on the Dataflow service if there is an error as building the pipeline.
+                - *Common errors*: GroupByKey is applied to un-bounded PCollections. (*Windowing will help create bounded PCollections*).
+
+                - **Notice**: these errors can be re-produced by local DirectRunner.
+
+            - 2. Errors as creating jobs.
+                - After building the pipeline or the DAG graph successfully, Dataflow service then will check the following certicates:
+                    - Access permission to the job's associated Cloud Storage buckets.
+                    - Validate permission roles to execute the project.
+                    - Access permission to the input and outpur sources.
+
+                - If we want to see log messages or errors in the console or terminal window, we have to use ***"blocking-execution"*** with the *".wait_until_finish()"* method. Otherwise, we can only see them in the Log panel on the botton of Dataflow graph page.
+
+                - **Notice**: these errors can not be re-produced by local DirectRunner. To avoid undue costs while testing, just execute the pipeline with a tiny amount of data because these errors are not dependent on the data scale.
+
+            - 3. Exceptions during pipeline execution.
+                - These exceptions happens in the *beam.DoFn* method in the pipeline and are not handled properly by our code. So, they are reported as failed tasks in the Dataflow Monitoring interface (*Log pannel*).
+
+                - It's important to notice that batch and streaming pipeline handle exceptions:
+                    - In batch: the dataflow service will retry a failed job up to 4 times and then go for the next elements. (*fault-tolerance*).
+                    - In streaming: the dataflow service will do the same with 4 retries before passing to next elements. (*fault-tolerance*).
+
+            - 4. **Slow performance.**: the useful UI interface to debug the performance is the Step Level with *Step-Info* UI. Step Info provides step title, Wall time, Input elements, Input bytes... 
+                - Wall time: approximate time spent across all threads in all workers in the following actions: initializing the step, processing elements, shuffling elements, ending the step.
+                - Estimated size: the total volumne of data that the step has received.
+
+
+    - **Performance Influencing Factors**:
+        - **Pipeline Design**:
+            - We should place transformations that reduce the volumne of data as high up on the graph as possible. This placement should be above the windowing.
+
+            - If our pipeline has large windows(*1hour*) aggregating large volumne of data, we can create *"smaller windowing(1min) + combine"* patterns before the *"main windowing(1hour)"* to reduce the volumne of data processed on the main windows.
+
+            - *Dataflow auto optimization*: is called Fusion, where adjacient transforms like ParDo will be fused together into a single stage that can be handle by one worker to generally increase performance. But in certain cases like (*farnout transformation*) we dont want this Fusion, so just put *"beam.Reshuffle()"* between two transforms that Dataflow will never fuse together. Besides, passing intermediate PCollections as side inputs to a ParDo can help prevent fusion in Apache Beam because Dataflow always materializes side inputs 
+
+            ```sql
+            (
+                p
+                | 'Read Data' >> beam.io.ReadFromText('gs://my-bucket/input.txt')
+                | 'Map A' >> beam.Map(lambda x: x.strip())
+                | 'Break Fusion' >> beam.Reshuffle()     ### prevent Fusion here
+                | 'Map B' >> beam.Map(lambda x: (x, 1))
+                | 'Write' >> beam.io.WriteToText('gs://my-bucket/output.txt')
+            )
+
+            ## intermediate PCollections as side inputs to a ParDo
+
+            main_data = (
+                p
+                | 'Create Main Data' >> beam.Create([1, 2, 3])
+                | 'Double Main Data' >> beam.Map(lambda x: x * 2)
+            )
+
+            # Side input: materialized as a list to prevent fusion
+            side_input = (
+                p
+                | 'Create Side Data' >> beam.Create(['apple', 'banana'])
+                | 'Side ToList' >> beam.combiners.ToList()
+            )
+
+            # Into another ParDo
+            result = (
+                main_data
+                | 'Combine with Side Input' >> beam.Map(
+                    lambda x, fruits: f"{x} + {', '.join(fruits)}",
+                    beam.pvalue.AsList(side_input)
+                )
+            )
+
+            # results
+            # 2 + apple, banana
+            # 4 + apple, banana
+            # 6 + apple, banana
+            ```
+            - To much logging sometimes might impact pipeline performance.
+                - logging.info() should be avoided in any of PCollections.
+                - For deadletter pattern, counting per window of 5 minutes is optimal for logging.error().
+
+        - **Data shape**:
+            - Data skew: All values related to one key will be sent to the same worker in GroupByKey transform, this might results in un-balanced status, then a bottleneck issue happens. For example, columns used as keys that are nullable will often end up being "hot keys" as "None" (*with a great amount of values*). Generally, we have 3 ways to mitigate the hot key issue: .withFanout(), or more controlling with .withHotKeyFanout() or finally Dataflow shuffle service that will separates shuffle data storage from workers, offloading the shuffling from the workers.
+
+            ```sql
+            | beam.CombinePerKey(my_combine_fn).withFanout(10)   
+
+            | beam.CombinePerKey(my_combine_fn).withHotKeyFanout(lambda key: 10 if key == "global" else 1)   
+            
+            # we need manually assign null to "global" by following func 
+            # in beam.Map(assign_key)
+
+            def assign_key(record):
+                key = record.get("user_id")
+                if key is None:
+                    return ("global", record)  # Hot key bucket
+                return (key, record)
+            ```
+
+            - **Key space = number of keys**: it is also an impact to the performance because parallelism is determined by the number of keys. More workers will not be able to work if they dont have keys. 
+                - Increase the number of keys by using composite keys.
+                - Using **Avro** files as reading because its **splittable** structure is very good for reading in parallelism.
+
+            - In contrary, if the key space is too large, it is also not good for parallelism. So, what is solutions:
+                - 1. Use beam.CombinePerKey() instead of GroupByKey() due to local combining of CombinePerKey().
+                - 2. Key Fanout (hashing into buckets to reduce number of keys)
+                
+                ```sql
+                ## Now we're grouping on 1000 keys instead of millions
+                import hashlib
+
+                def stable_hash(key):
+                    return int(hashlib.sha256(key.encode('utf-8')).hexdigest(), 16)
+
+                NUM_BUCKETS = 1000
+                | 'Bucketize' >> beam.Map(lambda x: (stable_hash(x['key']) % NUM_BUCKETS, x))
+
+                ```
+                - 3. use withHotKeyFanout() or custom fanout logic
+
+                ```sql
+                | 'CountPerKeyWithFanout' >> beam.CombinePerKey(sum, fanout=lambda key: 100 if key == 'global' else 1)
+                ```
+                
+                - 4. Windowing can help: beam.WindowInto(FixedWindows(60)) will splits keys temporally, reducing the pressure per window. Because same keys in different windows are processed independently.
+
+                - 5. Avoid Overusing UUIDs or Unbounded IDs as Keys:
+
+        - **Sources, sinks, & external systems**:
+            - Most external sources or sinks abstracts users from dealing with read stage parallelism. 
+            - For instance, reading *gzip files* using *Textio* cannot be in parallel. So only one machine can read the data, Fusion stage will then run on the same worker that read the data, finally shuffling will only happens around this worker, leading to bottleneck issue. 
+            - Sollution 1: switch to uncompressed sources while using Textio 
+            - Soluttion 2: using compressed Avro format that is designed for reading in parallel.
+
+            - **"Backlog"** refers to the piled up tasks or jobs waiting for external source to process. By analogy, **"back pressure"** happens when external source cannot keep up with the processing rate of the pipeline system.
+
+            - *Solutions for backlogs issue due to external sources or sinks*: 
+                - **Batching** can help increase the processing rate: imagine that 1 element or 100 elements still use the same fixed cost on an external source or sink, *including network transformation, encryption/decryption, authentication, authorization, query execution if database, etc*. Therefore, we can process more elements with the same fixed costs.
+
+                - **Bundling** also help with the same impact but in contrary context "overhead" that is when system is slower than external sources or sinks.
+                    - Normally, in Beam, each element would trigger processing individually with a fixed cost (setup, teardown, maybe logging, memory allocations). This cost happens element by element. 
+                    - Bundling more elements together, the cost only happens once in method "start_bundle()". It means, all elements only spend one cost to be processed.
+                    - There are common ways of bundling:
+                        - By number of elements with "*withBatching(batch_size=10)*": in beam.ParDo(...).withBatching(batch_size=10).
+
+                        - By number of workers with Fanout: is some kind of bundling, "*beam.CombinePerKey(sum).withFanout(5)*", meaning bundling for 5 workers to process instead of 1 worker for each key.
+
+                        - By time: using windowing in 5s with *.fixedWindows(5)*.
+
+                - **Co-locations** in the same region and zone to reduce the latency then mitigate the backlog from the external sources or sinks. Co-location would help reading in parallel with structured data. Unstructured data can only be read sequentially. Co-location can be done in 2 ways:
+                    - Way 1: same server but at another endpoints such as *https://../data-1 https://../data-2*.
+                    - Way 2: add another server and we also have another API.
+
+                    - A code example to read data from a BigQuery table via 2 different APIs:
+
+                    ```sql
+                    class FetchFromBigQueryAPI(beam.DoFn):
+                        def __init__(self, api_id):
+                            # API ID to switch between two API endpoints
+                            self.api_id = api_id
+
+                        def process(self, element):
+                            # choose between two BigQuery APIs or datasets
+                            if self.api_id == 1:
+                                # Use BigQuery API 1 (First endpoint)
+                                query = "SELECT * FROM `your-project.your-dataset.table` WHERE element_id = {}".format(element)
+                            else:
+                                # Use BigQuery API 2 (Second endpoint)
+                                query = "SELECT * FROM `your-project.your-dataset.table` WHERE element_id = {}".format(element)
+
+                            # Execute the query with BigQuery client to get result
+                            client = bigquery.Client()
+                            query_job = client.query(query)   # waiting
+                            results = query_job.result()
+
+                            for row in results:
+                                yield row
+
+                    # in beam PIPELINE
+                    results = (elements
+                      | "fromAPI-1" >> beam.ParDo(FetchFromBigQueryAPI(api_id=1))
+                      | "fromAPI-2" >> beam.ParDo(FetchFromBigQueryAPI(api_id=2))
+                    )
+                    ```
+
+
+        - **Shuffle & Streaming engine**:
+            - Shuffling is the base operation behind Dataflow transforms such as *GroupByKey, CoGroupByKey, and Combine*. Shuffling is auto-scalable, efficient and fault-tolerant. Basically, Shuffling runs on all the workers and consumes all workers CPU, memory, and persistent disk storage, so if one failure of one worker happens, it might cause the whole shuffle operation to fail with it.
+
+            - The service-base shuffling moves shuffling operations out of workers into Dataflow backend with faster, better fault-tolerant, offloading workers. There are 2 types of service-based shuffle: one for batching and one for streaming. It is important that no code changes are required as applying them. We just simply enable these service.
+
+    - **Testing and CI/CD**: introduces frameworks and features available to streamline our CI/CD workflow for Dataflow pipeline.
+        - **Overview**:
+            - Comprehensive testing: we need implement: unit test, integration test, end-to-end test.
+            - Well-structured development
+            - Validate changes and a rollback plan if there is a bad release.
+            
+            - Some special differences before deployment that needs to point down:
+
+                - Pipelines that aggregate data are implicitly stateful. This mean, when we want to get the latest data, we need to check all states that may exist in the pipeline.
+                - Any change to pipeline logic or topolody must be able to account for all *intermediate states* in the original pipeline. 
+                - Be careful with *non-idempotent side effects* to external systems.
+
+            - All pipelines revolve around transforms that are essential DoFn functions that we will validate their behaviors at different types of testing that operate on hand-crafted input dataset.
+                - *single transform Unit test*: test each DoFn as a separate function.
+                - *composite transforms Unit test*: test a fusion of over 2 transforms.
+                - *pipeline unit test*: test the whole pipeline.
+                - *system integration test*: we incorporate a small amount of test data using the actual I/Os.
+                - *End-to-end test*: using a full test dataset.
+            
+            ![unit-test-pipeline]({{ 'assets/dataflow-3/unit-test-pipeline.jpg' | relative_url}}){: .toggled-image}
+
+            - Common tasks for DirectRunner and ProductionRunner:
+                - DirectRunner: local development, functional unit tests, small/medium integration tests.
+                - ProductionRunner: medium/large integration tests, performance test, deployment/rollback testing.
+
+            - CI/CD life-cycle:
+                - Development -> Build & Test -> Deliver & Deploy.
+        
+        - **Unit testing**:
+            - We use unit test to assert behavior of any small testable piece of our production pipeline. This small portions are either individual DoFns or PTransforms. 
+            - Unit test should complete quickly and can run locally with no dependencies on external systems.
+
+            - Beam uses Junit 4 for unit testing in Java SDK, and beam.testing in Python SDK:
+
+            - We use TestPipeline in place of Pipeline  when we create a pipeline instance for testing **because** we can handle *"setting pipeline options"* internally with TestPipeline.
+
+            - For assertion on the contents of PCollections, we use *assert_that* despite of which runner are used, DirectRunner or DataflowRunner. We also have 
+
+            ```sql
+            from apache_beam.testing.test_pipeline import TestPipeline
+            from apache_beam.testing.util import assert_that, equal_to, greater_than_or_equal_to, less_than_or_equal_to
+
+            p = TestPipeline(desc="pipeline for testing")
+            
+            (p  | 'Create' >> beam.Create([1, 2, 3])
+                | 'AddOne' >> beam.Map(lambda x: x + 1)
+            )
+
+            assert_that(result, equal_to([2, 3, 4]))
+
+            ## Test if all output values are >= [2, 4, 6]
+
+            assert_that(output, greater_than_or_equal_to([2, 4, 6]))  
+            
+            ## Test if all output values are <= [10, 8, 6]
+            
+            assert_that(output, less_than_or_equal_to([10, 8, 6]))    
+
+            ```
+
+            - **Anti-Pattern** that we should not use in our pipeline because it is a challenge to test:
+                - Anonymous DoFns: ones that has no name like when we use lambda. Solution is to name it.
+            
+            - **Named subclasses** are easily testable so we validate its behavior independently without having to execute the entire pipeline.
+
+            - We can test window behaviors with *beam.window.TimestampedValue()*
+            - We can test the entire pipeline with *TestStream()* 
+
+
+        - **Integration testing**:
+            - Small integration test: create a small amount of data for testing
+            - Large integration test: carry out the test on data that is closer to production-scale. We can clone data from production project to testing project.
+
+            - *"Storage Transfer Service"* to clone. It can copy a BigQuery dataset or even a read_only Production dataset.
+
+            - In integration test, we typically test the entire pipeline without sources and sinks, meaning we can create an input data and assert the ouput of the pipeline transformations matches our expected result.
+
+            - Testing Streaming Pipelines from PubSub:
+                - To clone the Pub/Sub stream, just create a new subsription against the production topic. Then we integrate it to a testing pipeline that has passed unit testings. After that, comparing the outputs of the two pipelines Production and Testing for assertion of this integration test:
+                
+                ![large-integration-testing-a-pipeline]({{ 'assets/dataflow-3/large-integration-testing-a-pipeline.jpg' | relative_url}}){: .toggled-image}
+
+                - We should do this integration testing in a regular cadence, especially after we have had a certain amount of minor updates.
+
+        - **Artifact building**:
+            - Semantic version of Beam is under pattern of *Major.minor.incremental*
+                - Major versions are incremented for incompatible API changes.
+                - Minor versions are incremented for new functionality in a backward incompatible manner.
+                - Incremental versions are incremented for forward compatible bug fixes.
+
+        - **Deployment**:
+            - 3 stages of the pipeline lifecycle: *Deployment - In-flight - Termination*
+            
+            - **Deployment**: 2 ways:
+                - Direct launch : via gcloud commands
+                - Use Templates : such as via Airflow 
+
+            - Separating between development environment and execution environment would make it easy to automate our Dataflow deployments.
+                - External scheduler like Airflow, which actually invoke a template as deployment.
+                - Each pipeline will have a unique name for Dataflow to identify, manage and monitor.
+
+            - **In-flight pipelines**: only for streaming, what actions that can or shouldn't be taken during running pipeline:
+
+                - Dataflow manage states to eliminate the risk of data loss. It control states via **snapshots**.
+                - Since streaming pipeline is always running, we have to modify from time to time, so we can do this safely by using snapshot to store specific states of a pipeline.
+                - Snapshot saves currently *executing pipeline* before launching a *new pipeline*. This way, we can **rollback** to the previous version by the snapshot.
+
+                - **Snapshot functionality for certain use cases**:
+                    - *Being a checkpoint* to roll back our pipeline in the event of bad release.
+                    - For backups and recovery.
+                    - A safe path for migrating pipelines to Streaming Engine. This means we can run a job directly from a snapshot on *a streaming engine service, not Dataflow itself*. Therefore, this process requires streaming engine service enabled.
+
+                - Snapshot creation: we can create a snapshot in the UI or using CLI. 
+                    - In the UI: press the "CREATE SNAPSHOT" button at the top. 
+                    - The pipeline will *pause processing* while the snapshot is being built up.
+                    - Snapshots should be taken daily or on a weekly cadence when latency can be tolerated such as non-buiness hours. 
+
+                - Create a job from a snapshot:
+
+                - Update a pipeline: only after taking a snapshot. 
+                    - Why: improve performance, fix bugs, or just make necessary changes.
+                    - Two must options that we must add as updating a pipeline: 
+                        - --update
+                        - --job_name="current_existing_name" (*must use old name otherwise it fails to replace the old pipeline*)
+                        - --transformNameMapping='{"oldTransform1":"newTransform1", "oldTform2":"newTform2"}'  (*in case of changing 2 transforms names 1 & 2*)
+
+                        ```sql
+                        python ... --update --job_name="current_existing_name"
+                        ```
+                    - Note: new transforms may or may not take effect, depending on where the records are buffered.
+                    - Updates can also be triggered via the API, enabling continuous deployment contingent on other tests passing.
+
+                    - **Compatibility Check**: Dataflow will check compatibility on any changes we made to the pipeline. Compability check will fail in some cases:
+                        - *Modify without "a transform mapping"*: if we renamed or removed any steps, we need a transform to map data between its two adjacient steps. It is important intermediate data can be fully processed.
+                        - *Adding/removing side inputs*: because it will change the input schema. Just recall that Dataflow always treats side input as an independent object.
+                        - *Changing coders* (or different data encoding)
+                        - *Switching locations*: new zone or new region
+                        - *Removing stateful operations*: remove any state-dependent operation in a Fusion, the check will fail.
+
+                        - NOTE: if any changes that fails the compatibility check is required, we should drain our pipeline, then rerun the pipeline with the updated code.
+
+            - **Termination**: 2 ways to terminate our pipeline.
+                - Drain (*only for streaming*): stop data input and process all buffered intermediate data. After that, the pipeline is torn down.
+                - Cancel (*both batch and streaming*): cease all data processing and drops any intermediate, unprocessed data.
+
+                - Press "STOP" button on the top of the Dataflow UI, we will have 2 options: "drain" or "cancel".
+                    - *Drain drawbacks*: incomplete aggregations will happen because all windows will be closed immediately. *Solutions*: We can use *Beam PaneInfo* to recover incomplete windows as everpane is implicitly associated with a window.
+                    - *Cancel drawbacks*: intermediate data will be lost.
+
+
+
+            ![deployment-in-pipeline-lifecycle]({{ 'assets/dataflow-3/deployment-in-pipeline-lifecycle.jpg' | relative_url}}){: .toggled-image}
+
+
+    - Reliability (Độ ổn định): When a pipeline fails, what will be lost and who is responsible for this loss. Those are the things "Reliability" will cover.
+        - Loss: 
+            - For batching: data is not lost, just rerun the pipeline.
+            - For streaming: data engineer must act fast to minimize data loss and downtime.
+
+        - Failures: 
+            - User code, data shape such as software bugs or corrupted data.
+            - Outages: service outages (), zonal or regional outages.
+
+        - Monitoring:
+            - Batch: a failed task will be retried 4 times.
+            - Streaming: a failed task will be retried indefinitely, making pipeline stall indefinitely.
+                
+        - Solution: 
+            - Implementing a Dead-letter sink in a upstream ParDo using a Try-Except block.
+            - Monitoring and Alert policies should be applied. Potential metrics to alert on: 
+                - Job status: 
+                - Elapsed time: if it exceeds a threshold, alerting
+                - Data freshness: so high not good 
+                - System latency: 
+                - Your custom metrics if necessary.
+
+
+
+    - Flex Templates

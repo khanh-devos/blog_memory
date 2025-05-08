@@ -163,43 +163,55 @@ Task 3. Create the dataset, and tables in BigQuery:
 ![create dataset]({{ 'assets/data-analyst-2/create-dataset.jpg' | relative_url }}){: .toggled-image}
 
 - Load and create the table "customer_reviews". The SQL command as following:
-    - LOAD DATA OVERWRITE gemini_demo.customer_reviews 
+    
+    ```sql
+    LOAD DATA OVERWRITE gemini_demo.customer_reviews 
     (customer_review_id INT64, customer_id INT64, location_id INT64, review_datetime DATETIME, review_text STRING, social_media_source STRING, social_media_handle STRING)
     FROM FILES (
         format = 'CSV',
         uris = ['gs://qwiklabs-gcp-04-6d38ad5fc148-bucket/gsp1246/customer_reviews.csv']);
+    ```
 
 ![create table by loading with SQL]({{ 'assets/data-analyst-2/load-data-with-SQL.jpg' | relative_url }}){: .toggled-image}
 
 - Load and create the object table "review_images". To create the object table you will use a SQL Query. The "uri" is the cloud storage location.
-    - CREATE OR REPLACE EXTERNAL TABLE
-    `gemini_demo.review_images`
+    
+    ```sql
+    CREATE OR REPLACE EXTERNAL TABLE `gemini_demo.review_images`
     WITH CONNECTION `us.gemini_conn`
     OPTIONS (
-    object_metadata = 'SIMPLE',
-    uris = ['gs://qwiklabs-gcp-04-6d38ad5fc148-bucket/gsp1246/images/*']
+        object_metadata = 'SIMPLE',
+        uris = ['gs://qwiklabs-gcp-04-6d38ad5fc148-bucket/gsp1246/images/*']
     );
+    ```
 
 ![create an object table]({{ 'assets/data-analyst-2/create-object-table.jpg' | relative_url }}){: .toggled-image}
 
 
 Task 4. Create the Gemini models in BigQuery
+    
 - Create the Gemini Pro model with an SQL:
+    
+    ```sql
     - CREATE OR REPLACE MODEL `gemini_demo.gemini_pro`
     REMOTE WITH CONNECTION `us.gemini_conn`
     OPTIONS (endpoint = 'gemini-pro')
+    ```
 
 - Create the Gemini Pro Vision model with a SQL:
-    - CREATE OR REPLACE MODEL `gemini_demo.gemini_pro_vision`
+    
+    ```sql
+    CREATE OR REPLACE MODEL `gemini_demo.gemini_pro_vision`
     REMOTE WITH CONNECTION `us.gemini_conn`
     OPTIONS (endpoint = 'gemini-pro-vision')
-
+    ```
 
 Task 5. Prompt Gemini to analyze customer reviews for keywords and sentiment
 
 - Analyze the customer reviews for keywords with a SQL, and store it in a new table "customer_reviews_keywords":
 
-    - CREATE OR REPLACE TABLE
+    ```sql
+    CREATE OR REPLACE TABLE
     `gemini_demo.customer_reviews_keywords` AS (
     SELECT ml_generate_text_llm_result, social_media_source, review_text, customer_id, location_id, review_datetime
     FROM
@@ -213,12 +225,14 @@ Task 5. Prompt Gemini to analyze customer reviews for keywords and sentiment
     ),
     STRUCT(
     0.2 AS temperature, TRUE AS flatten_json_output)));
+    ```
 
     - Inspect by *SELECT * FROM `gemini_demo.customer_reviews_keywords`*
     
 - Analyze the customer reviews for positive and negative sentiment with a SQL, and put it in a new table "customer_reviews_analysis":
 
-    - CREATE OR REPLACE TABLE
+    ```sql
+    CREATE OR REPLACE TABLE
     `gemini_demo.customer_reviews_analysis` AS (
     SELECT ml_generate_text_llm_result, social_media_source, review_text, customer_id, location_id, review_datetime
     FROM
@@ -232,13 +246,14 @@ Task 5. Prompt Gemini to analyze customer reviews for keywords and sentiment
     ),
     STRUCT(
     0.2 AS temperature, TRUE AS flatten_json_output)));
+    ```
 
     - Inspect the table by *"SELECT * FROM `gemini_demo.customer_reviews_analysis`
     ORDER BY review_datetime"*
 
-
 - Create a view to sanitize the records with a SQL:
 
+    ```sql
     - CREATE OR REPLACE VIEW gemini_demo.cleaned_data_view AS
     SELECT REPLACE(REPLACE(LOWER(ml_generate_text_llm_result), '.', ''), ' ', '') AS sentiment, 
     REGEXP_REPLACE(
@@ -250,26 +265,33 @@ Task 5. Prompt Gemini to analyze customer reviews for keywords and sentiment
     ) AS social_media_source,
     review_text, customer_id, location_id, review_datetime
     FROM `gemini_demo.customer_reviews_analysis`;
+    ```
 
     - *The query creates the view, cleaned_data_view and includes the sentiment results, the review text, the customer id and the location id. It then takes the sentiment result (positive or negative) and ensures that all letters are made lower case, and extreanous charaters like extra spaces or periods are removed. The resulting view will make it easier to do further analysis in later steps within this lab*.
 
 - Create a report of positive and negative review counts:
     - Create a bar chart report of the counts of positive and negative reviews with a SQL:
+
+        ```sql
         - SELECT sentiment, COUNT(*) AS count
         FROM `gemini_demo.cleaned_data_view`
         WHERE sentiment IN ('positive', 'negative')
         GROUP BY sentiment; 
+        ```
 
     - Draw Chart directly in BigQuery:
 
     - ![draw a chart in BigQuery]({{ 'assets/data-analyst-2/Draw-Chart-after-SQL.jpg' | relative_url }}){: .toggled-image}
 
     - Can list the count of positive and negative reviews per social media source using the query below.
-        - SELECT sentiment, social_media_source, COUNT(*) AS count
+
+        ```sql
+        SELECT sentiment, social_media_source, COUNT(*) AS count
         FROM `gemini_demo.cleaned_data_view`
         WHERE sentiment IN ('positive') OR sentiment IN ('negative')
         GROUP BY sentiment, social_media_source
         ORDER BY sentiment, count;    
+        ```
 
     - ![sentiment by social media sources]({{ 'assets/data-analyst-2/sentiments-per-social-media-sources.jpg' | relative_url }}){: .toggled-image}
 
@@ -278,7 +300,8 @@ Task 6. Respond to customer reviews
 
 - Create a marketing response using "zero-shot" and a customer service response using "few-shot", against specific reviews in the "customer_reviews" table. Use this SQL, store results in a new table "customer_reviews_marketing":
 
-    - CREATE OR REPLACE TABLE
+    ```sql
+    CREATE OR REPLACE TABLE
     `gemini_demo.customer_reviews_marketing` AS (
     SELECT ml_generate_text_llm_result, social_media_source, review_text, customer_id, location_id, review_datetime
     FROM
@@ -292,11 +315,14 @@ Task 6. Respond to customer reviews
     ),
     STRUCT(
     0.2 AS temperature, TRUE AS flatten_json_output)));
+    ```
 
     - Inspect with "SELECT * FROM `gemini_demo.customer_reviews_marketing`"
 
 - Make this easier to read, and take action on the response by using the SQL query below: 
-    - CREATE OR REPLACE TABLE
+
+    ```sql
+    CREATE OR REPLACE TABLE
     `gemini_demo.customer_reviews_marketing_formatted` AS (
     SELECT
     review_text,
@@ -304,11 +330,13 @@ Task 6. Respond to customer reviews
     social_media_source, customer_id, location_id, review_datetime
     FROM
     `gemini_demo.customer_reviews_marketing` results )
+    ```
 
     - Inspect with "SELECT * FROM `gemini_demo.customer_reviews_marketing_formatted`".
 
 - For negative reviews. The result is the "customer_reviews_cs_response" table.
 
+    ```sql
     - CREATE OR REPLACE TABLE
     `gemini_demo.customer_reviews_cs_response` AS (
     SELECT ml_generate_text_llm_result, social_media_source, review_text, customer_id, location_id, review_datetime
@@ -323,11 +351,14 @@ Task 6. Respond to customer reviews
     ),
     STRUCT(
     0.2 AS temperature, TRUE AS flatten_json_output)));
+    ```
 
     - Inspect with *"SELECT * FROM `gemini_demo.customer_reviews_cs_response`"*.
 
 - Make easier to read with:
-    - CREATE OR REPLACE TABLE
+
+    ```sql
+    CREATE OR REPLACE TABLE
     `gemini_demo.customer_reviews_cs_response_formatted` AS (
     SELECT
     review_text,
@@ -336,6 +367,7 @@ Task 6. Respond to customer reviews
     social_media_source, customer_id, location_id, review_datetime
     FROM
     `gemini_demo.customer_reviews_cs_response` results )
+    ```
 
     - Inspect with "SELECT * FROM `gemini_demo.customer_reviews_cs_response_formatted`".
 
@@ -344,7 +376,9 @@ Task 6. Respond to customer reviews
 Task 7. Prompt Gemini to provide keywords and summaries for each image:
 
 - Analyze the images with Gemini Pro Vision model:
-    - CREATE OR REPLACE TABLE
+
+    ```sql
+    CREATE OR REPLACE TABLE
     `gemini_demo.review_images_results` AS (
     SELECT
         uri,
@@ -355,11 +389,13 @@ Task 7. Prompt Gemini to provide keywords and summaries for each image:
         STRUCT( 0.2 AS temperature,
             'For each image, provide a summary of what is happening in the image and keywords from the summary. Answer in JSON format with two keys: summary, keywords. Summary should be a string, keywords should be a list.' AS PROMPT,
             TRUE AS FLATTEN_JSON_OUTPUT)));
-
+    ```
 
     - Inspect with "SELECT * FROM `gemini_demo.review_images_results`"
 
 - Retrieve these results in a more human readable way
+
+    ```sql
     - CREATE OR REPLACE TABLE
     `gemini_demo.review_images_results_formatted` AS (
     SELECT
@@ -368,6 +404,8 @@ Task 7. Prompt Gemini to provide keywords and summaries for each image:
         JSON_QUERY(RTRIM(LTRIM(results.ml_generate_text_llm_result, " ```json"), "```"), "$.keywords") AS keywords
     FROM
         `gemini_demo.review_images_results` results )
+    ```
+    
 
 ![gemini_pro with image reviews]({{ 'assets/data-analyst-2/gemini-pro-image-reviews.jpg' | relative_url }}){: .toggled-image}
 
