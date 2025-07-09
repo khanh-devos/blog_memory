@@ -1,7 +1,7 @@
 ---
 category: tool
 ---
-
+<div class="hide">
 - Under the hood = behind the scene == phía sau hậu trường.
 - Each user operation has its own separate environment *"in which to execute"*:  
 - *reference to - v* : tham chiếu đến || *preference for* : sở thích về.  
@@ -16,6 +16,7 @@ category: tool
 - to specify ST == to point out (an enigne powering your pipelines)
 - to provision (a system): to setup, provide and prepare st for future use.  
 - be made up of 4 parts: đc tạo thành từ 4 phần.
+</div>
 
 Traininng and training more in different contexts:
 
