@@ -11,3 +11,10 @@
 
 # Copyright
 All images on the blog posts, unless clearly noted, are original contents created by the author.
+
+# Installation
+- Download using "git pull" 
+- 
+
+# Running: 
+- bundle exec jekyll serve

@@ -2,6 +2,9 @@
 category: tool
 ---
 <div class="hide">
+- retention : sự giữ lại ST đã có được (khách hàng)
+- eligible : đủ tư cách, đủ điều kiện, ~ to do ST
+
 - Under the hood = behind the scene == phía sau hậu trường.
 - Each user operation has its own separate environment *"in which to execute"*:  
 - *reference to - v* : tham chiếu đến || *preference for* : sở thích về.  
